@@ -1,0 +1,129 @@
+<%- include('partials/header') %>
+<section class="personnel-detail-section">
+        <div class="container">
+            <div class="row">
+                <!-- Left Column: Avatar and Basic Info -->
+                <div class="col-md-4">
+                    <div class="personnel-info">
+                        <i class="fa fa-user-circle avatar-icon"></i>
+                        <h2>Dr. John Doe</h2>
+                        <p class="bio">Experienced researcher in NLP and AI. Dr. Doe has over 10 years of experience in developing advanced natural language processing models and has contributed to numerous high-impact publications.</p>
+                        <a href="https://scholar.google.com/johndoe" class="btn" target="_blank">View Scholarship</a>
+                    </div>
+                </div>
+                <!-- Right Column: Detailed Info -->
+                <div class="col-md-8">
+                    <div class="personnel-details">
+                        <h3>Contact Information</h3>
+                        <ul class="contact-info">
+                            <li><i class="fa fa-envelope"></i> Email: john.doe@example.com</li>
+                            <li><i class="fa fa-phone"></i> Phone: +84 123 456 789</li>
+                        </ul>
+                        <h3>Projects</h3>
+                        <ul class="projects-list">
+                            <li>
+                                <strong>AI Research Project</strong> (Jan 2025 - Dec 2025)
+                                <p>Developing advanced AI models for real-time applications.</p>
+                            </li>
+                            <li>
+                                <strong>NLP Model Optimization</strong> (Mar 2024 - Dec 2024)
+                                <p>Improving efficiency of NLP models for large-scale data.</p>
+                            </li>
+                        </ul>
+                        <h3>Publications</h3>
+                        <ul class="publications-list">
+                            <li>
+                                <strong>Advanced NLP Techniques</strong> (Published: May 2025)
+                                <p>Exploration of cutting-edge NLP methods.</p>
+                            </li>
+                            <li>
+                                <strong>Efficient Data Processing</strong> (Published: Oct 2024)
+                                <p>Strategies for optimizing data pipelines in AI systems.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <style>
+        .personnel-detail-section {
+            padding: 60px 0;
+            background: #fff;
+        }
+        .personnel-info {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .personnel-info .avatar-icon {
+            font-size: 120px;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+        .personnel-info h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .personnel-info .bio {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .personnel-info .btn {
+            background: #007bff;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .personnel-info .btn:hover {
+            background: #0056b3;
+        }
+        .personnel-details {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .personnel-details h3 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+        .contact-info {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        .contact-info li {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .contact-info li i {
+            color: #007bff;
+            margin-right: 10px;
+        }
+        .projects-list, .publications-list {
+            list-style: none;
+            padding: 0;
+        }
+        .projects-list li, .publications-list li {
+            margin-bottom: 15px;
+        }
+        .projects-list strong, .publications-list strong {
+            color: #333;
+            font-size: 16px;
+        }
+        .projects-list p, .publications-list p {
+            color: #666;
+            font-size: 14px;
+            margin: 5px 0 0;
+        }
+    </style>
+    <%- include('partials/footer') %>

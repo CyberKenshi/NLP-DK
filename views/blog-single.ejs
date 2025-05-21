@@ -1,0 +1,239 @@
+<%- include('partials/header') %>
+
+<!-- Breadcrumbs -->
+<div class="breadcrumbs overlay">
+    <div class="container">
+        <div class="bread-inner">
+            <div class="row">
+                <div class="col-12">
+                    <h2><%= __("header.blog_details") %></h2>
+                    <ul class="bread-list">
+                        <li><a href="/"><%= __("header.home") %></a></li>
+                        <li><i class="icofont-simple-right"></i></li>
+                        <li class="active"><%= __("header.blog_details") %></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+
+<!-- Single News -->
+<section class="news-single section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="single-main">
+                            <!-- News Head -->
+                            <div class="news-head">
+                                <img src="img/blog1.jpg" alt="<%= __("blog_single.image_alt") %>">
+                            </div>
+                            <!-- News Title -->
+                            <h1 class="news-title"><a href="/blog-single"><%= __("blog_single.title") %></a></h1>
+                            <!-- Meta -->
+                            <div class="meta">
+                                <div class="meta-left">
+                                    <span class="author"><a href="#"><img src="img/author1.jpg" alt="<%= __("blog_single.author_alt") %>"><%= __("blog_single.author") %></a></span>
+                                    <span class="date"><i class="fa fa-clock-o"></i><%= __("blog_single.date") %></span>
+                                </div>
+                                <div class="meta-right">
+                                    <span class="comments"><a href="#"><i class="fa fa-comments"></i><%= __("blog_single.comments") %></a></span>
+                                    <span class="views"><i class="fa fa-eye"></i><%= __("blog_single.views") %></span>
+                                </div>
+                            </div>
+                            <!-- News Text -->
+                            <div class="news-text">
+                                <p><%= __("blog_single.paragraph1") %></p>
+                                <p><%= __("blog_single.paragraph2") %></p>
+                                <div class="image-gallery">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <div class="single-image">
+                                                <img src="img/blog2.jpg" alt="<%= __("blog_single.gallery_image1_alt") %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <div class="single-image">
+                                                <img src="img/blog3.jpg" alt="<%= __("blog_single.gallery_image2_alt") %>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p><%= __("blog_single.paragraph3") %></p>
+                                <blockquote class="overlay">
+                                    <p><%= __("blog_single.quote") %></p>
+                                </blockquote>
+                                <p><%= __("blog_single.paragraph4") %></p>
+                            </div>
+                            <div class="blog-bottom">
+                                <!-- Social Share -->
+                                <ul class="social-share">
+                                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i><span><%= __("blog_single.social.facebook") %></span></a></li>
+                                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i><span><%= __("blog_single.social.twitter") %></span></a></li>
+                                    <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                                <!-- Next Prev -->
+                                <ul class="prev-next">
+                                    <li class="prev"><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
+                                    <li class="next"><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                                </ul>
+                                <!--/ End Next Prev -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="blog-comments">
+                            <h2><%= __("blog_single.comments_title") %></h2>
+                            <div class="comments-body">
+                                <!-- Single Comments -->
+                                <div class="single-comments">
+                                    <div class="main">
+                                        <div class="head">
+                                            <img src="img/author1.jpg" alt="<%= __("blog_single.comment1.author_alt") %>">
+                                        </div>
+                                        <div class="body">
+                                            <h4><%= __("blog_single.comment1.author") %></h4>
+                                            <div class="comment-meta">
+                                                <span class="meta"><i class="fa fa-calendar"></i><%= __("blog_single.comment1.date") %></span>
+                                                <span class="meta"><i class="fa fa-clock-o"></i><%= __("blog_single.comment1.time") %></span>
+                                            </div>
+                                            <p><%= __("blog_single.comment1.text") %></p>
+                                            <a href="#"><i class="fa fa-reply"></i><%= __("blog_single.reply") %></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/ End Single Comments -->
+                                <!-- Single Comments -->
+                                <div class="single-comments left">
+                                    <div class="main">
+                                        <div class="head">
+                                            <img src="img/author2.jpg" alt="<%= __("blog_single.comment2.author_alt") %>">
+                                        </div>
+                                        <div class="body">
+                                            <h4><%= __("blog_single.comment2.author") %></h4>
+                                            <div class="comment-meta">
+                                                <span class="meta"><i class="fa fa-calendar"></i><%= __("blog_single.comment2.date") %></span>
+                                                <span class="meta"><i class="fa fa-clock-o"></i><%= __("blog_single.comment2.time") %></span>
+                                            </div>
+                                            <p><%= __("blog_single.comment2.text") %></p>
+                                            <a href="#"><i class="fa fa-reply"></i><%= __("blog_single.reply") %></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/ End Single Comments -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="comments-form">
+                            <h2><%= __("blog_single.form_title") %></h2>
+                            <!-- Contact Form -->
+                            <form class="form" method="post" action="mail/mail.php">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-12">
+                                        <div class="form-group">
+                                            <i class="fa fa-user"></i>
+                                            <input type="text" name="name" placeholder="<%= __("blog_single.form.name") %>" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-12">
+                                        <div class="form-group">
+                                            <i class="fa fa-envelope"></i>
+                                            <input type="email" name="email" placeholder="<%= __("blog_single.form.email") %>" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group message">
+                                            <i class="fa fa-pencil"></i>
+                                            <textarea name="message" rows="7" placeholder="<%= __("blog_single.form.message") %>"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group button">
+                                            <button type="submit" class="btn primary"><i class="fa fa-send"></i><%= __("blog_single.form.submit") %></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <!--/ End Contact Form -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-12">
+                <div class="main-sidebar">
+                    <!-- Single Widget -->
+                    <div class="single-widget search">
+                        <div class="form">
+                            <input type="text" placeholder="<%= __("blog_single.search_placeholder") %>">
+                            <a class="button" href="#"><i class="fa fa-search"></i></a>
+                        </div>
+                    </div>
+                    <!--/ End Single Widget -->
+                    <!-- Single Widget -->
+                    <div class="single-widget category">
+                        <h3 class="title"><%= __("blog_single.categories_title") %></h3>
+                        <ul class="categor-list">
+                            <li><a href="#"><%= __("blog_single.category.ai") %></a></li>
+                            <li><a href="#"><%= __("blog_single.category.nlp") %></a></li>
+                            <li><a href="#"><%= __("blog_single.category.data_science") %></a></li>
+                            <li><a href="#"><%= __("blog_single.category.machine_learning") %></a></li>
+                            <li><a href="#"><%= __("blog_single.category.automation") %></a></li>
+                        </ul>
+                    </div>
+                    <!--/ End Single Widget -->
+                    <!-- Single Widget -->
+                    <div class="single-widget recent-post">
+                        <h3 class="title"><%= __("blog_single.recent_posts_title") %></h3>
+                        <!-- Single Post -->
+                        <div class="single-post">
+                            <div class="image">
+                                <img src="img/blog-sidebar1.jpg" alt="<%= __("blog_single.recent_post1.image_alt") %>">
+                            </div>
+                            <div class="content">
+                                <h5><a href="#"><%= __("blog_single.recent_post1.title") %></a></h5>
+                                <ul class="comment">
+                                    <li><i class="fa fa-calendar" aria-hidden="true"></i><%= __("blog_single.recent_post1.date") %></li>
+                                    <li><i class="fa fa-commenting-o" aria-hidden="true"></i><%= __("blog_single.recent_post1.comments") %></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Single Post -->
+                        <!-- Single Post -->
+                        <div class="single-post">
+                            <div class="image">
+                                <img src="img/blog-sidebar2.jpg" alt="<%= __("blog_single.recent_post2.image_alt") %>">
+                            </div>
+                            <div class="content">
+                                <h5><a href="#"><%= __("blog_single.recent_post2.title") %></a></h5>
+                                <ul class="comment">
+                                    <li><i class="fa fa-calendar" aria-hidden="true"></i><%= __("blog_single.recent_post2.date") %></li>
+                                    <li><i class="fa fa-commenting-o" aria-hidden="true"></i><%= __("blog_single.recent_post2.comments") %></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Single Post -->
+                    </div>
+                    <!--/ End Single Widget -->
+                    <!-- Single Widget -->
+                    <div class="single-widget side-tags">
+                        <h3 class="title"><%= __("blog_single.tags_title") %></h3>
+                        <ul class="tag">
+                            <li><a href="#"><%= __("blog_single.tag.ai") %></a></li>
+                            <li><a href="#"><%= __("blog_single.tag.nlp") %></a></li>
+                            <li><a href="#"><%= __("blog_single.tag.data_science") %></a></li>
+                            <li><a href="#"><%= __("blog_single.tag.research") %></a></li>
+                            <li><a href="#"><%= __("blog_single.tag.innovation") %></a></li>
+                        </ul>
+                    </div>
+                    <!--/ End Single Widget -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ End Single News -->
+<%- include('partials/footer') %>

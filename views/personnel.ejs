@@ -1,0 +1,84 @@
+<%- include('partials/header') %>
+<section class="personnel-section">
+    <div class="container">
+        <div class="row">
+            <% if (personnel && personnel.length > 0) { %>
+                <% personnel.forEach(user => { %>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="personnel-card">
+                            <% if (user.avatar) { %>
+                                <img src="<%= user.avatar %>" alt="<%= user.fullName %>" class="avatar-icon" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+                            <% } else { %>
+                                <i class="fa fa-user-circle avatar-icon"></i>
+                            <% } %>
+                            <h3><%= user.fullName %></h3>
+                            <p><%= user.bio || 'No bio available' %></p>
+                            <% if (user.scholarID) { %>
+                                <a href="/personnel-detail/<%= user.userId %>" class="btn" target="_blank">View Scholarship</a>
+                            <% } else { %>
+                                <a href="#" class="btn disabled" target="_blank">View Scholarship</a>
+                            <% } %>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <div class="col-12">
+                    <p class="text-center">No personnel users found.</p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</section>
+<style>
+    .personnel-section {
+        padding: 60px 0;
+        background: #fff;
+    }
+    .personnel-card {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 20px;
+        text-align: center;
+        margin-bottom: 20px;
+        height: 300px; /* Đảm bảo độ cao đồng đều */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .personnel-card .avatar-icon {
+        font-size: 80px;
+        color: #ccc;
+        margin-bottom: 10px;
+    }
+    .personnel-card img.avatar-icon {
+        margin-bottom: 10px;
+    }
+    .personnel-card h3 {
+        color: #333;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    .personnel-card p {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 10px;
+        flex-grow: 1;
+    }
+    .personnel-card .btn {
+        background: #007bff;
+        color: #fff;
+        padding: 5px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .personnel-card .btn:hover {
+        background: #0056b3;
+    }
+    .personnel-card .btn.disabled {
+        background: #ccc;
+        cursor: not-allowed;
+    }
+</style>
+<%- include('partials/footer') %>

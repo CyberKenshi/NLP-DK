@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+    <html lang="<%= locale %>">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title><%= __("login.title") %></title>
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <section class="login"> 
+            <div class="container">
+                <div class="row">
+                    <!-- Left Side (Background Image) -->
+                    <div class="col-lg-6 login-left"></div>
+                    <!-- Right Side (Login Form) -->
+                    <div class="col-lg-6">
+                        <div class="inner">
+                            <div class="login-form">
+                                <h2><%= __("login.intern") %></h2>
+                                <p><%= __("login.description") %></p>
+                                <form class="form">
+                                    <div class="form-group">
+                                        <input type="text" placeholder="<%= __("login.username") %>" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" placeholder="<%= __("login.password") %>" required>
+                                    </div>
+                                    <div class="form-group login-btn">
+                                        <button type="submit" class="btn" style="background: #1A76D1;">
+                                            <%= __("login.submit") %>
+                                        </button>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox"> <%= __("login.remember_me") %></label>
+                                        <a href="#" class="lost-pass"><%= __("login.forgot_password") %></a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+    </html>

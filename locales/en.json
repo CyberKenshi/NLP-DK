@@ -1,0 +1,307 @@
+{
+	"header": {
+		"lang_code": "en",
+		"meta_keywords": "NLP, AI, Machine Learning, Data Science, Knowledge Discovery",
+		"meta_description": "The NLP-KD Lab pioneers research in Natural Language Processing and Knowledge Discovery.",
+		"meta_copyright": "NLP-KD Lab",
+		"title": "NLP-KD Lab | Natural Language Processing and Knowledge Discovery",
+		"about": "About",
+		"personnel": "Personnel",
+		"contact": "Contact",
+		"faq": "FAQ",
+		"phone_number": "+999 8888 7777",
+		"email_address": "example@yourmail.com",
+		"logo_alt": "NLP-KD Lab Logo",
+		"home": "Home",
+		"research": "Research",
+		"latest_news": "Latest News",
+		"about_us": "About Us",
+		"publication": "Publication",
+		"404_error": "404 Error",
+		"blog_details": "Blog Details",
+		"join_our_lab": "Join Our Lab",
+		"english": "English",
+		"vietnamese": "Vietnamese",
+		"language": "Language",
+		"login": "Login"
+	},
+	"redirect_login" : {
+		"lab_description": "Natural Language Processing and Knowledge Discovery",
+		"personnel_title": "Personnel of the Lab",
+		"personnel_description": "If you are a lab personnel, click here to log in to your account.",
+		"intern_title": "Intern",
+		"intern_description": "If you are an intern, click here to log in to your account."
+	},
+	"index": {
+		"slider1": {
+			"title": "We are",
+			"highlight": "a research and application lab for technologies",
+			"subtitle": "in AI, Machine Learning, Deep Learning, Natural Language Processing (NLP), and Data Science."
+		},
+		"slider2": {
+			"title": "We",
+			"highlight1": "develop",
+			"subtitle": "intelligent systems, automation, and innovative technology products in",
+			"highlight2": "various fields.",
+			"button": "Our Projects"
+		},
+		"slider3": {
+			"title": "We",
+			"highlight1": "always welcome",
+			"subtitle": "those passionate about technology, creative thinking, and eager to create",
+			"highlight2": "breakthrough AI solutions!"
+		},
+		"schedule1": {
+			"tag": "Research Updates",
+			"title": "Latest News",
+			"description": "Stay updated with our latest advancements in AI and NLP research.",
+			"button": "Read More"
+		},
+		"schedule2": {
+			"tag": "Innovation Hub",
+			"title": "Research Projects",
+			"description": "Explore our cutting-edge projects in Machine Learning and Data Science.",
+			"button": "Learn More"
+		},
+		"schedule3": {
+			"tag": "Collaboration",
+			"title": "Working Schedule",
+			"time1": {
+				"day": "Monday - Friday",
+				"hours": "8:00 - 20:00"
+			},
+			"time2": {
+				"day": "Saturday",
+				"hours": "9:00 - 18:30"
+			},
+			"time3": {
+				"day": "Monday - Thursday",
+				"hours": "9:00 - 15:00"
+			},
+			"button": "Contact Us"
+		},
+		"funfacts": {
+			"projects": "Number of Projects",
+			"personnel": "Personnel",
+			"papers": "Scientific Papers",
+			"experience": "Years of Experience"
+		},
+		"why_choose": {
+			"title": "Why Choose Our Lab",
+			"description": "We are committed to advancing AI and NLP through innovative research and collaboration.",
+			"subtitle": "Who We Are",
+			"paragraph1": "We are a leading research lab specializing in AI, Machine Learning, and Natural Language Processing.",
+			"paragraph2": "Our team is dedicated to creating impactful solutions for real-world challenges.",
+			"list1": {
+				"item1": "Expertise in AI and NLP",
+				"item2": "Collaborative research environment",
+				"item3": "Cutting-edge technology"
+			},
+			"list2": {
+				"item1": "Innovative solutions",
+				"item2": "Global impact",
+				"item3": "Passionate team"
+			}
+		},
+		"call_action": {
+			"title": "Need to Collaborate on AI Projects? Call Us at +999 8888 7777",
+			"description": "We are ready to partner with you to develop innovative AI solutions.",
+			"button": "Learn More"
+		},
+		"portfolio": {
+			"title": "We Explore the Future of Natural Language Processing and Knowledge Discovery",
+			"description": "Discover our portfolio of groundbreaking AI and NLP projects.",
+			"button": "View Details"
+		},
+		"services": {
+			"title": "Our Research and Development Services",
+			"description": "We offer a range of services to advance AI and NLP technologies.",
+			"service1": {
+				"title": "AI Model Development",
+				"description": "Building state-of-the-art AI models for various applications."
+			},
+			"service2": {
+				"title": "NLP Solutions",
+				"description": "Developing advanced NLP systems for text analysis and understanding."
+			},
+			"service3": {
+				"title": "Data Science Consulting",
+				"description": "Providing expert consulting in data analysis and machine learning."
+			},
+			"service4": {
+				"title": "Automation Systems",
+				"description": "Creating intelligent automation solutions for businesses."
+			},
+			"service5": {
+				"title": "Research Collaboration",
+				"description": "Partnering with institutions for cutting-edge AI research."
+			},
+			"service6": {
+				"title": "Technology Transfer",
+				"description": "Transferring research outcomes to industry applications."
+			}
+		},
+		"pricing": {
+			"title": "Our Collaboration Packages",
+			"description": "We offer flexible collaboration packages for AI and NLP projects.",
+			"plan1": {
+				"title": "Basic Research",
+				"price": "199",
+				"per": "Per Project",
+				"feature1": "Initial AI model development",
+				"feature2": "Basic NLP analysis",
+				"feature3": "Advanced model training",
+				"feature4": "Full-scale deployment",
+				"feature5": "Ongoing support",
+				"button": "Book Now"
+			},
+			"plan2": {
+				"title": "Advanced Research",
+				"price": "299",
+				"per": "Per Project",
+				"feature1": "Initial AI model development",
+				"feature2": "Basic NLP analysis",
+				"feature3": "Advanced model training",
+				"feature4": "Full-scale deployment",
+				"feature5": "Ongoing support",
+				"button": "Book Now"
+			},
+			"plan3": {
+				"title": "Enterprise Solutions",
+				"price": "399",
+				"per": "Per Project",
+				"feature1": "Initial AI model development",
+				"feature2": "Basic NLP analysis",
+				"feature3": "Advanced model training",
+				"feature4": "Full-scale deployment",
+				"feature5": "Ongoing support",
+				"button": "Book Now"
+			}
+		},
+		"blog": {
+			"title": "Keep Up with Our Latest Research News",
+			"description": "Read about our recent advancements and insights in AI and NLP.",
+			"post1": {
+				"date": "22 Aug, 2020",
+				"title": "Announcing Our New AI Product",
+				"description": "Learn about our latest AI-driven solution for text analysis."
+			},
+			"post2": {
+				"date": "15 Jul, 2020",
+				"title": "Top Five NLP Techniques",
+				"description": "Explore the top techniques we use in our NLP research."
+			},
+			"post3": {
+				"date": "05 Jan, 2020",
+				"title": "High-Impact AI Solutions",
+				"description": "Discover how our AI solutions are transforming industries."
+			}
+		},
+		"appointment": {
+			"title": "We Are Always Ready to Collaborate. Book an Appointment",
+			"description": "Schedule a meeting to discuss your AI and NLP project needs.",
+			"form": {
+				"name": "Name",
+				"email": "Email",
+				"phone": "Phone",
+				"department": "Department",
+				"department_option1": "AI Research",
+				"department_option2": "NLP Development",
+				"department_option3": "Data Science",
+				"department_option4": "Automation",
+				"doctor": "Team Lead",
+				"doctor_option1": "Dr. John Smith",
+				"doctor_option2": "Dr. Jane Doe",
+				"doctor_option3": "Dr. Alex Brown",
+				"date": "Date",
+				"message": "Write Your Message Here...",
+				"submit": "Book an Appointment",
+				"confirmation": "(We will confirm by a text message)"
+			}
+		},
+		"newsletter": {
+			"title": "Sign Up for Our Newsletter",
+			"description": "Stay updated with our latest research and project updates.",
+			"form": {
+				"email": "Your email address",
+				"submit": "Subscribe"
+			}
+		}
+	},
+	"footer": {
+        "copyright": "© 2025 NLP-KD Lab"
+    },
+    "blog_single": {
+        "image_alt": "AI Research Article Image",
+        "title": "New Advances in Natural Language Processing",
+        "author": "Dr. Minh Nguyen",
+        "author_alt": "Author Minh Nguyen Photo",
+        "date": "May 10, 2025",
+        "comments": "8 Comments",
+        "views": "15K Views",
+        "paragraph1": "We have made significant progress in developing advanced NLP models, focusing on multilingual context understanding. This research promises to enhance the efficiency of AI systems in text analysis.",
+        "paragraph2": "Our project leverages state-of-the-art deep learning techniques to improve the accuracy of language models. We have tested on diverse datasets, including Vietnamese and English.",
+        "gallery_image1_alt": "NLP Model Performance Chart",
+        "gallery_image2_alt": "Text Analysis System Interface",
+        "paragraph3": "Initial results show our model outperforms traditional methods by 20% in handling complex text structures. This opens up potential applications in fields like healthcare and education.",
+        "quote": "NLP is not just technology; it’s a bridge to making machines understand human language more naturally.",
+        "paragraph4": "We are continuing to expand this research, with plans to integrate these models into real-world applications next year. Stay tuned for more updates!",
+        "social": {
+            "facebook": "Facebook",
+            "twitter": "Twitter"
+        },
+        "comments_title": "All Comments",
+        "comment1": {
+            "author": "Lan Anh",
+            "author_alt": "Commenter Lan Anh Photo",
+            "date": "May 12, 2025",
+            "time": "08:30 AM",
+            "text": "Very interesting article! I’m particularly impressed with how the model handles Vietnamese. Are there plans to expand to other languages?"
+        },
+        "comment2": {
+            "author": "Hoang Nam",
+            "author_alt": "Commenter Hoang Nam Photo",
+            "date": "May 13, 2025",
+            "time": "02:45 PM",
+            "text": "This research has great potential in education. I look forward to seeing real-world applications!"
+        },
+        "reply": "Reply",
+        "form_title": "Leave a Comment",
+        "form": {
+            "name": "Name",
+            "email": "Email",
+            "message": "Write your comment here...",
+            "submit": "Submit Comment"
+        },
+        "search_placeholder": "Search articles...",
+        "categories_title": "Blog Categories",
+        "category": {
+            "ai": "Artificial Intelligence",
+            "nlp": "Natural Language Processing",
+            "data_science": "Data Science",
+            "machine_learning": "Machine Learning",
+            "automation": "Automation"
+        },
+        "recent_posts_title": "Recent Posts",
+        "recent_post1": {
+            "title": "Announcing Our New AI Text Analysis System",
+            "date": "May 01, 2025",
+            "comments": "10 Comments",
+            "image_alt": "AI System Image"
+        },
+        "recent_post2": {
+            "title": "Five Breakthrough NLP Techniques",
+            "date": "April 20, 2025",
+            "comments": "15 Comments",
+            "image_alt": "NLP Techniques Image"
+        },
+        "tags_title": "Tags",
+        "tag": {
+            "ai": "AI",
+            "nlp": "NLP",
+            "data_science": "Data Science",
+            "research": "Research",
+            "innovation": "Innovation"
+        }
+    }
+}

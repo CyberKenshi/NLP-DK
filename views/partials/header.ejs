@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html class="no-js" lang="<%= locale %>">
+
+<head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="<%= __(" header.meta_keywords") %>">
+    <meta name="description" content="<%= __(" header.meta_description") %>">
+    <meta name="copyright" content="<%= __(" header.meta_copyright") %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>
+        <%= __("header.title") %>
+    </title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/img/favicon.png">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="/css/nice-select.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <!-- icofont CSS -->
+    <link rel="stylesheet" href="/css/icofont.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" href="/css/slicknav.min.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="/css/owl-carousel.css">
+    <!-- Datepicker CSS -->
+    <link rel="stylesheet" href="/css/datepicker.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="/css/animate.min.css">
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="/css/magnific-popup.css">
+    <!-- Medipro CSS -->
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <!-- Flag Icons CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader-outter"></div>
+            <div class="loader-inner"></div>
+            <div class="indicator">
+                <svg width="16px" height="12px">
+                    <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                    <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <!-- End Preloader -->
+
+    <header class="header">
+        <!-- Topbar -->
+        <div class="topbar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-5 col-12">
+                        <!-- Contact -->
+                        <ul class="top-link">
+                                <li><i class="fa fa-phone"></i>
+                                    <%= __("header.phone_number") %>
+                                </li>
+                                <li><i class="fa fa-envelope"></i><a href="mailto:<%= __(" header.email_address") %>"><%=
+                                            __("header.email_address") %></a></li>
+                        </ul>
+                        <!-- End Contact -->
+                    </div>
+                    <div class="col-lg-6 col-md-7 col-12">
+                        <!-- Top Contact -->
+                        <ul class="top-contact">
+                            <!-- Login Button -->
+                            <div class="get-login">
+                                <a href="/redirect-login" class="btn" style="background: #2596be; color: #fff; display: flex; align-items: center; justify-content: center; height: 30px; padding: 0 15px;">
+                                    <%= __("header.login") %>
+                                </a>
+                            </div>
+                        </ul>
+                        <!-- End Top Contact -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Topbar -->
+        <!-- Header Inner -->
+        <div class="header-inner">
+            <div class="container">
+                <div class="inner">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-12">
+                            <!-- Start Logo -->
+                            <div class="logo">
+                                <a href="/">
+                                    <img src="/img/nlp-kd-logo.png" alt="<%= __(" header.logo_alt") %>"
+                                    style="max-height: 50px; width: auto; vertical-align: middle;">
+                                </a>
+                            </div>
+                            <!-- End Logo -->
+                            <!-- Mobile Nav -->
+                            <div class="mobile-nav"></div>
+                            <!-- End Mobile Nav -->
+                        </div>
+                        <div class="col-lg-7 col-md-9 col-12">
+                            <!-- Main Menu -->
+                            <div class="main-menu">
+                                <nav class="navigation">
+                                    <ul class="nav menu">
+                                        <li><a href="/research">
+                                                <%= __("header.research") %>
+                                            </a></li>
+                                        <li><a href="/news">
+                                                <%= __("header.latest_news") %>
+                                            </a></li>
+                                        <li><a href="/about">
+                                                <%= __("header.about_us") %><i class="icofont-rounded-down"></i>
+                                            </a>
+                                            <ul class="dropdown">
+                                                <li><a href="/about/personnel">
+                                                        <%= __("header.personnel") %>
+                                                    </a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="/publication">
+                                                <%= __("header.publication") %><i class="icofont-rounded-down"></i>
+                                            </a>
+                                            <ul class="dropdown">
+                                                <li><a href="/blog-single">
+                                                        <%= __("header.blog_details") %>
+                                                    </a></li>
+                                            </ul>
+                                        </li>
+                                        <!-- Language Switcher -->
+                                        <li class="has-sub">
+                                            <a href="#" class="lang-toggle">
+                                                <%= __("header.language") %><i class="icofont-rounded-down"></i>
+                                            </a>
+                                            <ul class="dropdown">
+                                                <li><a href="/set-lang/vi"><span class="fi fi-vn"
+                                                            style="margin-right: 8px;"></span>
+                                                        <%= __("header.vietnamese") %>
+                                                    </a></li>
+                                                <li><a href="/set-lang/en"><span class="fi fi-gb"
+                                                        style="margin-right: 8px;"></span>
+                                                    <%= __("header.english") %>
+                                                </a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!--/ End Main Menu -->
+                        </div>
+                        <div class="col-lg-2 col-12">
+                            <div class="get-quote">
+                                <a href="/appointment" class="btn">
+                                    <%= __("header.join_our_lab") %>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ End Header Inner -->
+    </header>

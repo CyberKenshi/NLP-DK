@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+    <html lang="<%= locale %>">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title><%= __("redirect.title") %></title>
+        <link rel="stylesheet" href="/css/style.css">
+        <style>
+            .redirect-container {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                height: 100vh;
+                background: #1f78d1;
+                text-align: center;
+            }
+            .redirect-header {
+                text-align: center;
+                padding: 20px 0;
+                background: #fff;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+            .redirect-header img {
+                max-height: 50px;
+                vertical-align: middle;
+            }
+            .redirect-header h1 {
+                color: #2C2D3F;
+                font-size: 28px;
+                margin: 10px 0 0;
+                display: inline-block;
+                vertical-align: middle;
+            }
+            .redirect-option {
+                background: #fff;
+                padding: 40px;
+                border-radius: 10px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                width: 30%;
+                transition: transform 0.3s ease;
+                cursor: pointer;
+                text-decoration: none; /* Bỏ gạch chân */
+                color: inherit; /* Giữ màu chữ mặc định */
+            }
+            .redirect-option:hover {
+                transform: translateY(-15px);
+            }
+            .redirect-option img {
+                max-height: 100px;
+                margin-bottom: 20px;
+            }
+            .redirect-option h3 {
+                color: #2C2D3F;
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+            .redirect-option p {
+                color: #868686;
+                margin-bottom: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="redirect-header">
+            <img src="/img/nlp-kd-logo.png" alt="Lab Logo"><br>
+            <h1><%= __("redirect_login.lab_description") %></h1>
+        </div>
+        <div class="redirect-container">
+            <a href="/api/v1/auth/personnel-login" class="redirect-option">
+                <img src="/img/in-the-office.png" alt="">
+                <h3><%= __("redirect_login.personnel_title") %></h3>
+                <p><%= __("redirect_login.personnel_description") %></p>
+            </a>
+            <a href="/api/v1/auth/intern-login" class="redirect-option">
+                <img src="/img/engineering-team.png" alt="">
+                <h3><%= __("redirect_login.intern_title") %></h3>
+                <p><%= __("redirect_login.intern_description") %></p>
+            </a>
+        </div>
+    </body>
+    </html>

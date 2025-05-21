@@ -1,0 +1,317 @@
+{
+	"header": {
+		"lang_code": "vi",
+		"meta_keywords": "NLP, AI, Máy học, Khoa học Dữ liệu, Khám phá Tri thức",
+		"meta_description": "Phòng Thí nghiệm NLP-KD tiên phong trong nghiên cứu Xử lý Ngôn ngữ Tự nhiên và Khám phá Tri thức.",
+		"meta_copyright": "Phòng Thí nghiệm NLP-KD",
+		"title": "Phòng Thí nghiệm NLP-KD | Xử lý Ngôn ngữ Tự nhiên và Khám phá Tri thức",
+		"about": "Giới thiệu",
+		"personnel": "Nhân sự",
+		"contact": "Liên hệ",
+		"faq": "Câu hỏi Thường gặp",
+		"phone_number": "+999 8888 7777",
+		"email_address": "example@yourmail.com",
+		"logo_alt": "Logo Phòng Thí nghiệm NLP-KD",
+		"home": "Trang chủ",
+		"research": "Nghiên cứu",
+		"latest_news": "Tin tức",
+		"about_us": "Về Chúng tôi",
+		"publication": "Ấn phẩm",
+		"404_error": "Lỗi 404",
+		"blog_details": "Chi tiết Blog",
+		"join_our_lab": "Tham gia Phòng Thí nghiệm",
+		"english": "Tiếng Anh",
+		"vietnamese": "Tiếng Việt",
+		"language": "Ngôn ngữ",
+		"login": "Đăng nhập"
+	},
+	"redirect_login" : {
+		"lab_description": "Xử lý Ngôn ngữ Tự nhiên và Khám phá Tri thức",
+		"personnel_title": "Nhân sự phòng thí nghiệm",
+		"personnel_description": "Nếu là nhân sự phòng thí nghiệm, hãy nhấn vào đây để đăng nhập tài khoản của bạn.",
+		"intern_title": "Thực tập sinh",
+		"intern_description": "Nếu bạn là thực tập sinh, hãy nhấn vào đây để đăng nhập tài khoản của bạn."
+	},
+	"login": {
+		"description": "Đăng nhập vào tài khoản của bạn để truy cập các tài nguyên và thông tin phòng thí nghiệm.",
+		"personnel": "Đăng nhập Nhân sự",
+		"intern": "Đăng nhập Thực tập sinh",
+		"username": "Tên đăng nhập",
+		"password": "Mật khẩu",
+		"remember_me": "Ghi nhớ tôi",
+		"forgot_password": "Quên mật khẩu?",
+		"submit": "Đăng nhập"
+	},
+	"index": {
+		"slider1": {
+			"title": "Chúng tôi là",
+			"highlight": "phòng thí nghiệm nghiên cứu và ứng dụng các công nghệ",
+			"subtitle": "AI, Máy học, Học sâu, Xử lý Ngôn ngữ Tự nhiên (NLP), Khoa học Dữ liệu."
+		},
+		"slider2": {
+			"title": "Chúng tôi",
+			"highlight1": "phát triển",
+			"subtitle": "các hệ thống thông minh, tự động hóa và sáng tạo sản phẩm công nghệ mới trong",
+			"highlight2": "nhiều lĩnh vực.",
+			"button": "Các Dự Án Của Chúng Tôi"
+		},
+		"slider3": {
+			"title": "Chúng tôi",
+			"highlight1": "luôn chào đón",
+			"subtitle": "những bạn có đam mê công nghệ, tư duy sáng tạo và mong muốn tạo ra",
+			"highlight2": "các giải pháp AI đột phá!"
+		},
+		"schedule1": {
+			"tag": "Cập nhật Nghiên cứu",
+			"title": "Tin tức Mới nhất",
+			"description": "Cập nhật những tiến bộ mới nhất trong nghiên cứu AI và NLP của chúng tôi.",
+			"button": "Đọc Thêm"
+		},
+		"schedule2": {
+			"tag": "Trung tâm Đổi mới",
+			"title": "Dự án Nghiên cứu",
+			"description": "Khám phá các dự án tiên phong trong Máy học và Khoa học Dữ liệu.",
+			"button": "Tìm Hiểu Thêm"
+		},
+		"schedule3": {
+			"tag": "Hợp tác",
+			"title": "Lịch Làm việc",
+			"time1": {
+				"day": "Thứ Hai - Thứ Sáu",
+				"hours": "8:00 - 20:00"
+			},
+			"time2": {
+				"day": "Thứ Bảy",
+				"hours": "9:00 - 18:30"
+			},
+			"time3": {
+				"day": "Thứ Hai - Thứ Năm",
+				"hours": "9:00 - 15:00"
+			},
+			"button": "Liên Hệ Chúng Tôi"
+		},
+		"funfacts": {
+			"projects": "Số lượng Dự án",
+			"personnel": "Nhân sự",
+			"papers": "Bài báo Khoa học",
+			"experience": "Năm Kinh Nghiệm"
+		},
+		"why_choose": {
+			"title": "Tại Sao Chọn Phòng Thí nghiệm của Chúng Tôi",
+			"description": "Chúng tôi cam kết thúc đẩy AI và NLP thông qua nghiên cứu và hợp tác sáng tạo.",
+			"subtitle": "Chúng Tôi Là Ai",
+			"paragraph1": "Chúng tôi là phòng thí nghiệm hàng đầu chuyên về AI, Máy học và Xử lý Ngôn ngữ Tự nhiên.",
+			"paragraph2": "Đội ngũ của chúng tôi tận tâm tạo ra các giải pháp có tác động cho các thách thức thực tế.",
+			"list1": {
+				"item1": "Chuyên môn về AI và NLP",
+				"item2": "Môi trường nghiên cứu hợp tác",
+				"item3": "Công nghệ tiên tiến"
+			},
+			"list2": {
+				"item1": "Giải pháp sáng tạo",
+				"item2": "Tầm ảnh hưởng toàn cầu",
+				"item3": "Đội ngũ đam mê"
+			}
+		},
+		"call_action": {
+			"title": "Cần Hợp tác Dự án AI? Gọi Chúng Tôi tại +999 8888 7777",
+			"description": "Chúng tôi sẵn sàng hợp tác với bạn để phát triển các giải pháp AI sáng tạo.",
+			"button": "Tìm Hiểu Thêm"
+		},
+		"portfolio": {
+			"title": "Chúng Tôi Khám Phá Tương Lai của Xử lý Ngôn ngữ Tự nhiên và Khám phá Tri thức",
+			"description": "Khám phá danh mục các dự án AI và NLP đột phá của chúng tôi.",
+			"button": "Xem Chi Tiết"
+		},
+		"services": {
+			"title": "Dịch vụ Nghiên cứu và Phát triển của Chúng Tôi",
+			"description": "Chúng tôi cung cấp nhiều dịch vụ để thúc đẩy công nghệ AI và NLP.",
+			"service1": {
+				"title": "Phát triển Mô hình AI",
+				"description": "Xây dựng các mô hình AI tiên tiến cho nhiều ứng dụng."
+			},
+			"service2": {
+				"title": "Giải pháp NLP",
+				"description": "Phát triển các hệ thống NLP tiên tiến cho phân tích và hiểu văn bản."
+			},
+			"service3": {
+				"title": "Tư vấn Khoa học Dữ liệu",
+				"description": "Cung cấp tư vấn chuyên môn về phân tích dữ liệu và máy học."
+			},
+			"service4": {
+				"title": "Hệ thống Tự động hóa",
+				"description": "Tạo ra các giải pháp tự động hóa thông minh cho doanh nghiệp."
+			},
+			"service5": {
+				"title": "Hợp tác Nghiên cứu",
+				"description": "Hợp tác với các tổ chức cho nghiên cứu AI tiên tiến."
+			},
+			"service6": {
+				"title": "Chuyển giao Công nghệ",
+				"description": "Chuyển giao kết quả nghiên cứu sang ứng dụng công nghiệp."
+			}
+		},
+		"pricing": {
+			"title": "Gói Hợp tác của Chúng Tôi",
+			"description": "Chúng tôi cung cấp các gói hợp tác linh hoạt cho các dự án AI và NLP.",
+			"plan1": {
+				"title": "Nghiên cứu Cơ bản",
+				"price": "199",
+				"per": "Mỗi Dự án",
+				"feature1": "Phát triển mô hình AI ban đầu",
+				"feature2": "Phân tích NLP cơ bản",
+				"feature3": "Huấn luyện mô hình nâng cao",
+				"feature4": "Triển khai toàn diện",
+				"feature5": "Hỗ trợ liên tục",
+				"button": "Đặt Lịch Ngay"
+			},
+			"plan2": {
+				"title": "Nghiên cứu Nâng cao",
+				"price": "299",
+				"per": "Mỗi Dự án",
+				"feature1": "Phát triển mô hình AI ban đầu",
+				"feature2": "Phân tích NLP cơ bản",
+				"feature3": "Huấn luyện mô hình nâng cao",
+				"feature4": "Triển khai toàn diện",
+				"feature5": "Hỗ trợ liên tục",
+				"button": "Đặt Lịch Ngay"
+			},
+			"plan3": {
+				"title": "Giải pháp Doanh nghiệp",
+				"price": "399",
+				"per": "Mỗi Dự án",
+				"feature1": "Phát triển mô hình AI ban đầu",
+				"feature2": "Phân tích NLP cơ bản",
+				"feature3": "Huấn luyện mô hình nâng cao",
+				"feature4": "Triển khai toàn diện",
+				"feature5": "Hỗ trợ liên tục",
+				"button": "Đặt Lịch Ngay"
+			}
+		},
+		"blog": {
+			"title": "Theo Dõi Tin tức Nghiên cứu Mới nhất của Chúng Tôi",
+			"description": "Đọc về những tiến bộ và hiểu biết gần đây của chúng tôi trong AI và NLP.",
+			"post1": {
+				"date": "22 Tháng 8, 2020",
+				"title": "Công bố Sản phẩm AI Mới",
+				"description": "Tìm hiểu về giải pháp phân tích văn bản dựa trên AI mới nhất của chúng tôi."
+			},
+			"post2": {
+				"date": "15 Tháng 7, 2020",
+				"title": "Năm Kỹ thuật NLP Hàng đầu",
+				"description": "Khám phá các kỹ thuật hàng đầu chúng tôi sử dụng trong nghiên cứu NLP."
+			},
+			"post3": {
+				"date": "05 Tháng 1, 2020",
+				"title": "Giải pháp AI Tác động Cao",
+				"description": "Khám phá cách các giải pháp AI của chúng tôi đang chuyển đổi các ngành công nghiệp."
+			}
+		},
+		"appointment": {
+			"title": "Chúng Tôi Luôn Sẵn sàng Hợp tác. Đặt Lịch Hẹn",
+			"description": "Lên lịch cuộc họp để thảo luận về nhu cầu dự án AI và NLP của bạn.",
+			"form": {
+				"name": "Tên",
+				"email": "Email",
+				"phone": "Số điện thoại",
+				"department": "Bộ phận",
+				"department_option1": "Nghiên cứu AI",
+				"department_option2": "Phát triển NLP",
+				"department_option3": "Khoa học Dữ liệu",
+				"department_option4": "Tự động hóa",
+				"doctor": "Trưởng nhóm",
+				"doctor_option1": "TS. John Smith",
+				"doctor_option2": "TS. Jane Doe",
+				"doctor_option3": "TS. Alex Brown",
+				"date": "Ngày",
+				"message": "Viết Tin nhắn của Bạn tại Đây...",
+				"submit": "Đặt Lịch Hẹn",
+				"confirmation": "(Chúng tôi sẽ xác nhận qua tin nhắn)"
+			}
+		},
+		"newsletter": {
+			"title": "Đăng ký Bản tin của Chúng Tôi",
+			"description": "Cập nhật các nghiên cứu và dự án mới nhất của chúng tôi.",
+			"form": {
+				"email": "Địa chỉ email của bạn",
+				"submit": "Đăng ký"
+			}
+		}
+	},
+	"footer": {
+        "copyright": "© 2025 Phòng Thí nghiệm NLP-KD"
+    },
+    "blog_single": {
+        "image_alt": "Hình ảnh bài viết nghiên cứu AI",
+        "title": "Tiến bộ mới trong Xử lý Ngôn ngữ Tự nhiên",
+        "author": "TS. Minh Nguyễn",
+        "author_alt": "Ảnh tác giả Minh Nguyễn",
+        "date": "10 Tháng 5, 2025",
+        "comments": "8 Bình luận",
+        "views": "15K Lượt xem",
+        "paragraph1": "Chúng tôi đã đạt được bước tiến mới trong việc phát triển các mô hình NLP cải tiến, tập trung vào việc hiểu ngữ cảnh đa ngôn ngữ. Nghiên cứu này hứa hẹn sẽ nâng cao hiệu quả của các hệ thống AI trong phân tích văn bản.",
+        "paragraph2": "Dự án của chúng tôi sử dụng các kỹ thuật học sâu tiên tiến để cải thiện độ chính xác của các mô hình ngôn ngữ. Chúng tôi đã thử nghiệm trên nhiều tập dữ liệu đa dạng, bao gồm tiếng Việt và tiếng Anh.",
+        "gallery_image1_alt": "Biểu đồ hiệu suất mô hình NLP",
+        "gallery_image2_alt": "Giao diện hệ thống phân tích văn bản",
+        "paragraph3": "Kết quả ban đầu cho thấy mô hình của chúng tôi vượt trội hơn 20% so với các phương pháp truyền thống trong việc xử lý văn bản có cấu trúc phức tạp. Điều này mở ra tiềm năng ứng dụng trong nhiều lĩnh vực như y tế và giáo dục.",
+        "quote": "NLP không chỉ là công nghệ, mà là cầu nối để máy móc hiểu được ngôn ngữ con người một cách tự nhiên hơn.",
+        "paragraph4": "Chúng tôi đang tiếp tục mở rộng nghiên cứu này, với kế hoạch tích hợp các mô hình vào các ứng dụng thực tế trong năm tới. Hãy theo dõi để cập nhật thêm!",
+        "social": {
+            "facebook": "Facebook",
+            "twitter": "Twitter"
+        },
+        "comments_title": "Tất cả Bình luận",
+        "comment1": {
+            "author": "Lan Anh",
+            "author_alt": "Ảnh người bình luận Lan Anh",
+            "date": "12 Tháng 5, 2025",
+            "time": "08:30 Sáng",
+            "text": "Bài viết rất thú vị! Tôi đặc biệt ấn tượng với cách mô hình xử lý tiếng Việt. Có kế hoạch mở rộng sang các ngôn ngữ khác không?"
+        },
+        "comment2": {
+            "author": "Hoàng Nam",
+            "author_alt": "Ảnh người bình luận Hoàng Nam",
+            "date": "13 Tháng 5, 2025",
+            "time": "14:45 Chiều",
+            "text": "Nghiên cứu này có tiềm năng lớn trong giáo dục. Tôi mong chờ thấy các ứng dụng thực tế!"
+        },
+        "reply": "Trả lời",
+        "form_title": "Để lại Bình luận",
+        "form": {
+            "name": "Tên",
+            "email": "Email",
+            "message": "Viết bình luận của bạn tại đây...",
+            "submit": "Gửi Bình luận"
+        },
+        "search_placeholder": "Tìm kiếm bài viết...",
+        "categories_title": "Danh mục Blog",
+        "category": {
+            "ai": "Trí tuệ Nhân tạo",
+            "nlp": "Xử lý Ngôn ngữ Tự nhiên",
+            "data_science": "Khoa học Dữ liệu",
+            "machine_learning": "Máy học",
+            "automation": "Tự động hóa"
+        },
+        "recent_posts_title": "Bài viết Gần đây",
+        "recent_post1": {
+            "title": "Công bố Hệ thống Phân tích Văn bản AI",
+            "date": "01 Tháng 5, 2025",
+            "comments": "10 Bình luận",
+            "image_alt": "Hình ảnh hệ thống AI"
+        },
+        "recent_post2": {
+            "title": "Năm Kỹ thuật NLP Đột phá",
+            "date": "20 Tháng 4, 2025",
+            "comments": "15 Bình luận",
+            "image_alt": "Hình ảnh kỹ thuật NLP"
+        },
+        "tags_title": "Thẻ",
+        "tag": {
+            "ai": "AI",
+            "nlp": "NLP",
+            "data_science": "Khoa học Dữ liệu",
+            "research": "Nghiên cứu",
+            "innovation": "Đổi mới"
+        }
+    }
+}
