@@ -1,7 +1,8 @@
 "# NLP-DK" 
-# Hướng dẫn chạy
+## Hướng dẫn chạy
 npm i
+
 npm start
 
-# Swagger ui ( API testing )
+## Swagger ui ( API testing )
 localhost:3000/api-docs
