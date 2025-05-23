@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const newsController = require('../controllers/newsController.js');
-// const { protect } = require('../middlewares/authMiddleware');
-const multer = require('../middlewares/multer'); 
+const multer = require('../middlewares/multer'); // Giả định cấu hình multer
 
 /**
  * @swagger
@@ -71,6 +70,47 @@ const multer = require('../middlewares/multer');
  *         description: An error occurred while creating news.
  */
 
+/**
+ * @swagger
+ * /api/v1/news/upload-image:
+ *   post:
+ *     summary: Upload image for CKEditor
+ *     description: Upload an image to Cloudinary and return the URL for CKEditor.
+ *     tags:
+ *       - News
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               upload:
+ *                 type: string
+ *                 format: binary
+ *                 description: Image file to upload
+ *     responses:
+ *       200:
+ *         description: Image uploaded successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 url:
+ *                   type: string
+ *                   example: "https://res.cloudinary.com/dx5333xez/image/upload/news/editor/sample.jpg"
+ *       400:
+ *         description: Invalid file.
+ *       401:
+ *         description: Unauthorized.
+ *       500:
+ *         description: An error occurred while uploading image.
+ */
+
 router.post('/', multer.single('image'), newsController.createNews);
+router.post('/upload-image', multer.single('upload'), newsController.uploadImage);
 
 module.exports = router;

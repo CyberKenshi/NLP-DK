@@ -1,28 +1,19 @@
 const News = require('../models/newsModel.js');
-const cloudinary = require('../utils/cloudinary.js');
 
 exports.createNews = async (req, res) => {
     try {
         const { title, content } = req.body;
-        const owner_id = req.user.id;
         let imageUrl = null;
 
-        // Upload ảnh nếu có
+        // Lưu URL của ảnh nếu có (từ input file)
         if (req.file) {
-            const uploadResult = await cloudinary.uploader.upload(req.file.path, {
-                folder: 'news',
-                use_filename: true,
-                unique_filename: false,
-                overwrite: true,
-            });
-            imageUrl = uploadResult.secure_url;
+            imageUrl = `/uploads/${req.file.filename}`; // URL cục bộ
         }
 
         const news = new News({
             title,
             content,
             imageUrl,
-            owner_id,
         });
 
         await news.save();
@@ -38,6 +29,34 @@ exports.createNews = async (req, res) => {
             status: 'error',
             message: 'Failed to create news.',
             error: error.message
+        });
+    }
+};
+
+exports.uploadImage = async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({
+                status: 'error',
+                message: 'No file uploaded.'
+            });
+        }
+
+        const imageUrl = `/uploads/${req.file.filename}`;
+
+        // CKEditor 4 yêu cầu response dạng { uploaded: 1, url: "..." }
+        res.status(200).json({
+            uploaded: 1,
+            fileName: req.file.originalname,
+            url: imageUrl
+        });
+    } catch (error) {
+        console.error('Error uploading image:', error);
+        res.status(500).json({
+            uploaded: 0,
+            error: {
+                message: error.message
+            }
         });
     }
 };
