@@ -13,6 +13,7 @@ const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const publicationRoutes = require("./routes/publicationRoutes");
 const newsRoutes = require("./routes/newsRoutes");
+const chatbotRoutes = require("./routes/chatbot");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -126,7 +127,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use('/api/v1/publications', publicationRoutes);
 app.use('/api/v1/news', newsRoutes);
-
+app.use('/', chatbotRoutes);
 
 app.get('/blog-single', (req, res) => {
     res.render('blog-single');
