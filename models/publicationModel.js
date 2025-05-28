@@ -12,8 +12,8 @@ const publicationSchema = new Schema({
     default: null,
     trim: true,
   },
-  publicationDate: {
-    type: Date,
+  publicationYear: {
+    type: Number,
     required: true,
   },
   abstract: {

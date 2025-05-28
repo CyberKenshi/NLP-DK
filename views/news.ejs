@@ -1,0 +1,405 @@
+<%- include('partials/header') %>
+<!-- Breadcrumbs -->
+<div class="breadcrumbs overlay">
+    <div class="container">
+        <div class="bread-inner">
+            <div class="row">
+                <div class="col-12">
+                    <h2><%= __("header.news") || "News" %></h2>
+                    <ul class="bread-list">
+                        <li><a href="/"><%= __("header.home") || "Home" %></a></li>
+                        <li><i class="icofont-simple-right"></i></li>
+                        <li class="active"><%= __("header.news") || "News" %></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+<section class="news-section">
+    <div class="container">
+        <!-- Header with Search and Sort -->
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="news-filter-form d-flex justify-content-between align-items-center flex-wrap gap-3">
+                    <!-- Search Bar -->
+                    <div class="input-group w-auto">
+                        <input type="text" id="searchInput" class="form-control" placeholder="<%= __('news.search_placeholder') || 'Search news...' %>" value="<%= search || '' %>">
+                        <button type="button" class="btn btn-primary" onclick="fetchNews()"><%= __('news.search') || 'Search' %></button>
+                    </div>
+                    <!-- Sort Dropdown -->
+                    <div class="sort-options">
+                        
+                        <select name="orderby" id="orderby" class="form-select w-auto" onchange="fetchNews()">
+                            <option value="newest" <%= orderby === 'newest' ? 'selected' : '' %>><%= __('news.newest') || 'Newest' %></option>
+                            <option value="oldest" <%= orderby === 'oldest' ? 'selected' : '' %>><%= __('news.oldest') || 'Oldest' %></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- News List -->
+        <div id="newsList" class="row">
+            <% if (news && news.length > 0) { %>
+                <% news.forEach(newsItem => { %>
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card news-card h-100">
+                            <% if (newsItem.thumbnail) { %>
+                                <a href="/news/<%= newsItem._id %>">
+                                    <img src="<%= newsItem.thumbnail %>" class="card-img-top" alt="<%= newsItem.title || 'News Thumbnail' %>">
+                                </a>
+                            <% } %>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="/news/<%= newsItem._id %>" class="text-decoration-none"><%= newsItem.title || 'Untitled' %></a>
+                                </h5>
+                                <!-- Publication Date -->
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        <%= __('news.published_on') || 'Published on' %>: 
+                                        <%= new Date(newsItem.createdAt).toLocaleDateString(locale === 'vi' ? 'vi-VN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                                    </small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p class="text-center">No news articles found.</p>
+            <% } %>
+        </div>
+
+        <!-- Pagination -->
+        <nav aria-label="News pagination" class="mt-4">
+            <ul id="pagination" class="pagination justify-content-center">
+                <!-- Previous Page -->
+                <% if (currentPage > 1) { %>
+                    <li class="page-item">
+                        <a class="page-link" href="#" onclick="fetchNews(<%= currentPage - 1 %>)" aria-label="Previous">
+                            <span aria-hidden="true">⬅ <%= __('pagination.previous') || 'Previous' %></span>
+                        </a>
+                    </li>
+                <% } else { %>
+                    <li class="page-item disabled">
+                        <span class="page-link">⬅ <%= __('pagination.previous') || 'Previous' %></span>
+                    </li>
+                <% } %>
+
+                <!-- Page Numbers -->
+                <%
+                    const delta = 2;
+                    let pages = [];
+                    let displayPages = [];
+                    let lastPage;
+
+                    for (let i = 1; i <= totalPages; i++) {
+                        if (i === 1 || i === totalPages || (i >= currentPage - delta && i <= currentPage + delta)) {
+                            pages.push(i);
+                        }
+                    }
+
+                    for (let i of pages) {
+                        if (lastPage) {
+                            if (i - lastPage === 2) {
+                                displayPages.push(lastPage + 1);
+                            } else if (i - lastPage > 2) {
+                                displayPages.push('...');
+                            }
+                        }
+                        displayPages.push(i);
+                        lastPage = i;
+                    }
+                %>
+                <% displayPages.forEach(page => { %>
+                    <% if (page === '...') { %>
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    <% } else { %>
+                        <li class="page-item <%= currentPage === page ? 'active' : '' %>">
+                            <a class="page-link" href="#" onclick="fetchNews(<%= page %>)" <%= currentPage === page ? 'aria-current="page"' : '' %>><%= page %></a>
+                        </li>
+                    <% } %>
+                <% }); %>
+
+                <!-- Next Page -->
+                <% if (currentPage < totalPages) { %>
+                    <li class="page-item">
+                        <a class="page-link" href="#" onclick="fetchNews(<%= (currentPage + 1) %>)" aria-label="Next">
+                            <span aria-hidden="true"><%= __('pagination.next') || 'Next' %> ➡</span>
+                        </a>
+                    </li>
+                <% } else { %>
+                    <li class="page-item disabled">
+                        <span class="page-link"><%= __('pagination.next') || 'Next' %> ➡</span>
+                    </li>
+                <% } %>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<script>
+    // Client-side translations (passed from server)
+    const translations = {
+        news: {
+            published_on: "<%= __('news.published_on') || 'Published on' %>",
+            no_news: "<%= __('news.no_news') || 'No news articles found.' %>",
+        },
+        pagination: {
+            previous: "<%= __('pagination.previous') || 'Previous' %>",
+            next: "<%= __('pagination.next') || 'Next' %>"
+        }
+    };
+    const locale = "<%= locale || 'en' %>";
+    let currentPage = "<%= currentPage || 1 %>";
+    let currentSearch = "<%= search || '' %>";
+    let currentOrderby = "<%= orderby || 'newest' %>";
+
+    async function fetchNews(page = currentPage) {
+        currentPage = page;
+        const search = document.getElementById('searchInput').value || currentSearch;
+        const orderby = document.getElementById('orderby').value || currentOrderby;
+
+        const params = new URLSearchParams(window.location.search);
+
+        // Cập nhật hoặc thêm search, orderby, page
+        params.set('page', page);
+        params.set('search', search);
+        params.set('orderby', orderby);
+        if (search !== '') {
+            params.delete('category');
+        }
+        try {
+            const response = await fetch(`/news?${params.toString()}`, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            console.log('Fetched data:', data); // Debug log
+
+            if (!data || typeof data.currentPage !== 'number' || typeof data.totalPages !== 'number') {
+                throw new Error('Invalid response data: missing currentPage or totalPages');
+            }
+
+            const newsList = document.getElementById('newsList');
+            newsList.innerHTML = ''; // Clear current news
+
+            if (data.news && Array.isArray(data.news) && data.news.length > 0) {
+                data.news.forEach(newsItem => {
+                    const newsCard = document.createElement('div');
+                    newsCard.className = 'col-md-6 col-lg-4 mb-4';
+                    newsCard.innerHTML = `
+                        <div class="card news-card h-100">
+                            ${newsItem.thumbnail ? `
+                                <a href="/news/${newsItem._id}">
+                                    <img src="${newsItem.thumbnail}" class="card-img-top" alt="${newsItem.title || 'News Thumbnail'}">
+                                </a>
+                            ` : ''}
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="/news/${newsItem._id}" class="text-decoration-none">${newsItem.title || 'Untitled'}</a>
+                                </h5>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        ${translations.news.published_on}: 
+                                        ${new Date(newsItem.createdAt).toLocaleDateString(locale === 'vi' ? 'vi-VN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                                    </small>
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                    newsList.appendChild(newsCard);
+                });
+            } else {
+                newsList.innerHTML = `<p class="text-center">${translations.news.no_news}</p>`;
+            }
+
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = ''; // Clear current pagination
+
+            // Previous Page
+            const prevLi = document.createElement('li');
+            prevLi.className = `page-item ${data.currentPage <= 1 ? 'disabled' : ''}`;
+            prevLi.innerHTML = data.currentPage > 1
+                ? `<a class="page-link" href="#" onclick="fetchNews(${data.currentPage - 1}); return false;" aria-label="Previous">
+                    <span aria-hidden="true">⬅ ${translations.pagination.previous}</span>
+                </a>`
+                : `<span class="page-link">⬅ ${translations.pagination.previous}</span>`;
+            pagination.appendChild(prevLi);
+
+            // Page Numbers
+            const delta = 2;
+            let pages = [];
+            let displayPages = [];
+            let lastPage;
+
+            for (let i = 1; i <= data.totalPages; i++) {
+                if (i === 1 || i === data.totalPages || (i >= data.currentPage - delta && i <= data.currentPage + delta)) {
+                    pages.push(i);
+                }
+            }
+
+            for (let i of pages) {
+                if (lastPage) {
+                    if (i - lastPage === 2) {
+                        displayPages.push(lastPage + 1);
+                    } else if (i - lastPage > 2) {
+                        displayPages.push('...');
+                    }
+                }
+                displayPages.push(i);
+                lastPage = i;
+            }
+
+            displayPages.forEach(page => {
+                const li = document.createElement('li');
+                if (page === '...') {
+                    li.className = 'page-item disabled';
+                    li.innerHTML = `<span class="page-link">...</span>`;
+                } else {
+                    li.className = `page-item ${data.currentPage === page ? 'active' : ''}`;
+                    li.innerHTML = `<a class="page-link" href="#" onclick="fetchNews(${page}); return false;" ${data.currentPage === page ? 'aria-current="page"' : ''}>${page}</a>`;
+                }
+                pagination.appendChild(li);
+            });
+
+            // Next Page
+            const nextLi = document.createElement('li');
+            nextLi.className = `page-item ${data.currentPage >= data.totalPages ? 'disabled' : ''}`;
+            nextLi.innerHTML = data.currentPage < data.totalPages
+                ? `<a class="page-link" href="#" onclick="fetchNews(${data.currentPage + 1}); return false;" aria-label="Next">
+                    <span aria-hidden="true">${translations.pagination.next} ➡</span>
+                </a>`
+                : `<span class="page-link">${translations.pagination.next} ➡</span>`;
+            pagination.appendChild(nextLi);
+
+            // Update URL without reloading
+            const newUrl = `/news?page=${data.currentPage}&search=${encodeURIComponent(search)}&orderby=${orderby}`;
+            history.pushState({}, '', `/news?${params.toString()}`);
+
+            // Scroll to top of news list
+            // window.scrollTo({ top: newsList.offsetTop, behavior: 'smooth' });
+        } catch (error) {
+            console.error('Error fetching news:', error);
+            const newsList = document.getElementById('newsList');
+            newsList.innerHTML = `<p class="text-center">${translations.news.no_news}</p>`;
+            
+            // Fallback pagination
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = `
+                <li class="page-item disabled">
+                    <span class="page-link">⬅ ${translations.pagination.previous}</span>
+                </li>
+                <li class="page-item active">
+                    <span class="page-link">1</span>
+                </li>
+                <li class="page-item disabled">
+                    <span class="page-link">${translations.pagination.next} ➡</span>
+                </li>
+            `;
+        }
+    }
+
+    // Initialize fetch on page load with current parameters
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchNews(currentPage);
+    });
+</script>
+
+<style>
+    .news-section {
+        padding: 60px 0;
+        background: #fff;
+    }
+    .news-section h1 {
+        color: #333;
+        font-size: 28px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    .news-filter-form {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+    }
+    .news-card {
+        transition: transform 0.2s;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+    .news-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    .news-card .card-img-top {
+        height: 200px;
+        object-fit: cover;
+    }
+    .news-card .card-title {
+        margin-bottom: 10px;
+    }
+    .news-card .card-title a {
+        color: #007bff;
+        font-size: 18px;
+        font-weight: 500;
+    }
+    .news-card .card-title a:hover {
+        color: #0056b3;
+    }
+    .news-card .card-text {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 0;
+    }
+    .pagination {
+        margin-top: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+    }
+    .page-item {
+        flex: 0 0 auto;
+    }
+    .page-link {
+        color: #007bff;
+        border: 1px solid #ddd;
+        padding: 6px 12px;
+        border-radius: 6px;
+        min-width: 36px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .page-item.active .page-link {
+        background-color: #007bff;
+        color: white;
+        border: 1px solid #007bff;
+    }
+    .page-item.disabled .page-link {
+        color: #aaa;
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        cursor: not-allowed;
+    }
+    .page-link:hover:not(.disabled .page-link) {
+        background-color: #e9ecef;
+        border-color: #ddd;
+    }
+    .page-item.disabled .page-link.ellipsis {
+        border: none;
+        background: transparent;
+    }
+</style>
+
+<%- include('partials/footer') %>

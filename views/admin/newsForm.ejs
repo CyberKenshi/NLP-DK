@@ -2,19 +2,26 @@
 <section class="news-section">
     <div class="container">
         <h1>Create News Article</h1>
+        <div id="error-message" style="color: red; display: none; margin-bottom: 20px;"></div>
         <form action="/api/v1/news" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" id="title" name="title" required>
             </div>
             <div class="form-group">
+                <label for="thumbnail">Thumbnail</label>
+                <input type="file" class="form-control-file" id="thumbnail" name="thumbnail">
+            </div>
+            <div class="form-group">
+                <label>Categories</label>
+                <div id="categories-container" class="categories-list">
+                    <!-- Danh sách checkbox sẽ được populate bằng JavaScript -->
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="content">Content</label>
                 <textarea id="editor" name="content"></textarea>
             </div>
-            <!-- <div class="form-group">
-                <label for="image">Image (Optional)</label>
-                <input type="file" class="form-control-file" id="image" name="image">
-            </div> -->
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
@@ -25,14 +32,94 @@
     .form-control, .form-control-file { width: 100%; padding: 10px; }
     .btn-primary { background: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; }
     .btn-primary:hover { background: #0056b3; }
+    .cke_notifications_area {
+        display: none !important;
+    }
+
+    .categories-list {
+        max-height: 200px; /* Giới hạn chiều cao, cuộn nếu quá dài */
+        overflow-y: auto;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        padding: 10px;
+        background: #f8f9fa;
+    }
+
+    .categories-list label {
+        display: block;
+        margin-bottom: 8px;
+        cursor: pointer;
+        color: #333;
+        font-size: 14px;
+    }
+
+    .categories-list input[type="checkbox"] {
+        margin-right: 8px;
+        accent-color: #007bff; /* Màu checkbox */
+    }
+
+    .categories-list label:hover {
+        background: #e9ecef;
+        border-radius: 3px;
+        padding: 2px 5px;
+    }
 </style>
 <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
-<style>
-    .cke_notifications_area {
-      display: none !important;
-    }
-  </style>
 <script>
+    // Hiển thị thông báo lỗi trên giao diện
+    function showError(message) {
+        const errorDiv = document.getElementById('error-message');
+        errorDiv.textContent = message;
+        errorDiv.style.display = 'block';
+    }
+
+    // Lấy danh sách category từ API
+    async function loadCategories() {
+        try {
+            console.log('Fetching categories...');
+            const response = await fetch('/api/v1/categories', {
+                method: 'GET'
+            });
+
+            console.log('Response status:', response.status);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log('Response data:', data);
+
+            if (data.status === 'success') {
+                const container = document.getElementById('categories-container');
+                if (!container) {
+                    console.error('Categories container not found!');
+                    showError('Categories container not found in DOM.');
+                    return;
+                }
+                console.log('Populating categories...');
+                data.data.forEach((category, index) => {
+                    console.log(`Adding category ${index + 1}: ${category.name}`);
+                    const label = document.createElement('label');
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.name = 'categoryIds[]'; // Dùng mảng với tên categoryIds[]
+                    checkbox.value = category._id;
+                    label.appendChild(checkbox);
+                    label.appendChild(document.createTextNode(category.name));
+                    container.appendChild(label);
+                });
+                console.log('Categories loaded successfully.');
+            } else {
+                showError('Failed to load categories: ' + (data.message || 'Unknown error'));
+                console.error('Failed to load categories:', data.message);
+            }
+        } catch (error) {
+            showError('Error fetching categories: ' + error.message);
+            console.error('Error fetching categories:', error);
+        }
+    }
+
+    // Khởi tạo CKEditor
     CKEDITOR.replace('editor', {
         extraPlugins: 'uploadimage',
         filebrowserUploadUrl: '/api/v1/news/upload-image',
@@ -41,12 +128,20 @@
         height: 300
     });
 
+    // Xử lý submit form
     document.querySelector('form').addEventListener('submit', (e) => {
         const content = CKEDITOR.instances.editor.getData();
         if (!content) {
             e.preventDefault();
             alert('Content is required!');
         }
+        // Không cần tạo input ẩn vì checkbox đã gửi trực tiếp categoryIds[]
+    });
+
+    // Gọi hàm loadCategories khi trang tải
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('DOM loaded, calling loadCategories...');
+        loadCategories();
     });
 </script>
 <%- include('../partials/footer') %>

@@ -6,6 +6,7 @@
 		"meta_copyright": "NLP-KD Lab",
 		"title": "NLP-KD Lab | Natural Language Processing and Knowledge Discovery",
 		"about": "About",
+		"introduction": "Introduction",
 		"personnel": "Personnel",
 		"contact": "Contact",
 		"faq": "FAQ",
@@ -23,7 +24,8 @@
 		"english": "English",
 		"vietnamese": "Vietnamese",
 		"language": "Language",
-		"login": "Login"
+		"login": "Login",
+		"news": "News"
 	},
 	"redirect_login" : {
 		"lab_description": "Natural Language Processing and Knowledge Discovery",
@@ -303,5 +305,85 @@
             "research": "Research",
             "innovation": "Innovation"
         }
+    },
+	"personnel": {
+		"contact_information": "Contact Information",
+		"email": "Email",
+		"phone": "Phone",
+		"major": "Major",
+		"school": "School",
+		"expertise": "Expertise",
+		"publications": "Publications",
+		"published": "Published",
+		"no_publications": "No publications available",
+		"view_publication": "View publication",
+		"view_scholarship": "View Google Scholar",
+		"authors": "Authors",
+		"no_abstract": "No abstract available",
+		"citation": "Citation",
+		"personnel_title": "Personnel of the Lab",
+		"colaborators": "Colaborators",
+		"title": "Title"
+	},
+	"pagination": {
+		"previous": "Previous",
+		"next": "Next"
+	},
+    "apply": {
+        "title": "Application to Join NLP-KD Lab",
+        "personal_info": "Personal Information",
+        "full_name": "Full Name",
+        "full_name_help": "Enter your full name as it appears on official documents.",
+        "email": "Email Address",
+        "email_help": "We’ll use this email to contact you.",
+        "phone": "Phone Number",
+        "phone_help": "Optional. Include country code if applicable (e.g., +84).",
+        "country": "Country",
+        "select_country": "Select your country",
+        "country_vietnam": "Vietnam",
+        "country_us": "United States",
+        "country_uk": "United Kingdom",
+        "country_other": "Other",
+        "academic_background": "Academic Background",
+        "highest_degree": "Highest Degree",
+        "select_degree": "Select your degree",
+        "degree_bachelor": "Bachelor’s Degree",
+        "degree_master": "Master’s Degree",
+        "degree_phd": "PhD",
+        "degree_other": "Other",
+        "institution": "Institution",
+        "institution_help": "Name of the university or institution.",
+        "major": "Major/Field of Study",
+        "major_help": "E.g., Computer Science, Natural Language Processing.",
+        "research_interests": "Research Interests",
+        "areas_of_interest": "Areas of Interest",
+        "areas_of_interest_help": "Describe your research interests (e.g., NLP, Machine Learning, AI Ethics). Min 100 characters.",
+        "motivation": "Motivation for Joining",
+        "motivation_help": "Why do you want to join the NLP-KD Lab? Min 100 characters.",
+        "cv": "Curriculum Vitae (CV)",
+        "upload_cv": "Upload your CV (PDF only, max 5MB)",
+        "upload_cv_help": "Ensure your CV includes your academic and research experience.",
+        "submit": "Submit Application"
+    },
+	"news": {
+        "title": "News",
+        "search_placeholder": "Search news...",
+        "search": "Search",
+        "sort_by": "Sort by:",
+        "newest": "Newest",
+        "oldest": "Oldest",
+        "published_on": "Published on",
+        "no_news": "No news articles found."
+    },
+	 "news_detail": {
+        "title": "News Detail",
+        "published_on": "Published on",
+        "author": "Author",
+        "categories": "Categories",
+        "back_to_news": "Back to News",
+        "no_content": "Content unavailable.",
+		"search_placeholder":"Search articles...",
+		"recent_posts_title" :"Recent Posts",
+		"categories_title": "Blog Categories"
     }
 }

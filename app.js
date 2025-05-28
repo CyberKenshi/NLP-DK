@@ -12,6 +12,7 @@ const swaggerUi = require("swagger-ui-express");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const publicationRoutes = require("./routes/publicationRoutes");
+const categoryRoutes = require("./routes/categoryRoutes");
 const newsRoutes = require("./routes/newsRoutes");
 
 const app = express();
@@ -26,8 +27,8 @@ const i18n = new I18n({
     defaultLocale: 'vi',
     cookie: 'lang',
     objectNotation: true,
-    autoReload: true, // Tự động tải lại file JSON khi thay đổi
-    updateFiles: false // Không tự động ghi file JSON
+    autoReload: true,
+    updateFiles: false
 });
 
 // Cấu hình Express
@@ -79,32 +80,31 @@ const swaggerOptions = {
       ],
     },
     apis: ["./routes/*.js", "./utils/swaggerSchemas.js"],
-  };
-  
-  const swaggerDocs = swaggerJSDoc(swaggerOptions);
-  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+};
+
+const swaggerDocs = swaggerJSDoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Middleware để debug và truyền locale vào EJS
 app.use((req, res, next) => {
-    console.log('Current locale:', req.getLocale());
     res.locals.locale = req.getLocale();
     next();
 });
 
 // Route để chuyển đổi ngôn ngữ
 app.get('/set-lang/:lang', (req, res) => {
-  const lang = req.params.lang;
-  const referer = req.get('referer') || '/';
+    const lang = req.params.lang;
+    const referer = req.get('referer') || '/';
 
-  if (['en', 'vi'].includes(lang)) {
-      res.cookie('lang', lang, { maxAge: 900000, httpOnly: true });
-      req.setLocale(lang);
-      console.log('Setting language to:', lang);
-  } else {
-      console.log('Invalid language:', lang);
-  }
+    if (['en', 'vi'].includes(lang)) {
+        res.cookie('lang', lang, { maxAge: 900000, httpOnly: true });
+        req.setLocale(lang);
+        console.log('Setting language to:', lang);
+    } else {
+        console.log('Invalid language:', lang);
+    }
 
-  res.redirect(referer); 
+    res.redirect(referer); 
 });
 
 // Route trang chủ
@@ -113,31 +113,50 @@ app.get('/', (req, res) => {
 });
 
 app.get('/redirect-login', (req, res) => {
-  res.render('redirect-login', {
-    locale: req.getLocale(),
-    __: res.__
-  });
+    res.render('redirect-login', {
+        locale: req.getLocale(),
+        __: res.__
+    });
 });
 
 // Middleware xác thực
 app.use("/api/v1/auth", authRoutes);
 
-// Route 
+// Route
 app.use("/api/v1/users", userRoutes);
 app.use('/api/v1/publications', publicationRoutes);
-app.use('/api/v1/news', newsRoutes);
+app.use('/news', newsRoutes);
+app.use('/api/v1/categories', categoryRoutes);
 
+// Trong app.js
+const userController = require('./controllers/userController');
+app.get('/about/personnel', userController.getPersonnelForPage);
+app.get('/about/personnel-detail/:userId', userController.getPersonnelDetail);
+app.get('/about/personnel-detail/:userId/publications', userController.getPersonnelPublications);
+
+app.get('/join-us', (req, res) => {
+    res.render('join-us', {
+        locale: req.getLocale(),
+        __: res.__
+    });
+});
+
+// Route để render form tạo tin tức
+app.get('/admin', (req, res) => {
+    res.render('admin/dashboard'); 
+});
+
+// Route để render form tạo tin tức
+app.get('/news-form', (req, res) => {
+    res.render('admin/newsForm');
+});
 
 app.get('/blog-single', (req, res) => {
     res.render('blog-single');
 });
 
-app.get('/news-form', (req, res) => {
-    res.render('admin/newsForm');
-});
-
-app.get('/personnel-detail', (req, res) => {
-    res.render('personnel-detail');
+app.get('/news-detail', (req, res) => {
+    res.render('news-detail');
 });
 
 app.get('/portfolio-details', (req, res) => {
@@ -157,6 +176,12 @@ app.use((err, req, res, next) => {
     res.render('500');
 });
 
-app.listen(port, () => console.log(
-    `Express started on http://localhost:${port}; ` +
-    `press Ctrl-C to terminate. `));
+app.listen(port, () => {
+  console.log(
+    `Server running on http://localhost:${port};` +
+    ` press Ctrl-C to terminate. `
+  );
+  console.log(
+    `APIs documentation running on http://localhost:${port}/api-docs`
+  );
+});

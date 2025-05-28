@@ -121,42 +121,45 @@
                                 <nav class="navigation">
                                     <ul class="nav menu">
                                         <li><a href="/research">
-                                                <%= __("header.research") %>
+                                                <strong><%= __("header.research") %></strong>
                                             </a></li>
                                         <li><a href="/news">
-                                                <%= __("header.latest_news") %>
+                                                <strong><%= __("header.latest_news") %></strong>
                                             </a></li>
-                                        <li><a href="/about">
-                                                <%= __("header.about_us") %><i class="icofont-rounded-down"></i>
+                                        <li><a href="#">
+                                                <strong><%= __("header.about_us") %></strong><i class="icofont-rounded-down"></i>
                                             </a>
                                             <ul class="dropdown">
+                                                <li><a href="/about/introduction">
+                                                        <strong><%= __("header.introduction") %></strong>
+                                                    </a></li>
                                                 <li><a href="/about/personnel">
-                                                        <%= __("header.personnel") %>
+                                                        <strong><%= __("header.personnel") %></strong>
                                                     </a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="/publication">
-                                                <%= __("header.publication") %><i class="icofont-rounded-down"></i>
+                                        <!-- <li><a href="/publication">
+                                                <strong><%= __("header.publication") %></strong><i class="icofont-rounded-down"></i>
                                             </a>
                                             <ul class="dropdown">
                                                 <li><a href="/blog-single">
-                                                        <%= __("header.blog_details") %>
+                                                        <strong><%= __("header.blog_details") %></strong>
                                                     </a></li>
                                             </ul>
-                                        </li>
+                                        </li> -->
                                         <!-- Language Switcher -->
                                         <li class="has-sub">
                                             <a href="#" class="lang-toggle">
-                                                <%= __("header.language") %><i class="icofont-rounded-down"></i>
+                                                <strong><%= __("header.language") %></strong><i class="icofont-rounded-down"></i>
                                             </a>
                                             <ul class="dropdown">
                                                 <li><a href="/set-lang/vi"><span class="fi fi-vn"
                                                             style="margin-right: 8px;"></span>
-                                                        <%= __("header.vietnamese") %>
+                                                        <strong><%= __("header.vietnamese") %></strong>
                                                     </a></li>
                                                 <li><a href="/set-lang/en"><span class="fi fi-gb"
                                                         style="margin-right: 8px;"></span>
-                                                    <%= __("header.english") %>
+                                                    <strong><%= __("header.english") %></strong>
                                                 </a></li>
                                             </ul>
                                         </li>
@@ -167,7 +170,7 @@
                         </div>
                         <div class="col-lg-2 col-12">
                             <div class="get-quote">
-                                <a href="/appointment" class="btn">
+                                <a href="/join-us" class="btn">
                                     <%= __("header.join_our_lab") %>
                                 </a>
                             </div>
@@ -178,3 +181,13 @@
         </div>
         <!--/ End Header Inner -->
     </header>
+
+     <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-migrate-3.4.0.min.js" integrity="sha256-mBCu5+bVfYzOqpYyK4jm30ZxAZRomuErKEFJFIyrwvQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-KM512VNnjElC30ehFwehXjx1YCHPiQkOPmqnrWtpccM=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js" integrity="sha512-CEiA+78TpP9KAIPzqBvxUv8hy41jyI3f2uHi7DGp/Y/Ka973qgSdybNegWFciqh6GrN2UePx2KkflnQUbUhNIA==" crossorigin="anonymous"></script>
+    <!-- Custom Script -->
+    <script src="/js/main.js"></script>

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const newsSchema = new mongoose.Schema({
   title: { type: String, required: true, trim: true },
-    thumnail: { type: String, default: null },
+    thumbnail: { type: String, default: null },
     categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category', default: null }],
     content: { type: String, required: true },
     imageUrl: { type: String, default: null },
