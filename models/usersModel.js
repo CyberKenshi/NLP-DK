@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema({
     ref: 'User',
     default: null
   },
-
+  studentCode: { type: String, default: null }, 
   major: { type: String, default: null },
   school: { type: String, default: null },
   avatar: { type: String, default: null },

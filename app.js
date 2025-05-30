@@ -6,6 +6,10 @@ const session = require('express-session');
 const { I18n } = require('i18n');
 const connectDB = require("./config/db"); 
 
+const app = express();
+const port = process.env.PORT || 3000;
+const cron = require('node-cron');
+
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
@@ -16,8 +20,6 @@ const categoryRoutes = require("./routes/categoryRoutes");
 const newsRoutes = require("./routes/newsRoutes");
 const chatbotRoutes = require("./routes/chatbot");
 
-const app = express();
-const port = process.env.PORT || 3000;
 
 connectDB();
 
