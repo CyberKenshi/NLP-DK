@@ -263,7 +263,6 @@ const getPersonnelDetail = async (req, res) => {
         res.status(500).render('500', { locale: req.getLocale(), __: res.__, message: 'Failed to fetch personnel details.' });
     }
 };
-
 const getPersonnelPublications = async (req, res) => {
     try {
         const userId = req.params.userId;
@@ -296,14 +295,27 @@ const getPersonnelPublications = async (req, res) => {
             }
         }
 
+        const totalPublications = await Publication.countDocuments({ owner_id: userId });
         const publications = await Publication.find({ owner_id: userId })
             .sort(sortCriteria)
             .skip(skip)
             .limit(limit)
             .lean();
 
+        const totalPages = Math.ceil(totalPublications / limit);
+        const pagination = {
+            currentPage: page,
+            totalPages,
+            hasPrevPage: page > 1,
+            hasNextPage: page < totalPages,
+            prevPage: page - 1,
+            nextPage: page + 1,
+            totalPublications: totalPublications
+        };
+
         res.json({
             publications,
+            pagination,
             sortBy,
             order
         });
@@ -312,6 +324,7 @@ const getPersonnelPublications = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch publications.' });
     }
 };
+
 
 module.exports = {
     getAllPersonnelUsers,
