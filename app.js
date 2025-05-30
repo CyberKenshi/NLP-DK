@@ -14,6 +14,7 @@ const userRoutes = require("./routes/userRoutes");
 const publicationRoutes = require("./routes/publicationRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const newsRoutes = require("./routes/newsRoutes");
+const chatbotRoutes = require("./routes/chatbot");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -127,6 +128,7 @@ app.use("/api/v1/users", userRoutes);
 app.use('/api/v1/publications', publicationRoutes);
 app.use('/news', newsRoutes);
 app.use('/api/v1/categories', categoryRoutes);
+app.use('/', chatbotRoutes);
 
 // Trong app.js
 const userController = require('./controllers/userController');
@@ -143,7 +145,7 @@ app.get('/join-us', (req, res) => {
 
 // Route để render form tạo tin tức
 app.get('/admin', (req, res) => {
-    res.render('admin/dashboard'); 
+    res.render('admin/admin-dashboard'); 
 });
 
 // Route để render form tạo tin tức
