@@ -25,7 +25,10 @@
 		"vietnamese": "Tiếng Việt",
 		"language": "Ngôn ngữ",
 		"login": "Đăng nhập",
-		"news": "Tin tức"
+		"news": "Tin tức",
+		"introduction":"Giới thiệu",
+		"about": "Về chúng tôi",
+		"projects": "Dự án của chúng tôi"
 	},
 	"redirect_login" : {
 		"lab_description": "Xử lý Ngôn ngữ Tự nhiên và Khám phá Tri thức",
@@ -395,5 +398,44 @@
         "oldest": "Cũ nhất",
         "published_on": "Đăng vào ngày",
         "no_news": "Không tìm thấy bài tin tức nào."
-    }
+    },
+	"introduction": {
+		"title": "Xử lý ngôn ngữ tự nhiên và Khai phá tri thức (NLP-KD)",
+		"paragraph1": "Nhóm nghiên cứu Xử lý Ngôn ngữ Tự nhiên và Khai phá Tri thức (NLP-KD) tập trung vào các nghiên cứu tiên tiến trong khai thác và xử lý dữ liệu văn bản, đặc biệt là trong ngữ cảnh tiếng Việt và đa ngôn ngữ.",
+		"section1": {
+		"title": "Xử lý ngôn ngữ tự nhiên và dữ liệu đa phương tiện",
+		"content": "Phát triển các mô hình học sâu và mô hình ngôn ngữ lớn (LLMs) để xử lý hiệu quả dữ liệu văn bản, hình ảnh, âm thanh và video. Các chủ đề nghiên cứu chính bao gồm: mô hình hiểu ngôn ngữ tiếng Việt và đa ngôn ngữ, hệ thống hội thoại thông minh, chatbot, phân tích cảm xúc, trích xuất tri thức và tích hợp thông tin từ dữ liệu đa phương tiện."
+		},
+		"section2": {
+		"title": "Khai phá tri thức và ứng dụng AI trong các lĩnh vực liên ngành",
+		"content": "Áp dụng trí tuệ nhân tạo và học máy để khai thác tri thức từ dữ liệu lớn trong các lĩnh vực như kinh tế, kinh doanh, tài chính, y tế và giáo dục. Nhóm tập trung xây dựng các hệ thống thông minh phục vụ phân tích, dự đoán và hỗ trợ ra quyết định, góp phần thúc đẩy chuyển đổi số trong tổ chức và doanh nghiệp."
+		},
+		"research": {
+		"title": "Công bố khoa học và năng lực đào tạo nghiên cứu",
+		"content": "Nhóm nghiên cứu đã công bố nhiều bài báo quốc tế thuộc danh mục ISI/SCIE và hội nghị hàng đầu trong các lĩnh vực Trí tuệ nhân tạo (AI), Xử lý ngôn ngữ tự nhiên (NLP) và Khoa học dữ liệu. Các hướng nghiên cứu trọng tâm gồm hệ thống hội thoại thông minh, hệ thống gợi ý, xử lý ngôn ngữ tự nhiên, học sâu, thị giác máy tính và phân tích dữ liệu y sinh. Hiện nay, nhiều nghiên cứu sinh, học viên cao học và sinh viên đang tham gia nghiên cứu tại các phòng thí nghiệm trực thuộc nhóm."
+		},
+		"projects": {
+		"title": "Dự án và hợp tác",
+		"content": "Các thành viên của nhóm đang chủ trì nhiều đề tài, dự án nghiên cứu ở các cấp độ khác nhau từ cơ sở, quốc gia đến quốc tế. Bên cạnh hoạt động học thuật, nhóm tích cực chuyển giao công nghệ và ứng dụng kết quả nghiên cứu vào thực tiễn trong các doanh nghiệp và tổ chức trong và ngoài nước."
+		}
+	},
+  	"products": {
+		"title": "Dự án của chúng tôi",
+		"vietgpt": {
+			"title": "VietGPT LLM",
+			"description": "Một mô hình ngôn ngữ lớn tiên tiến được huấn luyện chuyên biệt cho tiếng Việt, có khả năng tạo văn bản, tóm tắt, dịch thuật và xử lý các tác vụ hiểu ngữ cảnh phức tạp."
+		},
+		"chatbot": {
+			"title": "Chatbot cho giáo dục",
+			"description": "Một tác nhân hội thoại thông minh hỗ trợ học sinh và giáo viên bằng cách cung cấp câu trả lời tức thì, hỗ trợ học tập và truy cập tài nguyên học liệu."
+		},
+		"spellcheck": {
+			"title": "Kiểm tra chính tả tiếng Việt",
+			"description": "Công cụ thông minh phát hiện và gợi ý chỉnh sửa lỗi chính tả trong văn bản tiếng Việt, giúp nâng cao chất lượng nội dung."
+		},
+		"qa": {
+			"title": "Hệ thống hỏi đáp",
+			"description": "Một hệ thống đa năng có khả năng hiểu các câu hỏi ngôn ngữ tự nhiên và truy xuất câu trả lời phù hợp từ kho văn bản hoặc cơ sở tri thức lớn."
+		}
+	}
 }

@@ -1,0 +1,139 @@
+<%- include('partials/header') %>
+
+<section class="products-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2><%= __("products.title") %></h2>
+            <hr class="section-divider">
+        </div>
+
+        <div class="row">
+            <!-- Product 1 -->
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="product-card color-1">
+                    <div class="product-icon"><i class="fas fa-robot"></i></div>
+                    <h4><%= __("products.vietgpt.title") %></h4>
+                    <p><%= __("products.vietgpt.description") %></p>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="product-card color-2">
+                    <div class="product-icon"><i class="fas fa-comments"></i></div>
+                    <h4><%= __("products.chatbot.title") %></h4>
+                    <p><%= __("products.chatbot.description") %></p>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="product-card color-3">
+                    <div class="product-icon"><i class="fas fa-spell-check"></i></div>
+                    <h4><%= __("products.spellcheck.title") %></h4>
+                    <p><%= __("products.spellcheck.description") %></p>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="product-card color-4">
+                    <div class="product-icon"><i class="fas fa-question-circle"></i></div>
+                    <h4><%= __("products.qa.title") %></h4>
+                    <p><%= __("products.qa.description") %></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+.products-section {
+    padding: 60px 20px;
+    background-color: #f7f9fc;
+}
+
+.section-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.section-divider {
+    width: 80px;
+    height: 4px;
+    background: #007bff;
+    border: none;
+    margin: 0 auto 30px auto;
+}
+
+.product-card {
+    background-color: #fff;
+    border-left: 6px solid #ccc;
+    border-radius: 8px;
+    padding: 25px 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    transform: translateY(-3px);
+}
+
+.product-icon {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.product-card h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.product-card p {
+    font-size: 16px;
+    color: #444;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* Color Variants */
+.color-1 {
+    border-left-color: #007bff;
+}
+.color-1 .product-icon,
+.color-1 h4 {
+    color: #007bff;
+}
+
+.color-2 {
+    border-left-color: #28a745;
+}
+.color-2 .product-icon,
+.color-2 h4 {
+    color: #28a745;
+}
+
+.color-3 {
+    border-left-color: #e83e8c;
+}
+.color-3 .product-icon,
+.color-3 h4 {
+    color: #e83e8c;
+}
+
+.color-4 {
+    border-left-color: #fd7e14;
+}
+.color-4 .product-icon,
+.color-4 h4 {
+    color: #fd7e14;
+}
+
+</style>
+
+<%- include('partials/footer') %>

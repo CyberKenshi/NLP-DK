@@ -23,16 +23,31 @@
                   <h3>
                     <%= user.degree ? (locale === 'vi' ? user.degree.vi : user.degree.en) : '' %> <%= user.fullName %>
                   </h3>
-                  <% if (user.jobTitles && user.jobTitles.length > 0) { %>
+
+                 <% if (user.role !== 'colab') { %>
+                  <% const validJobTitles = (user.jobTitles || []).filter(title => title && (title.vi || title.en)); %>
+                  <% if (validJobTitles.length > 0) { %>
                     <ul class="job-title-list">
-                        <% user.jobTitles.forEach(title => { %>
-                            <li><%= locale === 'vi' ? title.vi : title.en %></li>
-                        <% }); %>
+                      <% validJobTitles.forEach(title => { %>
+                        <li><%= locale === 'vi' ? title.vi : title.en %></li>
+                      <% }); %>
                     </ul>
-                <% } else { %>
-                    N/A
+                  <% } else { %>
+                    <p class="job-title">N/A</p>
+                  <% } %>
                 <% } %>
-                  
+ <% if (user.roleInLab && ((locale === 'vi' && user.roleInLab.vi) || (locale === 'en' && user.roleInLab.en))) { 
+                      const roleText = locale === 'vi' ? user.roleInLab.vi : user.roleInLab.en;
+                     const roleClass = roleText
+                        .toLowerCase()
+                        .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // bỏ dấu
+                        .replace(/\s/g, '-')  // thay space bằng dấu gạch ngang
+                        .replace(/,/g, '');   // bỏ dấu phẩy
+                  %>
+                    <span class="role-badge <%= roleClass %>">
+                      <%= roleText %>
+                    </span>
+                  <% } %>
                 </div>
               </a>
             </div>
@@ -45,7 +60,7 @@
           </div>
           <% colabList.forEach(user => { %>
             <div class="col-md-3 col-sm-6">
-              <a href="/personnel-detail/<%= user._id %>" class="personnel-card-link">
+              <!-- <a href="#" class="personnel-card-link"> -->
                 <div class="personnel-card">
                   <% if (user.avatar) { %>
                     <img src="<%= user.avatar %>" alt="<%= user.fullName %>" class="avatar-icon">
@@ -55,14 +70,24 @@
                   <h3>
                     <%= user.degree ? (locale === 'vi' ? user.degree.vi : user.degree.en) : '' %> <%= user.fullName %>
                   </h3>
+                  
                   <% if (user.jobTitles && user.jobTitles.length > 0) { %>
                     <p class="job-title">
                       <%= user.jobTitles.map(title => locale === 'vi' ? title.vi : title.en).join(', ') %>
                     </p>
-                  <% } %>
-                  <p class="bio"><%= user.bio || __('personnel.no_bio') %></p>
+                    <% } %>
+                    <p class="bio"><%= locale === 'vi' ? user.bio.vi : user.bio.en %></p>
+                    <%
+                      const roleText = user.roleInLab ? (locale === 'vi' ? user.roleInLab.vi : user.roleInLab.en) : '';
+                      const roleClass = roleText.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s/g, '-');
+                    %>
+                    <% if (roleText) { %>
+                      <span class="role-badge <%= roleClass %>">
+                        <%= roleText %>
+                      </span>
+                    <% } %>
                 </div>
-              </a>
+              <!-- </a> -->
             </div>
           <% }); %>
         <% } %>
@@ -172,5 +197,42 @@
     text-overflow: ellipsis;
     flex-grow: 1;
   }
+  .role-badge {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin: 6px 0;
+  color: #fff;
+  align-self: center;
+}
+
+/* Đỏ: Trưởng nhóm */
+.role-badge.group-leader,
+.role-badge.truong-nhom {
+  background-color: #e74c3c;
+}
+
+
+/* Xanh dương: Thành viên, thành viên chủ chốt, thư ký, key member */
+.role-badge.member,
+.role-badge.key-member,
+.role-badge.thanh-vien,
+.role-badge.thanh-vien-chu-chot,
+.role-badge.thu-ky,
+.role-badge.secretary,
+.role-badge.secretary-key-member,
+.role-badge.thu-ky-thanh-vien-chu-chot {
+  background-color: #3498db;
+}
+/* Xanh lá: Cộng tác viên */
+.role-badge.collaborating-member,
+.role-badge.thanh-vien-cong-tac,
+.role-badge.thanh-vien-hop-tac {
+  background-color: #2ecc71;
+}
+
+
 </style>
 <%- include('partials/footer') %>

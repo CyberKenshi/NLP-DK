@@ -11,7 +11,7 @@ const userController = require('../controllers/userController');
 
 /**
  * @swagger
- * /api/v1/users/personnel:
+ * /users/api/v1/personnel:
  *   get:
  *     summary: Get all personnel users
  *     description: Retrieve a list of all users with the role 'personnel'.
@@ -90,11 +90,11 @@ const userController = require('../controllers/userController');
  *                   type: string
  *                   example: <error details>
  */
-router.get('/personnel', userController.getAllPersonnelUsers);
+router.get('/api/v1/personnel', userController.getAllPersonnelUsers);
 
 /**
  * @swagger
- * /api/v1/users/intern:
+ * /users/api/v1/intern:
  *   get:
  *     summary: Get all intern users
  *     description: Retrieve a list of all users with the role 'intern' without pagination.
@@ -153,11 +153,11 @@ router.get('/personnel', userController.getAllPersonnelUsers);
  *                   type: string
  *                   example: <error details>
  */
-router.get('/intern', userController.getAllInternUsers);
+router.get('/api/v1/intern', userController.getAllInternUsers);
 
 /**
  * @swagger
- * /api/v1/users/{userId}:
+ * /users/api/v1/{userId}:
  *   get:
  *     summary: Get user details by userId
  *     description: Retrieve detailed information of a specific user by their userId.
@@ -434,9 +434,9 @@ router.get('/intern', userController.getAllInternUsers);
  *                   type: string
  *                   example: <error details>
  */
-router.get('/:userId', userController.getUserDetail);
-router.put('/:userId', userController.updateUser);
-router.delete('/:userId', userController.deleteUser);
+router.get('/api/v1/:userId', userController.getUserDetail);
+router.put('/api/v1/:userId', userController.updateUser);
+router.delete('/api/v1/:userId', userController.deleteUser);
 
 /**
  * @swagger
@@ -552,7 +552,7 @@ router.delete('/:userId', userController.deleteUser);
  *                   type: string
  *                   example: <error details>
  */
-router.post('/', userController.addUser);
+router.post('/api/v1', userController.addUser);
 /**
  * @swagger
  * /api/v1/users/field-options:

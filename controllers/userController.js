@@ -64,16 +64,23 @@ const getUserDetail = async (req, res) => {
     }
 };
 
-// Adding a new user
 const addUser = async (req, res) => {
     try {
+        // Nếu có file được upload, thêm đường dẫn file vào avatar
+        if (req.file) {
+            req.body.avatar = `/uploads/avatar/${req.file.filename}`;
+        }
+
         const newUser = new User(req.body);
         await newUser.save();
+
         res.status(201).json({
             status: 'success',
+            message: 'User added successfully.',
             data: newUser
         });
     } catch (error) {
+        console.error('Error adding user:', error);
         res.status(500).json({
             status: 'error',
             message: 'Failed to add user.',
@@ -175,7 +182,7 @@ const getPersonnelForPage = async (req, res) => {
             role: { $in: ['personnel', 'colab'] },
             isLocked: false,
         })
-            .select('fullName bio avatar _id role jobTitles degree')
+            .select('fullName bio avatar _id role jobTitles degree roleInLab')
             .lean();
 
         res.render('personnel', {
