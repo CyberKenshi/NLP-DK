@@ -10,13 +10,13 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
 
   jobTitles: [{
-    vi: { type: String, required: true, trim: true, default: null },
-    en: { type: String, required: true, trim: true, default: null }
+    vi: { type: String, trim: true, default: null },
+    en: { type: String, trim: true, default: null }
   }, { _id: false }],
   degree: {
     vi: {
       type: String,
-      enum: ['ThS.', 'TS.', 'GS', 'PGS.TS.'],
+      enum: ['ThS.', 'TS.', 'GS.', 'PGS.TS.'],
       default: null
     },
     en: {
@@ -32,8 +32,22 @@ const userSchema = new mongoose.Schema({
     required: true,
     default: 'intern'
   },
-
-  bio: { type: String, default: null },
+  roleInLab: {
+    vi: {
+      type: String,
+      enum: ['Trưởng nhóm', 'Thư ký, Thành viên chủ chốt', 'Thành viên chủ chốt', 'Thành viên', "Thành viên cộng tác"],
+      default: null
+    },
+    en: {
+      type: String,
+      enum: ['Group Leader', 'Secretary, Key Member', 'Key Member', 'Member', 'Collaborating Member'],
+      default: null
+    }
+  },
+  bio: {
+    vi: { type: String,default: null },
+    en: { type: String,default: null }
+  },
   supervisor_personnel_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

@@ -1,147 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const newsController = require('../controllers/newsController.js');
-const multer = require('../middlewares/multer'); // Giả định cấu hình multer
-
-/**
- * @swagger
- * /api/v1/news:
- *   post:
- *     summary: Create a new news article
- *     description: Create a new news article with title, content, categories, and optional thumbnail upload.
- *     tags:
- *       - News
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *             properties:
- *               title:
- *                 type: string
- *                 example: "New AI Research"
- *               content:
- *                 type: string
- *                 example: "<p>This is a news article about AI.</p>"
- *               categoryIds:
- *                 type: string
- *                 example: '["682bdb29f7c406761c467d93", "682bdb29f7c406761c467d94"]'
- *               thumbnail:
- *                 type: string
- *                 format: binary
- *                 description: Optional thumbnail image file
- *     responses:
- *       201:
- *         description: News created successfully.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: string
- *                   example: success
- *                 message:
- *                   type: string
- *                   example: News created successfully.
- *                 data:
- *                   type: object
- *                   properties:
- *                     title:
- *                       type: string
- *                       example: "New AI Research"
- *                     content:
- *                       type: string
- *                       example: "<p>This is a news article about AI.</p>"
- *                     categories:
- *                       type: array
- *                       items:
- *                         type: string
- *                         example: "682bdb29f7c406761c467d93"
- *                     thumbnail:
- *                       type: string
- *                       example: "/uploads/sample.jpg"
- *                     owner_id:
- *                       type: string
- *                       example: "682bdb29f7c406761c467d93"
- *                     createdAt:
- *                       type: string
- *                       example: "2025-05-23T07:00:00Z"
- *       400:
- *         description: Invalid input data.
- *       401:
- *         description: Unauthorized.
- *       500:
- *         description: An error occurred while creating news.
- *   get:
- *     summary: Get list of news articles
- *     description: Retrieve a paginated list of news articles with optional search and sorting.
- *     tags:
- *       - News
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - name: page
- *         in: query
- *         description: Page number
- *         required: false
- *         schema:
- *           type: integer
- *           default: 1
- *       - name: search
- *         in: query
- *         description: Search keyword in title or content
- *         required: false
- *         schema:
- *           type: string
- *       - name: orderby
- *         in: query
- *         description: Sort order (newest or oldest)
- *         required: false
- *         schema:
- *           type: string
- *           enum: [newest, oldest]
- *           default: newest
- *     responses:
- *       200:
- *         description: List of news articles retrieved successfully.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: string
- *                   example: success
- *                 data:
- *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       title:
- *                         type: string
- *                         example: "New AI Research"
- *                       content:
- *                         type: string
- *                         example: "<p>This is a news article about AI.</p>"
- *                       thumbnail:
- *                         type: string
- *                         example: "/uploads/sample.jpg"
- *                       createdAt:
- *                         type: string
- *                         example: "2025-05-23T07:00:00Z"
- *                 currentPage:
- *                   type: integer
- *                   example: 1
- *                 totalPages:
- *                   type: integer
- *                   example: 5
- *       500:
- *         description: An error occurred while fetching news.
- */
+const multer = require('../middlewares/multer');
 
 /**
  * @swagger
@@ -408,6 +268,7 @@ router.get('/', newsController.getAllNews);
 router.get('/:id', newsController.getNews);
 router.post('/', multer.single('thumbnail'), newsController.createNews);
 router.post('/upload-image', multer.single('upload'), newsController.uploadImage);
+router.get('/api/v1/', newsController.getNewsList);
 router.put('/api/v1/news/:id', multer.single('thumbnail'), newsController.updateNews);
 router.delete('/api/v1/news/:id', newsController.deleteNews);
 module.exports = router;

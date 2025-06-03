@@ -19,6 +19,7 @@ const publicationRoutes = require("./routes/publicationRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
 const newsRoutes = require("./routes/newsRoutes");
 const chatbotRoutes = require("./routes/chatbot");
+const adminRoutes = require("./routes/adminRoutes");
 
 
 connectDB();
@@ -49,7 +50,8 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Public files
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 
 // Middleware i18n
 app.use(i18n.init);
@@ -126,14 +128,27 @@ app.get('/redirect-login', (req, res) => {
 app.use("/api/v1/auth", authRoutes);
 
 // Route
-app.use("/api/v1/users", userRoutes);
+app.use("/users", userRoutes);
 app.use('/api/v1/publications', publicationRoutes);
 app.use('/news', newsRoutes);
 app.use('/api/v1/categories', categoryRoutes);
+app.use('/admin', adminRoutes);
 app.use('/', chatbotRoutes);
 
 // Trong app.js
 const userController = require('./controllers/userController');
+app.get('/about/introduction', (req, res) => {
+    res.render('introduction', {
+        locale: req.getLocale(),
+        __: res.__
+    });
+});
+app.get('/projects', (req, res) => {
+    res.render('projects', {
+        locale: req.getLocale(),
+        __: res.__
+    });
+});
 app.get('/about/personnel', userController.getPersonnelForPage);
 app.get('/about/personnel-detail/:userId', userController.getPersonnelDetail);
 app.get('/about/personnel-detail/:userId/publications', userController.getPersonnelPublications);
@@ -143,11 +158,6 @@ app.get('/join-us', (req, res) => {
         locale: req.getLocale(),
         __: res.__
     });
-});
-
-// Route để render form tạo tin tức
-app.get('/admin', (req, res) => {
-    res.render('admin/admin-dashboard'); 
 });
 
 // Route để render form tạo tin tức
