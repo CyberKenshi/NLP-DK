@@ -73,7 +73,23 @@ const Category = require('../models/categoryModel.js');
 //     }
 // };
 
-// Grok
+exports.getNewsList = async (req, res) => {
+     try {
+        const newsList = await News.find();
+        res.status(200).json({
+            status: 'success',
+            results: newsList.length,
+            data: newsList
+        });
+    } catch (error) {
+        res.status(500).json({
+            status: 'error',
+            message: 'Failed to fetch personnel users.',
+            error: error.message
+        });
+    }
+};   
+
 exports.getAllNews = async (req, res) => {
     try {
         // Query parameters
