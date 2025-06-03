@@ -4,8 +4,11 @@
 <!-- Khung chat -->
 <div id="admin-chatbot-window">
   <div id="admin-chatbot-header">
-    <div class="avatar">👨‍💼</div>
-    <span>Admin Assistant</span>
+    <div class="header-content">
+      <div class="avatar">👨‍💼</div>
+      <span>Admin Assistant</span>
+    </div>
+    <button class="maximize-btn" id="admin-maximize-btn">⤢</button>
   </div>
   <div id="admin-chatbot-messages" class="messages-container"></div>
   <div id="admin-chatbot-input">
@@ -43,8 +46,8 @@
   }
   #admin-chatbot-window {
     position: fixed;
-    bottom: 170px;
-    right: 20px;
+    bottom: 100px;
+    right: 90px;
     width: 380px;
     height: 520px;
     background: #f8f9fa;
@@ -55,9 +58,17 @@
     overflow: hidden;
     border: 1px solid #dee2e6;
     z-index: 1000;
+    transition: all 0.3s ease;
+  }
+  #admin-chatbot-window.maximized {
+    width: 80%;
+    height: 95%;
+    right: 5%;
+    bottom: 5%;
+    border-radius: 8px;
   }
   #admin-chatbot-header {
-    background: #2c3e50;
+    background: linear-gradient(135deg, #2c3e50, #1a252f);
     color: white;
     padding: 15px;
     font-weight: bold;
@@ -65,8 +76,26 @@
     text-align: center;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .maximize-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 16px;
+    transition: transform 0.3s;
+  }
+  .maximize-btn:hover {
+    transform: scale(1.1);
   }
   #admin-chatbot-messages {
     flex: 1;
@@ -179,6 +208,28 @@
     border-radius: 10px;
     margin: 4px 0;
   }
+  .welcome-message {
+    background: #f8f9fa;
+    color: #2c3e50;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(44, 62, 80, 0.1);
+    border: 1px solid #e9ecef;
+  }
+  .welcome-message h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+  .welcome-message p {
+    margin: 0;
+    font-size: 14px;
+    color: #495057;
+    line-height: 1.5;
+  }
 </style>
 
 <script>
@@ -187,12 +238,37 @@
   const messages = document.getElementById("admin-chatbot-messages");
   const userInput = document.getElementById("admin-user-input");
   const sendBtn = document.getElementById("admin-send-btn");
+  const maximizeBtn = document.getElementById("admin-maximize-btn");
+
+  // Thêm tin nhắn chào mừng
+  function addWelcomeMessage() {
+    const welcomeDiv = document.createElement("div");
+    welcomeDiv.className = "welcome-message";
+    welcomeDiv.innerHTML = `
+      <h3>👋 Xin chào Admin!</h3>
+      <p>Tôi là trợ lý ảo của hệ thống. Tôi có thể giúp gì cho bạn?</p>
+    `;
+    messages.appendChild(welcomeDiv);
+    messages.scrollTop = messages.scrollHeight;
+  }
 
   toggleBtn.addEventListener("click", () => {
-    chatWindow.style.display = chatWindow.style.display === "none" ? "flex" : "none";
-    if (chatWindow.style.display === "flex") {
+    const isOpening = chatWindow.style.display === "none";
+    chatWindow.style.display = isOpening ? "flex" : "none";
+    
+    if (isOpening) {
+      // Xóa tin nhắn cũ khi mở lại
+      messages.innerHTML = '';
+      // Thêm tin nhắn chào mừng
+      addWelcomeMessage();
       userInput.focus();
     }
+  });
+
+  // Xử lý nút phóng to
+  maximizeBtn.addEventListener("click", () => {
+    chatWindow.classList.toggle("maximized");
+    maximizeBtn.textContent = chatWindow.classList.contains("maximized") ? "⤢" : "⤡";
   });
 
   sendBtn.addEventListener("click", async () => {
