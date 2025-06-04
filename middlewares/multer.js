@@ -3,7 +3,7 @@ const path = require('path');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'uploads/'); // Thư mục tạm để lưu file trước khi upload lên Cloudinary
+        cb(null, 'public/uploads/'); // Lưu trực tiếp vào public/uploads/
     },
     filename: (req, file, cb) => {
         cb(null, `${Date.now()}-${file.originalname}`);

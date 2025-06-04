@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('../models/usersModel.js');
+const Category = require('../models/categoryModel.js');
 const bcrypt = require('bcrypt');
 const dotenv = require('dotenv').config();
 const connectDB = require('../config/db.js');
@@ -12,10 +13,11 @@ const seedUsers = async () => {
         await connectDB();
         console.log('Connected to MongoDB');
 
+        // Xóa tất cả người dùng trong database
         const deleteResult = await User.deleteMany();
         console.log(`Deleted ${deleteResult.deletedCount} users.`);
 
-        // Dữ liệu nhân sự với jobTitles và degree
+        // Tạo một mảng chứa dữ liệu người dùng
         const usersData = [
             {
                 fullName: "Nguyễn Văn Admin",
@@ -24,9 +26,9 @@ const seedUsers = async () => {
                 username: "admin",
                 password: "admin",
                 role: "admin",
-                bio: "Tui là admin hehe",
+                bio: {vi: "Quản trị viên hệ thống", en: "System Administrator"},
                 avatar: "/img/lab-personnel/admin.jpg",
-                jobTitles: [], // Không có thông tin, để mảng rỗng
+                jobTitles: [], 
                 degree: {
                     vi: null,
                     en: null
@@ -39,8 +41,12 @@ const seedUsers = async () => {
                 username: "leanhcuong",
                 password: "password123",
                 role: "personnel",
+                roleInLab: {
+                    vi: "Trưởng nhóm",
+                    en: "Group Leader"
+                },
                 scholarID: "fpBTRIUAAAAJ",
-                bio: "Experienced researcher in NLP and AI.",
+                bio: {vi: "Khoa Công nghệ thông tin", en: "Falcuty of Information Technology"},
                 avatar: "/img/lab-personnel/leanhcuong.jpg",
                 jobTitles: [
                     { vi: "Phó Trưởng Khoa", en: "Vice Dean" },
@@ -59,29 +65,15 @@ const seedUsers = async () => {
                 username: "tranthanhphuoc",
                 password: "password123",
                 role: "personnel",
+                roleInLab: {
+                    vi: "Thành viên chủ chốt",
+                    en: "Key Member"
+                },
                 scholarID: "kq_KpT0AAAAJ",
-                bio: "Specialist in machine learning applications.",
+                bio: {vi: "Khoa Công nghệ thông tin", en: "Falcuty of Information Technology"},
                 avatar: "/img/lab-personnel/tranthanhphuoc.jpg",
                 jobTitles: [
                     { vi: "Trưởng bộ môn Hệ thống thông tin", en: "Head of Information Systems Department" }
-                ],
-                degree: {
-                    vi: "TS.",
-                    en: "PhD."
-                }
-            },
-            {
-                fullName: "Nguyễn Chí Thiện",
-                email: "nguyenchithien@tdtu.edu.vn",
-                mobile: "+84 456 789 123",
-                username: "nguyenchithien",
-                password: "password123",
-                role: "personnel",
-                scholarID: "r0W3l7kAAAAJ",
-                bio: "Researcher in data science and AI systems.",
-                avatar: "/img/lab-personnel/nguyenchithien.jpg",
-                jobTitles: [
-                    { vi: "Giảng viên", en: "Lecturer" }
                 ],
                 degree: {
                     vi: "TS.",
@@ -95,9 +87,13 @@ const seedUsers = async () => {
                 username: "tranluongquocdai",
                 password: "password123",
                 role: "personnel",
+                roleInLab: {
+                    vi: "Thư ký, Thành viên chủ chốt",
+                    en: "Secretary, Key Member"
+                },
                 scholarID: "0u07s1YAAAAJ",
-                bio: "Expert in natural language processing.",
-                avatar: "/img/lab-personnel/tlqd.jfif",
+                bio: {vi: "Khoa Công nghệ thông tin", en: "Falcuty of Information Technology"},
+                avatar: "/img/lab-personnel/tranluongquocdai.jpg",
                 jobTitles: [
                     { vi: "Giảng viên", en: "Lecturer" }
                 ],
@@ -113,8 +109,12 @@ const seedUsers = async () => {
                 username: "hothilinh",
                 password: "password123",
                 role: "personnel",
+                roleInLab: {
+                    vi: "Thành viên",
+                    en: "Member"
+                },
                 scholarID: "efbV62EAAAAJ",
-                bio: "Specialist in computer vision.",
+                bio: {vi: "Khoa Công nghệ thông tin", en: "Falcuty of Information Technology"},
                 avatar: "/img/lab-personnel/hothilinh.jpg",
                 jobTitles: [
                     { vi: "Giảng viên", en: "Lecturer" }
@@ -131,29 +131,114 @@ const seedUsers = async () => {
                 username: "huynhvannam",
                 password: "password123",
                 role: "colab",
+                roleInLab: {
+                    vi: "Thành viên cộng tác",
+                    en: "Collaborating Member"
+                },
                 scholarID: "XVThR3QAAAAJ",
-                bio: "Collaborator in AI research projects.",
+                bio: {vi: "Japan Advanced Institute of Science and Technology (JAIST)", en: "Japan Advanced Institute of Science and Technology (JAIST)"},
                 avatar: "/img/lab-personnel/huynhvannam.jpg",
-                jobTitles: [], // "null" được xử lý bằng mảng rỗng
+                jobTitles: [],
                 degree: {
-                    vi: "PGS.TS.",
-                    en: "Assoc. Prof."
+                    vi: "GS.",
+                    en: "Prof."
                 }
             },
             {
-                fullName: "Nguyen Le Minh",
-                email: "nguyenleminh@collaborator.com",
+                fullName: "Tran The Truyen",
+                email: "truyen.tran@deakin.edu.au",
                 mobile: "+84 852 963 741",
-                username: "nguyenleminh",
+                username: "tranthetruyen",
                 password: "password123",
                 role: "colab",
-                scholarID: "vM9772wAAAAJ",
-                bio: "Collaborator in NLP and machine learning.",
-                avatar: "/img/lab-personnel/nguyenleminh.jpg",
-                jobTitles: [], // "null" được xử lý bằng mảng rỗng
+                roleInLab: {
+                    vi: "Thành viên cộng tác",
+                    en: "Collaborating Member"
+                },
+                scholarID: "zvspVLwAAAAJ",
+                bio: {vi: "Đại học Deakin, Úc", en: "Deakin University, Australia"},
+                avatar: "/img/lab-personnel/tranthetruyen.jpg",
+                jobTitles: [],
                 degree: {
-                    vi: "PGS.TS.",
-                    en: "Assoc. Prof."
+                    vi: "GS.",
+                    en: "Prof."
+                }
+            },
+            {
+                fullName: "Ashwin Ittoo",
+                mobile: "+84 852 963 741",
+                username: "ashwin-ittoo",
+                password: "password123",
+                role: "colab",
+                roleInLab: {
+                    vi: "Thành viên cộng tác",
+                    en: "Collaborating Member"
+                },
+                scholarID: "",
+                bio: {vi: "Đại học Liège, Bỉ",en :"University of Liège, Belgium"},
+                avatar: "/img/lab-personnel/ashwin-ittoo.jpg",
+                jobTitles: [],
+                degree: {
+                    vi: "GS.",
+                    en: "Prof."
+                }
+            },
+            {
+                fullName: "Phạm Văn Huy",
+                email: "phamvanhuy@tdtu.edu.vn",
+                mobile: "+84 741 852 963",
+                username: "phamvanhuy",
+                password: "password123",
+                role: "personnel",
+                roleInLab: {
+                    vi: "Thành viên chủ chốt",
+                    en: "Key Member"
+                },
+                scholarID: "uGbR014AAAAJ",
+                bio: {vi: "Khoa Công nghệ thông tin", en: "Falcuty of Information Technology"},
+                avatar: "/img/lab-personnel/phamvanhuy.jpg",
+                jobTitles: [
+                    { vi: "Trưởng khoa", en: "Dean" }
+                ],
+                degree: {
+                    vi: "TS.",
+                    en: "PhD."
+                }
+            },
+            {
+                fullName: "Trịnh Hùng Cường",
+                email: "trinhhungcuong@tdtu.edu.vn",
+                mobile: "+84 741 852 963",
+                username: "trinhhungcuong",
+                password: "password123",
+                role: "personnel",
+                scholarID: "S9dbSwEAAAAJ",
+                bio: {vi: "Khoa Công nghệ thông tin", en: "Falcuty of Information Technology"},
+                avatar: "/img/lab-personnel/trinhhungcuong.jpg",
+                jobTitles: [
+                    { vi: "Giảng viên", en: "Lecturer" }
+                ],
+                degree: {
+                    vi: "TS.",
+                    en: "PhD."
+                }
+            },
+            {
+                fullName: "Vũ Đình Hồng",
+                email: "vudinhhong@tdtu.edu.vn",
+                mobile: "+84 741 852 963",
+                username: "vudinhhong",
+                password: "password123",
+                role: "personnel",
+                scholarID: "hyoR2cwAAAAJ",
+                bio: {vi: "Khoa Công nghệ thông tin", en: "Falcuty of Information Technology"},
+                avatar: "/img/lab-personnel/vudinhhong.jpg",
+                jobTitles: [
+                    { vi: "Giảng viên", en: "Lecturer" }
+                ],
+                degree: {
+                    vi: "ThS.",
+                    en: "MSc."
                 }
             },
         ];
@@ -201,6 +286,56 @@ const seedUsers = async () => {
         const userCount = await User.countDocuments();
         console.log(`Total users in database: ${userCount}`);
         console.log('Seeding completed successfully.');
+
+        // Xóa dữ liệu cũ của Category
+        const deleteCategoryResult = await Category.deleteMany();
+        console.log(`Deleted ${deleteCategoryResult.deletedCount} categories.`);
+
+        // Dữ liệu category cho nghiên cứu NLP và AI
+        const categoriesData = [
+            {
+                name: "Natural Language Processing",
+                description: "Research on processing and understanding human language."
+            },
+            {
+                name: "Machine Learning",
+                description: "Study of algorithms that improve automatically through experience."
+            },
+            {
+                name: "Computer Vision",
+                description: "Development of techniques for image and video analysis."
+            },
+            {
+                name: "Data Science",
+                description: "Exploration and analysis of large datasets to extract insights."
+            },
+            {
+                name: "Artificial Intelligence",
+                description: "Broad field of creating intelligent systems and machines."
+            },
+            {
+                name: "Deep Learning",
+                description: "Advanced techniques using neural networks for complex tasks."
+            },
+            {
+                name: "Speech Recognition",
+                description: "Technology to convert spoken language into text."
+            },
+            {
+                name: "Text Analytics",
+                description: "Analysis of text data for patterns and insights."
+            }
+        ];
+
+        // Thêm dữ liệu category
+        for (const categoryData of categoriesData) {
+            const category = new Category(categoryData);
+            await category.save();
+            console.log(`Added category: ${category.name}`);
+        }
+
+        const categoryCount = await Category.countDocuments();
+        console.log(`Total categories in database: ${categoryCount}`);
     } catch (error) {
         console.error('Error seeding users:', error);
     } finally {

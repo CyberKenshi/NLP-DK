@@ -6,6 +6,7 @@
 		"meta_copyright": "NLP-KD Lab",
 		"title": "NLP-KD Lab | Natural Language Processing and Knowledge Discovery",
 		"about": "About",
+		"introduction": "Introduction",
 		"personnel": "Personnel",
 		"contact": "Contact",
 		"faq": "FAQ",
@@ -23,7 +24,11 @@
 		"english": "English",
 		"vietnamese": "Vietnamese",
 		"language": "Language",
-		"login": "Login"
+		"login": "Login",
+		"news": "News",
+		"introduction":"Introduction",
+		"about" :"About Us",
+		"projects" : "Our Projects"
 	},
 	"redirect_login" : {
 		"lab_description": "Natural Language Processing and Knowledge Discovery",
@@ -303,5 +308,125 @@
             "research": "Research",
             "innovation": "Innovation"
         }
-    }
+    },
+	"personnel": {
+		"contact_information": "Contact Information",
+		"email": "Email",
+		"phone": "Phone",
+		"major": "Major",
+		"school": "School",
+		"expertise": "Expertise",
+		"publications": "Publications",
+		"published": "Published",
+		"no_publications": "No publications available",
+		"view_publication": "View publication",
+		"view_scholarship": "View Google Scholar",
+		"authors": "Authors",
+		"no_abstract": "No abstract available",
+		"citation": "Citation",
+		"personnel_title": "Personnel of the Lab",
+		"colaborators": "Colaborators",
+		"title": "Title"
+	},
+	"pagination": {
+		"previous": "Previous",
+		"next": "Next"
+	},
+    "apply": {
+        "title": "Application to Join NLP-KD Lab",
+        "personal_info": "Personal Information",
+        "full_name": "Full Name",
+        "full_name_help": "Enter your full name as it appears on official documents.",
+        "email": "Email Address",
+        "email_help": "We’ll use this email to contact you.",
+        "phone": "Phone Number",
+        "phone_help": "Optional. Include country code if applicable (e.g., +84).",
+        "country": "Country",
+        "select_country": "Select your country",
+        "country_vietnam": "Vietnam",
+        "country_us": "United States",
+        "country_uk": "United Kingdom",
+        "country_other": "Other",
+        "academic_background": "Academic Background",
+        "highest_degree": "Highest Degree",
+        "select_degree": "Select your degree",
+        "degree_bachelor": "Bachelor’s Degree",
+        "degree_master": "Master’s Degree",
+        "degree_phd": "PhD",
+        "degree_other": "Other",
+        "institution": "Institution",
+        "institution_help": "Name of the university or institution.",
+        "major": "Major/Field of Study",
+        "major_help": "E.g., Computer Science, Natural Language Processing.",
+        "research_interests": "Research Interests",
+        "areas_of_interest": "Areas of Interest",
+        "areas_of_interest_help": "Describe your research interests (e.g., NLP, Machine Learning, AI Ethics). Min 100 characters.",
+        "motivation": "Motivation for Joining",
+        "motivation_help": "Why do you want to join the NLP-KD Lab? Min 100 characters.",
+        "cv": "Curriculum Vitae (CV)",
+        "upload_cv": "Upload your CV (PDF only, max 5MB)",
+        "upload_cv_help": "Ensure your CV includes your academic and research experience.",
+        "submit": "Submit Application"
+    },
+	"news": {
+        "title": "News",
+        "search_placeholder": "Search news...",
+        "search": "Search",
+        "sort_by": "Sort by:",
+        "newest": "Newest",
+        "oldest": "Oldest",
+        "published_on": "Published on",
+        "no_news": "No news articles found."
+    },
+	 "news_detail": {
+        "title": "News Detail",
+        "published_on": "Published on",
+        "author": "Author",
+        "categories": "Categories",
+        "back_to_news": "Back to News",
+        "no_content": "Content unavailable.",
+		"search_placeholder":"Search articles...",
+		"recent_posts_title" :"Recent Posts",
+		"categories_title": "Blog Categories"
+    },
+	"introduction": {
+		"title": "NATURAL LANGUAGE PROCESSING AND KNOWLEDGE DISCOVERY RESEARCH GROUP (NLP-KD)",
+		"paragraph1": "The Natural Language Processing and Knowledge Discovery (NLP-KD) research group focuses on cutting-edge research in the mining and processing of text and natural language data, particularly in Vietnamese and multilingual contexts.",
+		"section1": {
+		"title": "Natural Language Processing and Multimodal Data",
+		"content": "Developing deep learning models and Large Language Models (LLMs) to efficiently process text, image, audio, and video data. Key research topics include Vietnamese and multilingual language understanding models, intelligent conversational systems, chatbots, sentiment analysis, knowledge extraction, and information integration from multimodal data."
+		},
+		"section2": {
+		"title": "Knowledge Mining and AI Applications in Interdisciplinary Fields",
+		"content": "Applying artificial intelligence and machine learning to extract knowledge from big data across various domains such as economics, business, finance, healthcare, and education. The group focuses on building intelligent systems for analysis, prediction, and decision-making, thereby supporting digital transformation in organizations and enterprises."
+		},
+		"research": {
+		"title": "Scientific Research Publication and Research Training Capacity",
+		"content": "The research group has published numerous international articles in ISI/SCIE journals and at leading conferences in the fields of Artificial Intelligence (AI), Natural Language Processing (NLP), and Data Science. Key research directions include intelligent conversational systems, recommendation systems, natural language processing, deep learning, computer vision, and biomedical data analysis. Currently, many PhD candidates, master’s students, and undergraduates are actively participating in research at laboratories affiliated with the group."
+		},
+		"projects": {
+		"title": "Projects and Collaboration",
+		"content": "Members of the research group are leading various research topics and projects at multiple levels, ranging from institutional to national and international. In addition to academic activities, the group actively promotes technology transfer, applying research outcomes in practical settings within both domestic and international enterprises and organizations."
+		}
+	},
+  	"products": {
+		"title": "Our Projects",
+		"vietgpt": {
+			"title": "VietGPT LLM",
+			"description": "An advanced Large Language Model specifically trained for the Vietnamese language, capable of text generation, summarization, translation, and complex understanding tasks."
+		},
+		"chatbot": {
+			"title": "Chatbot for Education",
+			"description": "An AI-powered conversational agent designed to assist students and educators by providing instant answers, study support, and access to learning resources."
+		},
+		"spellcheck": {
+			"title": "Vietnamese Spell Check",
+			"description": "An intelligent tool to identify and suggest corrections for spelling errors in Vietnamese documents, enhancing text quality."
+		},
+		"qa": {
+			"title": "Question Answering System",
+			"description": "A general-purpose system designed to understand natural language questions and retrieve relevant answers from large text corpora or knowledge bases."
+		}
+		}
+
 }

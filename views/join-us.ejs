@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application to Join NLP-KD Lab</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .apply-form-section {
+            padding: 60px 0;
+        }
+        .form-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .form-container h2 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .form-section-title {
+            color: #007bff;
+            font-size: 20px;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+        .form-label {
+            font-weight: 500;
+            color: #555;
+        }
+        .required::after {
+            content: '*';
+            color: #dc3545;
+            margin-left: 4px;
+        }
+        .form-control, .form-select {
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+        }
+        .form-text {
+            font-size: 14px;
+            color: #6c757d;
+        }
+        .btn-submit {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 30px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+        .cv-upload {
+            border: 2px dashed #ced4da;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+        .cv-upload:hover {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <section class="apply-form-section">
+        <div class="container">
+            <div class="form-container">
+                <h2>Application to Join NLP-KD Lab</h2>
+                <form id="applyForm" action="/apply" method="POST" enctype="multipart/form-data">
+                    <!-- Personal Information -->
+                    <div class="mb-4">
+                        <h3 class="form-section-title">Personal Information</h3>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="fullName" class="form-label required">Full Name</label>
+                                <input type="text" class="form-control" id="fullName" name="fullName" required aria-describedby="fullNameHelp">
+                                <div id="fullNameHelp" class="form-text">Enter your full name as it appears on official documents.</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label required">Email Address</label>
+                                <input type="email" class="form-control" id="email" name="email" required aria-describedby="emailHelp">
+                                <div id="emailHelp" class="form-text">We’ll use this email to contact you.</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{10,15}" aria-describedby="phoneHelp">
+                                <div id="phoneHelp" class="form-text">Optional. Include country code if applicable (e.g., +84).</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="country" class="form-label required">Country</label>
+                                <select class="form-select" id="country" name="country" required>
+                                    <option value="" disabled selected>Select your country</option>
+                                    <option value="Vietnam">Vietnam</option>
+                                    <option value="United States">United States</option>
+                                    <option value="United Kingdom">United Kingdom</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Academic Background -->
+                    <div class="mb-4">
+                        <h3 class="form-section-title">Academic Background</h3>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="degree" class="form-label required">Highest Degree</label>
+                                <select class="form-select" id="degree" name="degree" required>
+                                    <option value="" disabled selected>Select your degree</option>
+                                    <option value="Bachelor">Bachelor’s Degree</option>
+                                    <option value="Master">Master’s Degree</option>
+                                    <option value="PhD">PhD</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="institution" class="form-label required">Institution</label>
+                                <input type="text" class="form-control" id="institution" name="institution" required aria-describedby="institutionHelp">
+                                <div id="institutionHelp" class="form-text">Name of the university or institution.</div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="major" class="form-label required">Major/Field of Study</label>
+                            <input type="text" class="form-control" id="major" name="major" required aria-describedby="majorHelp">
+                            <div id="majorHelp" class="form-text">E.g., Computer Science, Natural Language Processing.</div>
+                        </div>
+                    </div>
+
+                    <!-- Research Interests -->
+                    <div class="mb-4">
+                        <h3 class="form-section-title">Research Interests</h3>
+                        <div class="mb-3">
+                            <label for="researchInterests" class="form-label required">Areas of Interest</label>
+                            <textarea class="form-control" id="researchInterests" name="researchInterests" rows="4" required aria-describedby="researchInterestsHelp"></textarea>
+                            <div id="researchInterestsHelp" class="form-text">Describe your research interests (e.g., NLP, Machine Learning, AI Ethics). Min 100 characters.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="motivation" class="form-label required">Motivation for Joining</label>
+                            <textarea class="form-control" id="motivation" name="motivation" rows="4" required aria-describedby="motivationHelp"></textarea>
+                            <div id="motivationHelp" class="form-text">Why do you want to join the NLP-KD Lab? Min 100 characters.</div>
+                        </div>
+                    </div>
+
+                    <!-- CV Upload -->
+                    <div class="mb-4">
+                        <h3 class="form-section-title">Curriculum Vitae (CV)</h3>
+                        <div class="cv-upload">
+                            <label for="cv" class="form-label">Upload your CV (PDF only, max 5MB)</label>
+                            <input type="file" class="form-control" id="cv" name="cv" accept=".pdf" required aria-describedby="cvHelp">
+                            <div id="cvHelp" class="form-text">Ensure your CV includes your academic and research experience.</div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-submit text-white font-weight-bold">Submit Application</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS (for form validation feedback) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS for Form Validation -->
+    <script>
+        // Basic client-side validation
+        (function () {
+            'use strict';
+            const form = document.getElementById('applyForm');
+            form.addEventListener('submit', function (event) {
+                let isValid = true;
+                const researchInterests = document.getElementById('researchInterests');
+                const motivation = document.getElementById('motivation');
+
+                // Validate textareas (min 100 characters)
+                if (researchInterests.value.length < 100) {
+                    researchInterests.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    researchInterests.classList.remove('is-invalid');
+                }
+
+                if (motivation.value.length < 100) {
+                    motivation.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    motivation.classList.remove('is-invalid');
+                }
+
+                // Validate CV file size (max 5MB)
+                const cvInput = document.getElementById('cv');
+                if (cvInput.files.length > 0) {
+                    const fileSize = cvInput.files[0].size / 1024 / 1024; // Size in MB
+                    if (fileSize > 5) {
+                        cvInput.classList.add('is-invalid');
+                        isValid = false;
+                    } else {
+                        cvInput.classList.remove('is-invalid');
+                    }
+                }
+
+                if (!form.checkValidity() || !isValid) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        })();
+    </script>
+</body>
+</html>

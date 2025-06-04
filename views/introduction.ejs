@@ -1,0 +1,119 @@
+<%- include('partials/header') %>
+<!-- Breadcrumbs -->
+<div class="breadcrumbs overlay">
+    <div class="container">
+        <div class="bread-inner">
+            <div class="row">
+                <div class="col-12">
+                    <h2><%= __("header.introduction") || "introduction" %></h2>
+                    <ul class="bread-list">
+                        <li><a href="/"><%= __("header.home") || "Home" %></a></li>
+                        <li><i class="icofont-simple-right"></i></li>
+                        <li class="active"><%= __("header.about") || "About" %></li>
+						<li><i class="icofont-simple-right"></i></li>
+                        <li class="active"><%= __("header.introduction") || "Introduction" %></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+<section class="introduction-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2><%= __('introduction.title') %></h2>
+            <hr class="section-divider">
+        </div>
+
+        <div class="intro-paragraph">
+            <p><%= __('introduction.paragraph1') %></p>
+        </div>
+
+        <div class="intro-block">
+            <h3><i class="fas fa-language section-icon"></i> <%= __('introduction.section1.title') %></h3>
+            <p><%= __('introduction.section1.content') %></p>
+        </div>
+
+        <div class="intro-block">
+            <h3><i class="fas fa-brain section-icon"></i> <%= __('introduction.section2.title') %></h3>
+            <p><%= __('introduction.section2.content') %></p>
+        </div>
+
+        <div class="intro-block">
+            <h3><i class="fas fa-book section-icon"></i> <%= __('introduction.research.title') %></h3>
+            <p><%= __('introduction.research.content') %></p>
+        </div>
+
+        <div class="intro-block">
+            <h3><i class="fas fa-project-diagram section-icon"></i> <%= __('introduction.projects.title') %></h3>
+            <p><%= __('introduction.projects.content') %></p>
+        </div>
+    </div>
+</section>
+<style>
+.introduction-section {
+    padding: 60px 20px;
+    background-color: #fff;
+    color: #333;
+}
+
+.section-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.section-divider {
+    width: 80px;
+    height: 4px;
+    background: #007bff;
+    border: none;
+    margin: 0 auto 30px auto;
+}
+
+.intro-paragraph {
+    font-size: 18px;
+    line-height: 1.7;
+    text-align: justify;
+    margin-bottom: 40px;
+}
+
+.intro-block {
+    margin-bottom: 40px;
+    padding: 25px 30px;
+    background-color: #f9f9f9;
+    border-left: 6px solid #007bff;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.intro-block:hover {
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.intro-block h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    color: #007bff;
+}
+
+.section-icon {
+    margin-right: 10px;
+    color: #007bff;
+}
+
+.intro-block p {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: justify;
+}
+</style>
+
+
+<%- include('partials/footer') %>

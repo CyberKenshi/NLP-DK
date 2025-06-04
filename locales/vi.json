@@ -5,7 +5,8 @@
 		"meta_description": "Phòng Thí nghiệm NLP-KD tiên phong trong nghiên cứu Xử lý Ngôn ngữ Tự nhiên và Khám phá Tri thức.",
 		"meta_copyright": "Phòng Thí nghiệm NLP-KD",
 		"title": "Phòng Thí nghiệm NLP-KD | Xử lý Ngôn ngữ Tự nhiên và Khám phá Tri thức",
-		"about": "Giới thiệu",
+		"about": "Về chúng tôi",
+		"introduction": "Giới thiệu",
 		"personnel": "Nhân sự",
 		"contact": "Liên hệ",
 		"faq": "Câu hỏi Thường gặp",
@@ -23,7 +24,11 @@
 		"english": "Tiếng Anh",
 		"vietnamese": "Tiếng Việt",
 		"language": "Ngôn ngữ",
-		"login": "Đăng nhập"
+		"login": "Đăng nhập",
+		"news": "Tin tức",
+		"introduction":"Giới thiệu",
+		"about": "Về chúng tôi",
+		"projects": "Dự án của chúng tôi"
 	},
 	"redirect_login" : {
 		"lab_description": "Xử lý Ngôn ngữ Tự nhiên và Khám phá Tri thức",
@@ -313,5 +318,124 @@
             "research": "Nghiên cứu",
             "innovation": "Đổi mới"
         }
-    }
+    },
+	"personnel": {
+		"contact_information": "Thông tin liên hệ",
+		"email": "Email",
+		"phone": "Số điện thoại",
+		"major": "Chuyên ngành",
+		"school": "Trường",
+		"expertise": "Chuyên môn",
+		"publications": "Công bố khoa học",
+		"published": "Năm",
+		"no_publications": "Không có công bố nào",
+		"view_publication": "Xem chi tiết",
+		"view_scholarship": "Xem Google Scholar",
+		"authors": "Tác giả",
+		"no_abstract": "Không có tóm tắt",
+		"citation": "Số trích dẫn",
+		"personnel_title": "Nhân sự Phòng Thí Nghiệm",
+		"colaborators": "Cộng tác",
+		"title": "Tiêu đề bài báo"
+	},
+	"pagination": {
+		"previous": "Trước",
+		"next": "Sau"
+	},
+    "apply": {
+        "title": "Đơn Ứng Tuyển Tham Gia NLP-KD Lab",
+        "personal_info": "Thông Tin Cá Nhân",
+        "full_name": "Họ và Tên",
+        "full_name_help": "Nhập họ và tên đầy đủ như trên giấy tờ chính thức.",
+        "email": "Địa Chỉ Email",
+        "email_help": "Chúng tôi sẽ sử dụng email này để liên lạc với bạn.",
+        "phone": "Số Điện Thoại",
+        "phone_help": "Không bắt buộc. Bao gồm mã quốc gia nếu có (ví dụ: +84).",
+        "country": "Quốc Gia",
+        "select_country": "Chọn quốc gia của bạn",
+        "country_vietnam": "Việt Nam",
+        "country_us": "Hoa Kỳ",
+        "country_uk": "Vương Quốc Anh",
+        "country_other": "Khác",
+        "academic_background": "Học Vấn",
+        "highest_degree": "Bằng Cấp Cao Nhất",
+        "select_degree": "Chọn bằng cấp của bạn",
+        "degree_bachelor": "Cử nhân",
+        "degree_master": "Thạc sĩ",
+        "degree_phd": "Tiến sĩ",
+        "degree_other": "Khác",
+        "institution": "Trường/Viện",
+        "institution_help": "Tên của trường đại học hoặc viện nghiên cứu.",
+        "major": "Chuyên Ngành",
+        "major_help": "Ví dụ: Khoa học Máy tính, Xử lý Ngôn ngữ Tự nhiên.",
+        "research_interests": "Quan Tâm Nghiên Cứu",
+        "areas_of_interest": "Lĩnh Vực Quan Tâm",
+        "areas_of_interest_help": "Mô tả lĩnh vực nghiên cứu bạn quan tâm (ví dụ: NLP, Máy học, Đạo đức AI). Tối thiểu 100 ký tự.",
+        "motivation": "Động Lực Tham Gia",
+        "motivation_help": "Tại sao bạn muốn tham gia NLP-KD Lab? Tối thiểu 100 ký tự.",
+        "cv": "Sơ Yếu Lý Lịch (CV)",
+        "upload_cv": "Tải lên CV của bạn (chỉ PDF, tối đa 5MB)",
+        "upload_cv_help": "Đảm bảo CV bao gồm kinh nghiệm học thuật và nghiên cứu của bạn.",
+        "submit": "Nộp Đơn Ứng Tuyển"
+    },    
+	"news_detail": {
+        "title": "Chi tiết tin tức",
+        "published_on": "Đăng vào",
+        "author": "Tác giả",
+        "categories": "Danh mục",
+        "back_to_news": "Quay lại Tin tức",
+        "no_content": "Nội dung không có sẵn.",
+		"search_placeholder":"Tìm kiếm bài viết...",
+		"recent_posts_title": "Bài viết gần đây",
+		"categories_title": "Danh mục"
+    },
+	"news": {
+        "title": "Tin tức",
+        "search_placeholder": "Tìm kiếm tin tức...",
+        "search": "Tìm kiếm",
+        "sort_by": "Sắp xếp theo:",
+        "newest": "Mới nhất",
+        "oldest": "Cũ nhất",
+        "published_on": "Đăng vào ngày",
+        "no_news": "Không tìm thấy bài tin tức nào."
+    },
+	"introduction": {
+		"title": "Xử lý ngôn ngữ tự nhiên và Khai phá tri thức (NLP-KD)",
+		"paragraph1": "Nhóm nghiên cứu Xử lý Ngôn ngữ Tự nhiên và Khai phá Tri thức (NLP-KD) tập trung vào các nghiên cứu tiên tiến trong khai thác và xử lý dữ liệu văn bản, đặc biệt là trong ngữ cảnh tiếng Việt và đa ngôn ngữ.",
+		"section1": {
+		"title": "Xử lý ngôn ngữ tự nhiên và dữ liệu đa phương tiện",
+		"content": "Phát triển các mô hình học sâu và mô hình ngôn ngữ lớn (LLMs) để xử lý hiệu quả dữ liệu văn bản, hình ảnh, âm thanh và video. Các chủ đề nghiên cứu chính bao gồm: mô hình hiểu ngôn ngữ tiếng Việt và đa ngôn ngữ, hệ thống hội thoại thông minh, chatbot, phân tích cảm xúc, trích xuất tri thức và tích hợp thông tin từ dữ liệu đa phương tiện."
+		},
+		"section2": {
+		"title": "Khai phá tri thức và ứng dụng AI trong các lĩnh vực liên ngành",
+		"content": "Áp dụng trí tuệ nhân tạo và học máy để khai thác tri thức từ dữ liệu lớn trong các lĩnh vực như kinh tế, kinh doanh, tài chính, y tế và giáo dục. Nhóm tập trung xây dựng các hệ thống thông minh phục vụ phân tích, dự đoán và hỗ trợ ra quyết định, góp phần thúc đẩy chuyển đổi số trong tổ chức và doanh nghiệp."
+		},
+		"research": {
+		"title": "Công bố khoa học và năng lực đào tạo nghiên cứu",
+		"content": "Nhóm nghiên cứu đã công bố nhiều bài báo quốc tế thuộc danh mục ISI/SCIE và hội nghị hàng đầu trong các lĩnh vực Trí tuệ nhân tạo (AI), Xử lý ngôn ngữ tự nhiên (NLP) và Khoa học dữ liệu. Các hướng nghiên cứu trọng tâm gồm hệ thống hội thoại thông minh, hệ thống gợi ý, xử lý ngôn ngữ tự nhiên, học sâu, thị giác máy tính và phân tích dữ liệu y sinh. Hiện nay, nhiều nghiên cứu sinh, học viên cao học và sinh viên đang tham gia nghiên cứu tại các phòng thí nghiệm trực thuộc nhóm."
+		},
+		"projects": {
+		"title": "Dự án và hợp tác",
+		"content": "Các thành viên của nhóm đang chủ trì nhiều đề tài, dự án nghiên cứu ở các cấp độ khác nhau từ cơ sở, quốc gia đến quốc tế. Bên cạnh hoạt động học thuật, nhóm tích cực chuyển giao công nghệ và ứng dụng kết quả nghiên cứu vào thực tiễn trong các doanh nghiệp và tổ chức trong và ngoài nước."
+		}
+	},
+  	"products": {
+		"title": "Dự án của chúng tôi",
+		"vietgpt": {
+			"title": "VietGPT LLM",
+			"description": "Một mô hình ngôn ngữ lớn tiên tiến được huấn luyện chuyên biệt cho tiếng Việt, có khả năng tạo văn bản, tóm tắt, dịch thuật và xử lý các tác vụ hiểu ngữ cảnh phức tạp."
+		},
+		"chatbot": {
+			"title": "Chatbot cho giáo dục",
+			"description": "Một tác nhân hội thoại thông minh hỗ trợ học sinh và giáo viên bằng cách cung cấp câu trả lời tức thì, hỗ trợ học tập và truy cập tài nguyên học liệu."
+		},
+		"spellcheck": {
+			"title": "Kiểm tra chính tả tiếng Việt",
+			"description": "Công cụ thông minh phát hiện và gợi ý chỉnh sửa lỗi chính tả trong văn bản tiếng Việt, giúp nâng cao chất lượng nội dung."
+		},
+		"qa": {
+			"title": "Hệ thống hỏi đáp",
+			"description": "Một hệ thống đa năng có khả năng hiểu các câu hỏi ngôn ngữ tự nhiên và truy xuất câu trả lời phù hợp từ kho văn bản hoặc cơ sở tri thức lớn."
+		}
+	}
 }

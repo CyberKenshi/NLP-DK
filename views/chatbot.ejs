@@ -4,8 +4,11 @@
 <!-- Khung chat -->
 <div id="chatbot-window">
   <div id="chatbot-header">
-    <div class="avatar">🤖</div>
-    <span>Trợ lý ảo</span>
+    <div class="header-content">
+      <div class="avatar">🤖</div>
+      <span>Trợ lý ảo</span>
+    </div>
+    <button class="maximize-btn" id="maximize-btn">⤢</button>
   </div>
   <div id="chatbot-messages" class="messages-container"></div>
   <div id="chatbot-input">
@@ -22,12 +25,11 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
-
   #chatbot-toggle {
     position: fixed;
     bottom: 100px;
     right: 20px;
-    background-color: #0d6efd;
+    background-color: #1A76D1;
     color: white;
     border: none;
     border-radius: 50%;
@@ -39,15 +41,13 @@
     transition: background-color 0.3s;
     z-index: 1000;
   }
-
   #chatbot-toggle:hover {
-    background-color: #0b5ed7;
+    background-color: #1A76D1;
   }
-
   #chatbot-window {
     position: fixed;
-    bottom: 170px;
-    right: 20px;
+    bottom: 100px;
+    right: 90px;
     width: 340px;
     height: 480px;
     background: #f8f9fa;
@@ -58,10 +58,17 @@
     overflow: hidden;
     border: 1px solid #dee2e6;
     z-index: 1000;
+    transition: all 0.3s ease;
   }
-
+  #chatbot-window.maximized {
+    width: 80%;
+    height: 95%;
+    right: 5%;
+    bottom: 5%;
+    border-radius: 8px;
+  }
   #chatbot-header {
-    background: #0d6efd;
+    background: linear-gradient(135deg, #0d6efd, #0a58ca);
     color: white;
     padding: 15px;
     font-weight: bold;
@@ -69,10 +76,27 @@
     text-align: center;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .header-content {
+    display: flex;
+    align-items: center;
     gap: 8px;
   }
-
+  .maximize-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 16px;
+    transition: transform 0.3s;
+  }
+  .maximize-btn:hover {
+    transform: scale(1.1);
+  }
   #chatbot-messages {
     flex: 1;
     padding: 15px;
@@ -81,7 +105,6 @@
     display: flex;
     flex-direction: column;
   }
-
   .message-container {
     display: flex;
     align-items: flex-start;
@@ -89,11 +112,9 @@
     gap: 8px;
     width: 100%;
   }
-
   .message-container.user {
     flex-direction: row-reverse;
   }
-
   .avatar {
     width: 32px;
     height: 32px;
@@ -105,12 +126,10 @@
     font-size: 16px;
     flex-shrink: 0;
   }
-
   .bot .avatar {
     background-color: #0d6efd;
     color: white;
   }
-
   .message {
     padding: 8px 12px;
     border-radius: 15px;
@@ -119,24 +138,20 @@
     max-width: calc(100% - 50px);
     white-space: pre-wrap;
   }
-
   .user .message {
     background-color: #e9ecef;
     border-bottom-right-radius: 5px;
   }
-
   .bot .message {
     background-color: #0d6efd;
     color: white;
     border-bottom-left-radius: 5px;
   }
-
   .typing-indicator {
     display: flex;
     gap: 4px;
     padding: 8px 12px;
   }
-
   .typing-dot {
     width: 8px;
     height: 8px;
@@ -144,22 +159,18 @@
     border-radius: 50%;
     animation: typing 1s infinite ease-in-out;
   }
-
   .typing-dot:nth-child(2) { animation-delay: 0.2s; }
   .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
   @keyframes typing {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
   }
-
   #chatbot-input {
     display: flex;
     border-top: 1px solid #ccc;
     background: #fff;
     padding: 10px;
   }
-
   #chatbot-input input {
     flex: 1;
     padding: 10px;
@@ -170,11 +181,9 @@
     margin-right: 10px;
     transition: border-color 0.2s;
   }
-
   #chatbot-input input:focus {
     border-color: #0d6efd;
   }
-
   #chatbot-input button {
     background: #0d6efd;
     color: white;
@@ -188,11 +197,9 @@
     align-items: center;
     gap: 5px;
   }
-
   #chatbot-input button:hover {
     background: #0b5ed7;
   }
-
   .error-message {
     color: #dc3545;
     font-size: 12px;
@@ -200,6 +207,28 @@
     background: #f8d7da;
     border-radius: 10px;
     margin: 4px 0;
+  }
+  .welcome-message {
+    background: #f8f9fa;
+    color: #2c3e50;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.1);
+    border: 1px solid #e9ecef;
+  }
+  .welcome-message h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #0d6efd;
+  }
+  .welcome-message p {
+    margin: 0;
+    font-size: 14px;
+    color: #495057;
+    line-height: 1.5;
   }
 </style>
 
@@ -209,21 +238,44 @@
   const messages = document.getElementById("chatbot-messages");
   const userInput = document.getElementById("user-input");
   const sendBtn = document.getElementById("send-btn");
+  const maximizeBtn = document.getElementById("maximize-btn");
+
+  // Thêm tin nhắn chào mừng
+  function addWelcomeMessage() {
+    const welcomeDiv = document.createElement("div");
+    welcomeDiv.className = "welcome-message";
+    welcomeDiv.innerHTML = `
+      <h3>👋 Xin chào!</h3>
+      <p>Tôi là trợ lý ảo của NLP-KD. Tôi có thể giúp gì cho bạn?</p>
+    `;
+    messages.appendChild(welcomeDiv);
+    messages.scrollTop = messages.scrollHeight;
+  }
 
   toggleBtn.addEventListener("click", () => {
-    chatWindow.style.display = chatWindow.style.display === "none" ? "flex" : "none";
-    if (chatWindow.style.display === "flex") {
+    const isOpening = chatWindow.style.display === "none";
+    chatWindow.style.display = isOpening ? "flex" : "none";
+    
+    if (isOpening) {
+      // Xóa tin nhắn cũ khi mở lại
+      messages.innerHTML = '';
+      // Thêm tin nhắn chào mừng
+      addWelcomeMessage();
       userInput.focus();
     }
+  });
+
+  // Xử lý nút phóng to
+  maximizeBtn.addEventListener("click", () => {
+    chatWindow.classList.toggle("maximized");
+    maximizeBtn.textContent = chatWindow.classList.contains("maximized") ? "⤢" : "⤡";
   });
 
   sendBtn.addEventListener("click", async () => {
     const msg = userInput.value.trim();
     if (!msg) return;
-
     appendMessage("user", msg);
     userInput.value = "";
-
     // Hiển thị typing indicator
     const typingContainer = document.createElement("div");
     typingContainer.className = "message-container bot";
@@ -237,17 +289,14 @@
     `;
     messages.appendChild(typingContainer);
     messages.scrollTop = messages.scrollHeight;
-
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: msg }),
       });
-
       // Xóa typing indicator
       messages.removeChild(typingContainer);
-
       const data = await response.json();
       if (data.error) {
         appendErrorMessage(data.error);
@@ -266,7 +315,6 @@
       sendBtn.click();
     }
   });
-
   function appendMessage(sender, text) {
     const container = document.createElement("div");
     container.className = `message-container ${sender}`;
@@ -274,17 +322,14 @@
     const avatar = document.createElement("div");
     avatar.className = "avatar";
     avatar.textContent = sender === "user" ? "👤" : "🤖";
-
     const messageDiv = document.createElement("div");
     messageDiv.className = "message";
     messageDiv.textContent = text || "...";
-
     container.appendChild(avatar);
     container.appendChild(messageDiv);
     messages.appendChild(container);
     messages.scrollTop = messages.scrollHeight;
   }
-
   function appendErrorMessage(text) {
     const div = document.createElement("div");
     div.className = "error-message";

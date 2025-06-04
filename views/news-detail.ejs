@@ -1,0 +1,151 @@
+<%- include('partials/header') %>
+
+<!-- Breadcrumbs -->
+<div class="breadcrumbs overlay">
+    <div class="container">
+        <div class="bread-inner">
+            <div class="row">
+                <div class="col-12">
+                    <h2><%= __("header.news_details") || "News Details" %></h2>
+                    <ul class="bread-list">
+                        <li><a href="/"><%= __("header.home") || "Home" %></a></li>
+                        <li><i class="icofont-simple-right"></i></li>
+                        <li class="active"><%= __("header.news_details") || "News Details" %></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+
+<!-- Single News -->
+<section class="news-single section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="single-main">
+                            <!-- News Head -->
+                            <div class="news-head">
+                                <% if (news.thumbnail) { %>
+                                    <img src="<%= news.thumbnail %>" alt="<%= news.title || __("news_detail.image_alt") || "News Image" %>">
+                                <% } else { %>
+                                    <img src="img/default-news.jpg" alt="<%= news.title || __("news_detail.image_alt") || "News Image" %>">
+                                <% } %>
+                            </div>
+                            <!-- News Title -->
+                            <h1 class="news-title"><%= news.title || __("news_detail.untitled") || "Untitled" %></h1>
+                            <!-- Meta -->
+                            <div class="meta">
+                                <div class="meta-left">
+                                    <!-- <span class="author"><%= __("news_detail.author") || "NLP-" %></a></span> -->
+                                    <span class="author" style="margin-top: 10px;"><strong>NPL-KD Lab</strong></span>
+                                </div>
+                                <div class="meta-right">
+                                    <span class="date"><i class="fa fa-clock-o"></i><%= new Date(news.createdAt).toLocaleDateString(locale === 'vi' ? 'vi-VN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></span>
+                                    <!-- <span class="views"><i class="fa fa-eye"></i><%= __("news_detail.views") || "0 Views" %></span> -->
+                                </div>
+                            </div>
+                            <!-- News Text -->
+                            <div class="news-text">
+                                <%- news.content || __("news_detail.no_content") || "No content available." %>
+                            </div>
+                            <div class="blog-bottom">
+                                <!-- Social Share -->
+                                <!-- <ul class="social-share">
+                                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i><span><%= __("news_detail.social.facebook") || "Share on Facebook" %></span></a></li>
+                                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i><span><%= __("news_detail.social.twitter") || "Share on Twitter" %></span></a></li>
+                                    <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i><span><%= __("news_detail.social.linkedin") || "Share on LinkedIn" %></span></a></li>
+                                </ul> -->
+                                <!-- Next Prev -->
+                                <!-- <ul class="prev-next">
+                                    <li class="prev"><a href="#"><i class="fa fa-angle-double-left"></i><span><%= __("news_detail.previous") || "Previous" %></span></a></li>
+                                    <li class="next"><a href="#"><i class="fa fa-angle-double-right"></i><span><%= __("news_detail.next") || "Next" %></span></a></li>
+                                </ul> -->
+                                <!--/ End Next Prev -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-12">
+                <div class="main-sidebar">
+                    <!-- Single Widget -->
+                    <div class="single-widget search">
+                        <div class="form">
+                            <input type="text" placeholder="<%= __("news_detail.search_placeholder") || "Search News..." %>" onkeypress="if(event.key === 'Enter') window.location.href='/news?search=' + this.value">
+                            <a class="button" href="#" onclick="window.location.href='/news?search=' + document.querySelector('.single-widget.search input').value"><i class="fa fa-search"></i></a>
+                        </div>
+                    </div>
+                    <!--/ End Single Widget -->
+                    <!-- Single Widget -->
+                    <!-- <div class="single-widget category">
+                        <h3 class="title"><%= __("news_detail.categories_title") || "Categories" %></h3>
+                        <ul class="categor-list">
+                            <% if (news.categories && news.categories.length > 0) { %>
+                                <% news.categories.forEach(category => { %>
+                                    <li><a href="/news?search=<%= category.name %>"><%= category.name || __("news_detail.category_unknown") || "Unknown" %></a></li>
+                                <% }); %>
+                            <% } else { %>
+                                <li><%= __("news_detail.no_categories") || "No categories available" %></li>
+                            <% } %>
+                        </ul>
+                    </div> -->
+                    <!--/ End Single Widget -->
+                    <!-- Single Widget -->
+                    <div class="single-widget recent-post">
+                        <h3 class="title"><%= __("news_detail.recent_posts_title") || "Recent Posts" %></h3>
+                        <!-- Single Post (Static for now) -->
+                        <div class="single-post">
+                            <div class="image">
+                                <img src="img/blog-sidebar1.jpg" alt="<%= __("news_detail.recent_post1.image_alt") || "Recent Post Image" %>">
+                            </div>
+                            <div class="content">
+                                <h5><a href="/news/<%= news._id %>"><%= __("news_detail.recent_post1.title") || "Sample News" %></a></h5>
+                                <ul class="comment">
+                                    <li><i class="fa fa-calendar" aria-hidden="true"></i><%= new Date().toLocaleDateString(locale === 'vi' ? 'vi-VN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></li>
+                                    <li><i class="fa fa-commenting-o" aria-hidden="true"></i><%= __("news_detail.recent_post1.comments") || "0 Comments" %></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Single Post -->
+                        <!-- Single Post -->
+                        <div class="single-post">
+                            <div class="image">
+                                <img src="img/blog-sidebar2.jpg" alt="<%= __("news_detail.recent_post2.image_alt") || "Recent Post Image" %>">
+                            </div>
+                            <div class="content">
+                                <h5><a href="/news/<%= news._id %>"><%= __("news_detail.recent_post2.title") || "Another Sample" %></a></h5>
+                                <ul class="comment">
+                                    <li><i class="fa fa-calendar" aria-hidden="true"></i><%= new Date().toLocaleDateString(locale === 'vi' ? 'vi-VN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></li>
+                                    <li><i class="fa fa-commenting-o" aria-hidden="true"></i><%= __("news_detail.recent_post2.comments") || "0 Comments" %></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Single Post -->
+                    </div>
+                    <!--/ End Single Widget -->
+                    <!-- Single Widget -->
+                    <div class="single-widget side-tags">
+                        <h3 class="title"><%= __("news_detail.categories_title") || "Categories" %></h3>
+                        <ul class="tag">
+                            <% if (allCategories && allCategories.length > 0) { %>
+                                <% allCategories.forEach(category => { %>
+                                    <li><a href="/news?category=<%= category._id %>"><%= category.name || __("news_detail.category_unknown") || "Unknown" %></a></li>
+                                <% }); %>
+                            <% } else { %>
+                                <li>"No categories available"</li>
+                            <% } %>
+                        </ul>
+                    </div>
+                    <!--/ End Single Widget -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ End Single News -->
+
+<%- include('partials/footer') %>   

@@ -1,129 +1,559 @@
 <%- include('partials/header') %>
 <section class="personnel-detail-section">
-        <div class="container">
-            <div class="row">
-                <!-- Left Column: Avatar and Basic Info -->
-                <div class="col-md-4">
-                    <div class="personnel-info">
+    <div class="container">
+        <div class="row">
+            <!-- Left Column: Avatar and Basic Info -->
+            <div class="col-md-4">
+                <div class="personnel-info">
+                    <% if (user.avatar) { %>
+                        <img src="<%= user.avatar %>" alt="<%= user.fullName || 'Personnel' %>" class="avatar-icon">
+                    <% } else { %>
                         <i class="fa fa-user-circle avatar-icon"></i>
-                        <h2>Dr. John Doe</h2>
-                        <p class="bio">Experienced researcher in NLP and AI. Dr. Doe has over 10 years of experience in developing advanced natural language processing models and has contributed to numerous high-impact publications.</p>
-                        <a href="https://scholar.google.com/johndoe" class="btn" target="_blank">View Scholarship</a>
-                    </div>
+                    <% } %>
+                    <h2><%= degreeDisplay || '' %> <%= user.fullName || 'Unknown' %></h2>
+                    <% if (jobTitleDisplay) { %>
+                        <ul class="job-title-list">
+                            <% jobTitleDisplay.split(', ').forEach(title => { %>
+                                <li><%= title %></li>
+                            <% }); %>
+                        </ul>
+                    <% } %>
+                    <% if (user.scholarID) { %>
+                        <a href="https://scholar.google.com/citations?user=<%= user.scholarID %>" class="btn" target="_blank"><%= __('personnel.view_scholarship') %></a>
+                    <% } %>
                 </div>
-                <!-- Right Column: Detailed Info -->
-                <div class="col-md-8">
-                    <div class="personnel-details">
-                        <h3>Contact Information</h3>
-                        <ul class="contact-info">
-                            <li><i class="fa fa-envelope"></i> Email: john.doe@example.com</li>
-                            <li><i class="fa fa-phone"></i> Phone: +84 123 456 789</li>
+            </div>
+            <!-- Right Column: Detailed Info -->
+            <div class="col-md-8">
+                <div class="personnel-details">
+                    <h3><%= __('personnel.contact_information') %></h3>
+                    <ul class="contact-info">
+                        <% if (user.email) { %>
+                            <li><i class="fa fa-envelope"></i> <%= __('personnel.email') %>: <%= user.email %></li>
+                        <% } %>
+                        <% if (user.mobile) { %>
+                            <li><i class="fa fa-phone"></i> <%= __('personnel.phone') %>: <%= user.mobile %></li>
+                        <% } %>
+                        <% if (user.major) { %>
+                            <li><i class="fa fa-graduation-cap"></i> <%= __('personnel.major') %>: <%= user.major %></li>
+                        <% } %>
+                        <% if (user.school) { %>
+                            <li><i class="fa fa-university"></i> <%= __('personnel.school') %>: <%= user.school %></li>
+                        <% } %>
+                    </ul>
+                    <% if (user.expertise && user.expertise.length > 0) { %>
+                        <h3><%= __('personnel.expertise') %></h3>
+                        <ul class="expertise-list">
+                            <% user.expertise.forEach(expertise => { %>
+                                <li><%= expertise %></li>
+                            <% }); %>
                         </ul>
-                        <h3>Projects</h3>
-                        <ul class="projects-list">
-                            <li>
-                                <strong>AI Research Project</strong> (Jan 2025 - Dec 2025)
-                                <p>Developing advanced AI models for real-time applications.</p>
-                            </li>
-                            <li>
-                                <strong>NLP Model Optimization</strong> (Mar 2024 - Dec 2024)
-                                <p>Improving efficiency of NLP models for large-scale data.</p>
-                            </li>
-                        </ul>
-                        <h3>Publications</h3>
-                        <ul class="publications-list">
-                            <li>
-                                <strong>Advanced NLP Techniques</strong> (Published: May 2025)
-                                <p>Exploration of cutting-edge NLP methods.</p>
-                            </li>
-                            <li>
-                                <strong>Efficient Data Processing</strong> (Published: Oct 2024)
-                                <p>Strategies for optimizing data pipelines in AI systems.</p>
-                            </li>
-                        </ul>
-                    </div>
+                    <% } %>
+                    <h3><%= __('personnel.publications') %></h3>
+                    <% if (publications && publications.length > 0) { %>
+                        <table class="publications-table">
+                            <thead>
+                                <tr>
+                                    <th class="title-column"><%= __('personnel.title') %></th>
+                                    <th class="year-column">
+                                        <span class="sort-header" data-sort-by="year" data-order="<%= sortBy === 'year' && order === 'asc' ? 'desc' : 'asc' %>">
+                                            <%= __('personnel.published') %>
+                                            <span class="sort-icon <%= sortBy === 'year' || sortBy === null ? 'active' : '' %>">
+                                                <%= (sortBy === 'year' && order === 'asc') || (sortBy === null && order === 'desc') ? '▲' : '▼' %>
+                                            </span>
+                                        </span>
+                                    </th>
+                                    <th class="citation-column">
+                                        <span class="sort-header" data-sort-by="citation" data-order="<%= sortBy === 'citation' && order === 'asc' ? 'desc' : 'asc' %>">
+                                            <%= __('personnel.citation') %>
+                                            <span class="sort-icon <%= sortBy === 'citation' ? 'active' : (sortBy === null ? 'secondary' : '') %>">
+                                                <%= sortBy === 'citation' ? (order === 'asc' ? '▲' : '▼') : (sortBy === null ? '▼' : '▲') %>
+                                            </span>
+                                        </span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="publications-tbody">
+                                <% publications.forEach(pub => { %>
+                                    <tr>
+                                        <td class="title-column">
+                                            <div class="publication-title">
+                                                <% if (pub.link) { %>
+                                                    <a href="<%= pub.link %>" target="_blank">
+                                                        <%= pub.title || 'Untitled' %>
+                                                    </a>
+                                                <% } else { %>
+                                                    <%= pub.title || 'Untitled' %>
+                                                <% } %>
+                                            </div>
+                                            <% if (pub.authors && pub.authors.length > 0) { %>
+                                                <div class="publication-authors">
+                                                    <strong><%= __('personnel.authors') %>:</strong> <%= pub.authors.join(', ') %>
+                                                </div>
+                                            <% } %>
+                                            <% if (pub.doi) { %>
+                                                <div class="publication-action">
+                                                    <a href="https://doi.org/<%= pub.doi %>" target="_blank" class="btn btn-sm btn-outline-primary">
+                                                        <%= __('personnel.view_publication') %>
+                                                    </a>
+                                                </div>
+                                            <% } %>
+                                        </td>
+                                        <td class="year-column">
+                                            <%= pub.publicationYear || 'N/A' %>
+                                        </td>
+                                        <td class="citation-column">
+                                            <%= pub.citationCount ?? 0 %>
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                        <!-- Pagination Controls -->
+                        <nav aria-label="Publications pagination">
+                            <ul class="pagination justify-content-center">
+                                <!-- Previous Page -->
+                                <% if (pagination.hasPrevPage) { %>
+                                    <li class="page-item">
+                                        <a class="page-link" href="/about/personnel-detail/<%= user._id %>?page=<%= pagination.prevPage %>&sortBy=<%= sortBy || '' %>&order=<%= order || '' %>" aria-label="Previous">
+                                            <span aria-hidden="true">⬅ <%= __('pagination.previous') %></span>
+                                        </a>
+                                    </li>
+                                <% } else { %>
+                                    <li class="page-item disabled">
+                                        <span class="page-link">⬅ <%= __('pagination.previous') %></span>
+                                    </li>
+                                <% } %>
+
+                                <!-- Page Numbers -->
+                                <%
+                                    const currentPage = pagination.currentPage;
+                                    const totalPages = pagination.totalPages;
+                                    const delta = 2;
+                                    let pages = [];
+                                    let displayPages = [];
+                                    let lastPage;
+
+                                    for (let i = 1; i <= totalPages; i++) {
+                                        if (i === 1 || i === totalPages || (i >= currentPage - delta && i <= currentPage + delta)) {
+                                            pages.push(i);
+                                        }
+                                    }
+
+                                    for (let i of pages) {
+                                        if (lastPage) {
+                                            if (i - lastPage === 2) {
+                                                displayPages.push(lastPage + 1);
+                                            } else if (i - lastPage > 2) {
+                                                displayPages.push('...');
+                                            }
+                                        }
+                                        displayPages.push(i);
+                                        lastPage = i;
+                                    }
+                                %>
+                                <% displayPages.forEach(page => { %>
+                                    <% if (page === '...') { %>
+                                        <li class="page-item disabled">
+                                            <span class="page-link">...</span>
+                                        </li>
+                                    <% } else { %>
+                                        <li class="page-item <%= currentPage === page ? 'active' : '' %>">
+                                            <a class="page-link" href="/about/personnel-detail/<%= user._id %>?page=<%= page %>&sortBy=<%= sortBy || '' %>&order=<%= order || '' %>"><%= page %></a>
+                                        </li>
+                                    <% } %>
+                                <% }); %>
+
+                                <!-- Next Page -->
+                                <% if (pagination.hasNextPage) { %>
+                                    <li class="page-item">
+                                        <a class="page-link" href="/about/personnel-detail/<%= user._id %>?page=<%= pagination.nextPage %>&sortBy=<%= sortBy || '' %>&order=<%= order || '' %>" aria-label="Next">
+                                            <span aria-hidden="true"><%= __('pagination.next') %> ➡</span>
+                                        </a>
+                                    </li>
+                                <% } else { %>
+                                    <li class="page-item disabled">
+                                        <span class="page-link"><%= __('pagination.next') %> ➡</span>
+                                    </li>
+                                <% } %>
+                            </ul>
+                        </nav>
+                    <% } else { %>
+                        <p><%= __('personnel.no_publications') %></p>
+                    <% } %>
                 </div>
             </div>
         </div>
-    </section>
-    <style>
-        .personnel-detail-section {
-            padding: 60px 0;
-            background: #fff;
+    </div>
+</section>
+<script>
+// Initialize sorting state
+let currentSortBy = '<%= sortBy || "none" %>' === 'none' ? null : '<%= sortBy || "none" %>';
+let currentOrder = '<%= order || "desc" %>';
+const userId = '<%= user._id %>';
+const currentPage = <%= pagination.currentPage %>;
+
+// Use event delegation for pagination links
+document.querySelector('.pagination').addEventListener('click', async function (e) {
+    const link = e.target.closest('a.page-link');
+    if (!link || link.parentElement.classList.contains('disabled')) return;
+
+    e.preventDefault();
+    const url = new URL(link.href);
+    const page = url.searchParams.get("page");
+    const sortBy = url.searchParams.get("sortBy") || currentSortBy;
+    const order = url.searchParams.get("order") || currentOrder;
+
+    try {
+        const response = await fetch(`/about/personnel-detail/${userId}/publications?page=${page}&sortBy=${sortBy || ''}&order=${order}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        .personnel-info {
-            text-align: center;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+        const data = await response.json();
+
+        if (data.error) {
+            throw new Error(data.error);
         }
-        .personnel-info .avatar-icon {
-            font-size: 120px;
-            color: #ccc;
-            margin-bottom: 15px;
+
+        // Update table
+        const tbody = document.getElementById('publications-tbody');
+        tbody.innerHTML = '';
+        if (data.publications && Array.isArray(data.publications)) {
+            data.publications.forEach(pub => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="title-column">
+                        <div class="publication-title">
+                            ${pub.link ? `<a href="${pub.link}" target="_blank">${pub.title || 'Untitled'}</a>` : pub.title || 'Untitled'}
+                        </div>
+                        ${pub.authors?.length ? `<div class="publication-authors"><strong>Authors:</strong> ${pub.authors.join(', ')}</div>` : ''}
+                        ${pub.doi ? `<div class="publication-action"><a href="https://doi.org/${pub.doi}" target="_blank" class="btn btn-sm btn-outline-primary">View</a></div>` : ''}
+                    </td>
+                    <td class="year-column">${pub.publicationYear || 'N/A'}</td>
+                    <td class="citation-column">${pub.citationCount ?? 0}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        } else {
+            throw new Error('Invalid publications data received');
         }
-        .personnel-info h2 {
-            color: #333;
-            font-size: 24px;
-            margin-bottom: 15px;
+
+        // Update pagination
+        const pagination = data.pagination;
+        currentSortBy = data.sortBy || currentSortBy;
+        currentOrder = data.order || currentOrder;
+        const paginationHtml = renderPagination(pagination, sortBy, order);
+        document.querySelector('.pagination').innerHTML = paginationHtml;
+
+        // Update URL
+        history.pushState({}, '', `/about/personnel-detail/${userId}?page=${page}&sortBy=${sortBy || ''}&order=${order}`);
+
+    } catch (err) {
+        console.error('Pagination AJAX error:', err.message);
+        alert(`Failed to load publications for the selected page: ${err.message}`);
+    }
+});
+
+// Utility to render pagination HTML
+function renderPagination(pagination, sortBy, order) {
+    const { currentPage, totalPages, hasPrevPage, hasNextPage, prevPage, nextPage } = pagination;
+    let html = '';
+
+    if (hasPrevPage) {
+        html += `<li class="page-item"><a class="page-link" href="?page=${prevPage}&sortBy=${sortBy || ''}&order=${order}" aria-label="Previous">⬅ Previous</a></li>`;
+    } else {
+        html += `<li class="page-item disabled"><span class="page-link">⬅ Previous</span></li>`;
+    }
+
+    const delta = 2;
+    const range = [];
+    for (let i = 1; i <= totalPages; i++) {
+        if (i === 1 || i === totalPages || (i >= currentPage - delta && i <= currentPage + delta)) {
+            range.push(i);
         }
-        .personnel-info .bio {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 20px;
+    }
+
+    let last = 0;
+    for (let i of range) {
+        if (last && i - last > 1) {
+            html += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
         }
-        .personnel-info .btn {
-            background: #007bff;
-            color: #fff;
-            padding: 8px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            display: inline-block;
+        html += `<li class="page-item ${i === currentPage ? 'active' : ''}">
+            <a class="page-link" href="?page=${i}&sortBy=${sortBy || ''}&order=${order}">${i}</a>
+        </li>`;
+        last = i;
+    }
+
+    if (hasNextPage) {
+        html += `<li class="page-item"><a class="page-link" href="?page=${nextPage}&sortBy=${sortBy || ''}&order=${order}" aria-label="Next">Next ➡</a></li>`;
+    } else {
+        html += `<li class="page-item disabled"><span class="page-link">Next ➡</span></li>`;
+    }
+
+    return html;
+}
+
+// Handle sorting headers
+document.querySelectorAll('.sort-header').forEach(header => {
+    header.addEventListener('click', async () => {
+        const sortBy = header.getAttribute('data-sort-by');
+        const order = header.getAttribute('data-order');
+
+        try {
+            const response = await fetch(`/about/personnel-detail/${userId}/publications?page=1&sortBy=${sortBy}&order=${order}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+
+            if (data.error) {
+                throw new Error(data.error);
+            }
+
+            // Update table
+            const tbody = document.getElementById('publications-tbody');
+            tbody.innerHTML = '';
+            if (data.publications && Array.isArray(data.publications)) {
+                data.publications.forEach(pub => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="title-column">
+                            <div class="publication-title">
+                                ${pub.link ? `<a href="${pub.link}" target="_blank">${pub.title || 'Untitled'}</a>` : pub.title || 'Untitled'}
+                            </div>
+                            ${pub.authors?.length ? `<div class="publication-authors"><strong>Authors:</strong> ${pub.authors.join(', ')}</div>` : ''}
+                            ${pub.doi ? `<div class="publication-action"><a href="https://doi.org/${pub.doi}" target="_blank" class="btn btn-sm btn-outline-primary">View</a></div>` : ''}
+                        </td>
+                        <td class="year-column">${pub.publicationYear || 'N/A'}</td>
+                        <td class="citation-column">${pub.citationCount ?? 0}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            } else {
+                throw new Error('Invalid publications data received');
+            }
+
+            // Update pagination
+            const pagination = data.pagination;
+            currentSortBy = data.sortBy || currentSortBy;
+            currentOrder = data.order || currentOrder;
+            const paginationHtml = renderPagination(pagination, sortBy, order);
+            document.querySelector('.pagination').innerHTML = paginationHtml;
+
+            // Update sort icons
+            document.querySelectorAll('.sort-header').forEach(h => {
+                const hSortBy = h.getAttribute('data-sort-by');
+                const icon = h.querySelector('.sort-icon');
+                icon.classList.remove('active', 'secondary');
+
+                if (hSortBy === sortBy) {
+                    const newOrder = order === 'asc' ? 'desc' : 'asc';
+                    h.setAttribute('data-order', newOrder);
+                    icon.classList.add('active');
+                    icon.textContent = order === 'asc' ? '▲' : '▼';
+                } else {
+                    h.setAttribute('data-order', 'asc');
+                    if (hSortBy === 'citation' && (!sortBy || sortBy === 'none')) {
+                        icon.classList.add('secondary');
+                        icon.textContent = '▼';
+                    } else {
+                        icon.textContent = '▲';
+                    }
+                }
+            });
+
+            // Update URL
+            history.pushState({}, '', `/about/personnel-detail/${userId}?page=1&sortBy=${sortBy}&order=${order}`);
+
+        } catch (err) {
+            console.error('Sorting AJAX error:', err.message);
+            alert(`Failed to sort publications: ${err.message}`);
         }
-        .personnel-info .btn:hover {
-            background: #0056b3;
-        }
-        .personnel-details {
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .personnel-details h3 {
-            color: #333;
-            font-size: 20px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 5px;
-        }
-        .contact-info {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 20px;
-        }
-        .contact-info li {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-        .contact-info li i {
-            color: #007bff;
-            margin-right: 10px;
-        }
-        .projects-list, .publications-list {
-            list-style: none;
-            padding: 0;
-        }
-        .projects-list li, .publications-list li {
-            margin-bottom: 15px;
-        }
-        .projects-list strong, .publications-list strong {
-            color: #333;
-            font-size: 16px;
-        }
-        .projects-list p, .publications-list p {
-            color: #666;
-            font-size: 14px;
-            margin: 5px 0 0;
-        }
-    </style>
-    <%- include('partials/footer') %>
+    });
+});
+</script>
+<style>
+    .personnel-detail-section {
+        padding: 60px 0;
+        background: #fff;
+    }
+    .personnel-info {
+        text-align: center;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+    .personnel-info .avatar-icon {
+        font-size: 120px;
+        color: #ccc;
+        margin-bottom: 15px;
+    }
+    .personnel-info img.avatar-icon {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 15px;
+    }
+    .personnel-info h2 {
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    .personnel-info .job-title {
+        color: #007bff;
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+    .personnel-info .btn {
+        background: #007bff;
+        color: #fff;
+        padding: 8px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .personnel-info .btn:hover {
+        background: #0056b3;
+    }
+    .personnel-details {
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+    .personnel-details h3 {
+        color: #333;
+        font-size: 20px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 5px;
+    }
+    .contact-info, .expertise-list {
+        list-style: none;
+        padding: 0;
+    }
+    .contact-info li, .expertise-list li {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+    .contact-info li i {
+        color: #007bff;
+        margin-right: 10px;
+    }
+    .publications-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    .publications-table th, .publications-table td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    .publications-table th {
+        background-color: #f8f9fa;
+        font-size: 16px;
+        color: #333;
+    }
+    .publications-table th .sort-header {
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        color: #333;
+    }
+    .publications-table th .sort-header:hover {
+        color: #007bff;
+    }
+    .publications-table th .sort-icon {
+        font-size: 12px;
+        color: #999;
+    }
+    .publications-table th .sort-icon.active {
+        color: #007bff;
+    }
+    .publications-table th .sort-icon.secondary {
+        color: #66b0ff;
+    }
+    .publications-table .title-column {
+        width: 60%;
+    }
+    .publications-table .year-column {
+        width: 20%;
+    }
+    .publications-table .citation-column {
+        width: 20%;
+    }
+    .publications-table .publication-title {
+        font-size: 16px;
+        margin: 0;
+    }
+    .publications-table .publication-title a {
+        color: #007bff;
+        text-decoration: none;
+    }
+    .publications-table .publication-title a:hover {
+        text-decoration: underline;
+    }
+    .publications-table .publication-authors {
+        font-size: 14px;
+        color: #666;
+        margin-top: 5px;
+    }
+    .publications-table .publication-authors strong {
+        font-weight: bold;
+    }
+    .publications-table .publication-action {
+        margin-top: 5px;
+    }
+    .publications-table .publication-action .btn {
+        font-size: 14px;
+        padding: 5px 10px;
+    }
+    .publications-table td.year-column, .publications-table td.citation-column {
+        font-size: 14px;
+        color: #555;
+    }
+    /* Pagination Styling */
+    .pagination {
+        margin-top: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+    }
+    .page-item {
+        flex: 0 0 auto;
+    }
+    .page-link {
+        color: #007bff;
+        border: 1px solid #ddd;
+        padding: 6px 12px;
+        border-radius: 6px;
+        min-width: 36px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .page-item.active .page-link {
+        background-color: #007bff;
+        color: white;
+        border: 1px solid #007bff;
+    }
+    .page-item.disabled .page-link {
+        color: #aaa;
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        cursor: not-allowed;
+    }
+    .page-link:hover:not(.disabled .page-link) {
+        background-color: #e9ecef;
+        border-color: #ddd;
+    }
+    .page-item.disabled .page-link.ellipsis {
+        border: none;
+        background: transparent;
+    }
+</style>
+<%- include('partials/footer') %>
