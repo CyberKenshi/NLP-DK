@@ -94,7 +94,7 @@ exports.getAllNews = async (req, res) => {
     try {
         // Query parameters
         const page = parseInt(req.query.page) || 1;
-        const limit = 5;
+        const limit = 6;
         const skip = (page - 1) * limit;
         const search = req.query.search || '';
         const orderby = req.query.orderby || 'newest';
@@ -205,36 +205,40 @@ exports.getNews = async (req, res) => {
     }
 };
 
-exports.getNewsDetail = async (req, res) => {
-    try {
-        const newsId = req.params.id;
-        const news = await News.findById(newsId).populate('categories').lean();
-        if (!news) {
-            return res.status(404).render('404', {
-                locale: req.getLocale(),
-                __: res.__,
-                message: 'News article not found.'
-            });
-        }
-
-        const allCategories = await Category.find().sort({ createdAt: -1 }).lean();
-
-        res.render('news-detail', {
-            news,
-            allCategories, 
-            locale: req.getLocale(),
-            __: res.__
-        });
-    } catch (error) {
-        console.error('Error fetching news detail:', error);
-        res.status(500).render('500', {
-            locale: req.getLocale(),
-            __: res.__,
-            message: 'Failed to fetch news details.'
-        });
-    }
+exports.getNewsById = async (id) => {
+    const news = await News.findById(id);
+    return news; // trả về news hoặc null
 };
 
+// exports.getNewsDetail = async (req, res) => {
+//     try {
+//         const newsId = req.params.id;
+//         const news = await News.findById(newsId).populate('categories').lean();
+//         if (!news) {
+//             return res.status(404).render('404', {
+//                 locale: req.getLocale(),
+//                 __: res.__,
+//                 message: 'News article not found.'
+//             });
+//         }
+
+//         const allCategories = await Category.find().sort({ createdAt: -1 }).lean();
+
+//         res.render('news-detail', {
+//             news,
+//             allCategories, 
+//             locale: req.getLocale(),
+//             __: res.__
+//         });
+//     } catch (error) {
+//         console.error('Error fetching news detail:', error);
+//         res.status(500).render('500', {
+//             locale: req.getLocale(),
+//             __: res.__,
+//             message: 'Failed to fetch news details.'
+//         });
+//     }
+// };
 exports.createNews = async (req, res) => {
     try {
         const { title, content, categoryIds } = req.body;
@@ -255,57 +259,50 @@ exports.createNews = async (req, res) => {
 
         await news.save();
 
-        res.status(201).json({
-            status: 'success',
-            message: 'News created successfully.',
-            data: news
+        // 👉 render lại form kèm thông báo thành công
+        return res.status(201).render('admin/newsForm', {
+            successMessage: 'Thêm tin tức thành công!',
+            errorMessage: null,
+            locale: req.getLocale(),
+            __: res.__
         });
     } catch (error) {
         console.error('Error creating news:', error);
-        res.status(500).json({
-            status: 'error',
-            message: 'Failed to create news.',
-            error: error.message
+
+        // 👉 render lại form kèm thông báo lỗi
+        return res.status(500).render('admin/newsForm', {
+            errorMessage: 'Không thể thêm tin tức: ' + error.message,
+            successMessage: null,
+            locale: req.getLocale(),
+            __: res.__
         });
     }
 };
 
+// Xử lý cập nhật tin tức
 exports.updateNews = async (req, res) => {
     try {
-        const { title, content, categoryIds } = req.body;
-        const news = await News.findById(req.params.id);
-        if (!news) {
-            return res.status(404).json({
-                status: 'error',
-                message: 'News not found.'
-            });
-        }
+        const { title, content } = req.body;
+        const categoryIds = req.body.categoryIds || [];
 
-        news.title = title || news.title;
-        news.content = content || news.content;
-        news.categories = Array.isArray(categoryIds) ? categoryIds : news.categories;
+        const updateData = {
+            title,
+            content,
+            categories: Array.isArray(categoryIds) ? categoryIds : [categoryIds],
+            updatedAt: new Date()
+        };
 
         if (req.file) {
-            news.thumbnail = `/uploads/${req.file.filename}`;
+            updateData.thumbnail = '/uploads/' + req.file.filename;
         }
 
-        await news.save();
-
-        res.status(200).json({
-            status: 'success',
-            message: 'News updated successfully.',
-            data: news
-        });
-    } catch (error) {
-        console.error('Error updating news:', error);
-        res.status(500).json({
-            status: 'error',
-            message: 'Failed to update news.',
-            error: error.message
-        });
+        await News.findByIdAndUpdate(req.params.id, updateData);
+        res.redirect('/admin'); 
+    } catch (err) {
+        console.error(err);
+        res.status(500).render('error', { message: 'Error updating news' });
     }
 };
-
 exports.deleteNews = async (req, res) => {
     try {
         const news = await News.findByIdAndDelete(req.params.id);

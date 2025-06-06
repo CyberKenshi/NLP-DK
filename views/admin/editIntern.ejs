@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chỉnh sửa Thực tập sinh</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 0;
+    }
+    .form-container {
+      max-width: 800px;
+      margin: 40px auto;
+      background-color: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #333;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .form-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+    button, a {
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      color: white;
+      cursor: pointer;
+    }
+    .submit-btn {
+      background-color: #28a745;
+    }
+    .cancel-btn {
+      background-color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Chỉnh sửa Thực tập sinh</h2>
+    <form id="edit-intern-form" enctype="multipart/form-data">
+      <div class="form-group">
+        <label>Họ tên *</label>
+        <input type="text" name="fullName" value="<%= intern.fullName %>" required />
+      </div>
+      <div class="form-group">
+        <label>Email *</label>
+        <input type="email" name="email" value="<%= intern.email %>" required />
+      </div>
+      <div class="form-group">
+        <label>Tên đăng nhập *</label>
+        <input type="text" name="username" value="<%= intern.username %>" required />
+      </div>
+      <div class="form-group">
+        <label>Ngành học *</label>
+        <input type="text" name="major" value="<%= intern.major || '' %>" required />
+      </div>
+      <div class="form-group">
+        <label>Trường *</label>
+        <input type="text" name="school" value="<%= intern.school || '' %>" required />
+      </div>
+      <div class="form-group">
+        <label>Mã sinh viên</label>
+        <input type="text" name="studentCode" value="<%= intern.studentCode || '' %>" />
+      </div>
+      <div class="form-group">
+        <label>Avatar (file ảnh)</label>
+        <% if (intern.avatar) { %>
+          <img src="<%= intern.avatar %>" alt="Avatar" style="max-width: 150px; border-radius: 10px; display: block; margin-bottom: 10px;">
+        <% } %>
+        <input type="file" name="avatarFile" accept="image/*" />
+      </div>
+      <div class="form-group">
+        <label>Giới thiệu (VI)</label>
+        <textarea name="bio[vi]"><%= intern.bio?.vi || '' %></textarea>
+      </div>
+      <div class="form-group">
+        <label>Giới thiệu (EN)</label>
+        <textarea name="bio[en]"><%= intern.bio?.en || '' %></textarea>
+      </div>
+      <div class="form-group">
+        <label>Vai trò hệ thống *</label>
+        <select name="role" required>
+          <option value="intern" selected>Intern</option>
+        </select>
+      </div>
+      <div class="form-buttons">
+        <button type="submit" class="submit-btn">Cập nhật</button>
+        <a href="/admin" class="cancel-btn">Quay lại</a>
+      </div>
+    </form>
+  </div>
+</body>
+
+<script>
+  document.getElementById('edit-intern-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    try {
+      const response = await fetch('/admin/user/update-intern/<%= intern._id || intern.id %>', {
+        method: 'POST',
+        body: formData
+      });
+      const result = await response.json();
+      if (response.ok) {
+        alert('✅ Cập nhật thực tập sinh thành công!');
+      } else {
+        alert('❌ Cập nhật thất bại: ' + (result.error || result.message || 'Lỗi không xác định.'));
+      }
+    } catch (error) {
+      alert('❌ Lỗi khi gửi dữ liệu: ' + error.message);
+    }
+  });
+</script>
+</html>

@@ -1,22 +1,5 @@
 <%- include('partials/header') %>
-<!-- Breadcrumbs -->
-<div class="breadcrumbs overlay">
-    <div class="container">
-        <div class="bread-inner">
-            <div class="row">
-                <div class="col-12">
-                    <h2><%= __("header.news") || "News" %></h2>
-                    <ul class="bread-list">
-                        <li><a href="/"><%= __("header.home") || "Home" %></a></li>
-                        <li><i class="icofont-simple-right"></i></li>
-                        <li class="active"><%= __("header.news") || "News" %></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Breadcrumbs -->
+
 <section class="news-section">
     <div class="container">
         <!-- Header with Search and Sort -->
@@ -56,19 +39,18 @@
                                     <a href="/news/<%= newsItem._id %>" class="text-decoration-none"><%= newsItem.title || 'Untitled' %></a>
                                 </h5>
                                 <% if (newsItem.categories && Array.isArray(newsItem.categories)) { %>
-                                <div class="mb-2">
-                                    <% newsItem.categories.forEach(cat => {
-                                        const catName = locale === 'vi' ? cat.name.vi : cat.name.en;
-                                        const catClass = catName
-                                        .toLowerCase()
-                                        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-                                        .replace(/\s/g, '-')
-                                        .replace(/,/g, '');
-                                    %>
-                                    <span class="badge category-badge <%= catClass %>"><%= catName %></span>
-                                    <% }); %>
-                                </div>
-                                <% } %>
+    <div class="mb-2">
+        <% newsItem.categories.forEach(cat => { %>
+            <% const catName = (locale === 'vi' ? (cat.name?.vi || '') : (cat.name?.en || '')) || 'Unknown'; %>
+            <% const catClass = catName
+                .toLowerCase()
+                .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+                .replace(/\s/g, '-')
+                .replace(/,/g, ''); %>
+            <span class="badge category-badge <%= catClass %>"><%= catName %></span>
+        <% }); %>
+    </div>
+<% } %>
 
                                 <!-- Publication Date -->
                                 <p class="card-text">
@@ -92,7 +74,7 @@
                 <!-- Previous Page -->
                 <% if (currentPage > 1) { %>
                     <li class="page-item">
-                        <a class="page-link" href="#" onclick="fetchNews(<%= currentPage - 1 %>)" aria-label="Previous">
+                        <a class="page-link" href="#" onclick="fetchNews('<%= currentPage - 1 %>')" aria-label="Previous">
                             <span aria-hidden="true">⬅ <%= __('pagination.previous') || 'Previous' %></span>
                         </a>
                     </li>
@@ -134,7 +116,7 @@
                         </li>
                     <% } else { %>
                         <li class="page-item <%= currentPage === page ? 'active' : '' %>">
-                            <a class="page-link" href="#" onclick="fetchNews(<%= page %>)" <%= currentPage === page ? 'aria-current="page"' : '' %>><%= page %></a>
+                            <a class="page-link" href="#" onclick="fetchNews('<%= page %>')" <%= currentPage === page ? 'aria-current="page"' : '' %>><%= page %></a>
                         </li>
                     <% } %>
                 <% }); %>
@@ -142,7 +124,7 @@
                 <!-- Next Page -->
                 <% if (currentPage < totalPages) { %>
                     <li class="page-item">
-                        <a class="page-link" href="#" onclick="fetchNews(<%= (currentPage + 1) %>)" aria-label="Next">
+                        <a class="page-link" href="#" onclick="fetchNews('<%= (currentPage + 1) %>')" aria-label="Next">
                             <span aria-hidden="true"><%= __('pagination.next') || 'Next' %> ➡</span>
                         </a>
                     </li>

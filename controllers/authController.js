@@ -25,11 +25,6 @@ const login = async (req, res) => {
             return res.status(403).json({ message: 'Account is locked. Please contact an administrator' });
         }
 
-        // Check if account is active
-        if (!user.isActive) {
-            return res.status(403).json({ message: 'Account is not activated. Please verify your account' });
-        }
-
         // Verify password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
@@ -41,12 +36,11 @@ const login = async (req, res) => {
 
         // Prepare user data for response
         const userData = {
-            userId: user.userId,
+            userId: user._id,
             fullName: user.fullName,
             email: user.email,
             username: user.username,
             role: user.role,
-            isActive: user.isActive,
             createdAt: user.createdAt,
             updatedAt: user.updatedAt,
         };

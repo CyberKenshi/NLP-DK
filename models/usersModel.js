@@ -78,6 +78,10 @@ userSchema.pre('save', async function (next) {
   }
 });
 
+userSchema.methods.matchPassword = async function (enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password);
+};
+
 userSchema.set('toJSON', {
   virtuals: true,
   transform: function (doc, ret) {

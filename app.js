@@ -38,7 +38,7 @@ const i18n = new I18n({
 // Cấu hình Express
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(cookieParser());
 app.use(session({
     secret: 'secret',
     resave: false,
@@ -50,8 +50,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Public files
-// app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware i18n
 app.use(i18n.init);
@@ -160,21 +159,9 @@ app.get('/join-us', (req, res) => {
     });
 });
 
-// Route để render form tạo tin tức
-app.get('/news-form', (req, res) => {
-    res.render('admin/newsForm');
-});
 
-app.get('/blog-single', (req, res) => {
-    res.render('blog-single');
-});
-
-app.get('/news-detail', (req, res) => {
-    res.render('news-detail');
-});
-
-app.get('/portfolio-details', (req, res) => {
-    res.render('portfolio-details');
+app.get('/admin/login', (req, res) => {
+    res.render('admin/adminLogin');
 });
 
 // Custom 404 page

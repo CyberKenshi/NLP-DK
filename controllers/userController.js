@@ -64,6 +64,15 @@ const getUserDetail = async (req, res) => {
     }
 };
 
+// Dùng cho trang admin (không phải API)
+const getUserDetailByIdAdmin = async (userId) => {
+    const user = await User.findById(userId);
+    if (!user) return null;
+    return { data: user };
+};
+
+
+
 const addUser = async (req, res) => {
     try {
         // Nếu có file được upload, thêm đường dẫn file vào avatar
@@ -92,7 +101,7 @@ const addUser = async (req, res) => {
 // Update user details
 const updateUser = async (req, res) => {
     try {
-        const userId = req.params.userId;
+        const userId = req.params.id;
         const updatedUser = await User.findByIdAndUpdate(userId, req.body, { new: true, runValidators: true });
 
         if (!updatedUser) {
@@ -118,7 +127,7 @@ const updateUser = async (req, res) => {
 // Delete a user
 const deleteUser = async (req, res) => {
     try {
-        const userId = req.params.userId;
+        const userId = req.params.id;
         const deletedUser = await User.findByIdAndDelete(userId);
 
         if (!deletedUser) {
@@ -337,6 +346,7 @@ module.exports = {
     getAllPersonnelUsers,
     getAllInternUsers,
     getUserDetail,
+    getUserDetailByIdAdmin,
     addUser,
     updateUser,
     deleteUser,
