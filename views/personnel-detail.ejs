@@ -187,42 +187,133 @@
     </div>
 </section>
 <script>
-    // Initialize sorting state
-    let currentSortBy = '<%= sortBy || "none" %>';
-    let currentOrder = '<%= order || "desc" %>';
-    const userId = '<%= user._id %>';
-    const currentPage = <%= pagination.currentPage %>;
+// Initialize sorting state
+let currentSortBy = '<%= sortBy || "none" %>' === 'none' ? null : '<%= sortBy || "none" %>';
+let currentOrder = '<%= order || "desc" %>';
+const userId = '<%= user._id %>';
+const currentPage = <%= pagination.currentPage %>;
 
-    // Add event listeners to sort headers
-    document.querySelectorAll('.sort-header').forEach(header => {
-        header.addEventListener('click', async (event) => {
-            event.preventDefault();
+// Use event delegation for pagination links
+document.querySelector('.pagination').addEventListener('click', async function (e) {
+    const link = e.target.closest('a.page-link');
+    if (!link || link.parentElement.classList.contains('disabled')) return;
 
-            // Get sort parameters
-            const sortBy = header.getAttribute('data-sort-by');
-            let order = header.getAttribute('data-order');
+    e.preventDefault();
+    const url = new URL(link.href);
+    const page = url.searchParams.get("page");
+    const sortBy = url.searchParams.get("sortBy") || currentSortBy;
+    const order = url.searchParams.get("order") || currentOrder;
 
-            // Toggle order if clicking the same column
-            if (sortBy === currentSortBy) {
-                order = currentOrder === 'asc' ? 'desc' : 'asc';
-            } else {
-                order = 'asc'; // Default to ascending for new sort column
+    try {
+        const response = await fetch(`/about/personnel-detail/${userId}/publications?page=${page}&sortBy=${sortBy || ''}&order=${order}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        if (data.error) {
+            throw new Error(data.error);
+        }
+
+        // Update table
+        const tbody = document.getElementById('publications-tbody');
+        tbody.innerHTML = '';
+        if (data.publications && Array.isArray(data.publications)) {
+            data.publications.forEach(pub => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="title-column">
+                        <div class="publication-title">
+                            ${pub.link ? `<a href="${pub.link}" target="_blank">${pub.title || 'Untitled'}</a>` : pub.title || 'Untitled'}
+                        </div>
+                        ${pub.authors?.length ? `<div class="publication-authors"><strong>Authors:</strong> ${pub.authors.join(', ')}</div>` : ''}
+                        ${pub.doi ? `<div class="publication-action"><a href="https://doi.org/${pub.doi}" target="_blank" class="btn btn-sm btn-outline-primary">View</a></div>` : ''}
+                    </td>
+                    <td class="year-column">${pub.publicationYear || 'N/A'}</td>
+                    <td class="citation-column">${pub.citationCount ?? 0}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        } else {
+            throw new Error('Invalid publications data received');
+        }
+
+        // Update pagination
+        const pagination = data.pagination;
+        currentSortBy = data.sortBy || currentSortBy;
+        currentOrder = data.order || currentOrder;
+        const paginationHtml = renderPagination(pagination, sortBy, order);
+        document.querySelector('.pagination').innerHTML = paginationHtml;
+
+        // Update URL
+        history.pushState({}, '', `/about/personnel-detail/${userId}?page=${page}&sortBy=${sortBy || ''}&order=${order}`);
+
+    } catch (err) {
+        console.error('Pagination AJAX error:', err.message);
+        alert(`Failed to load publications for the selected page: ${err.message}`);
+    }
+});
+
+// Utility to render pagination HTML
+function renderPagination(pagination, sortBy, order) {
+    const { currentPage, totalPages, hasPrevPage, hasNextPage, prevPage, nextPage } = pagination;
+    let html = '';
+
+    if (hasPrevPage) {
+        html += `<li class="page-item"><a class="page-link" href="?page=${prevPage}&sortBy=${sortBy || ''}&order=${order}" aria-label="Previous">⬅ Previous</a></li>`;
+    } else {
+        html += `<li class="page-item disabled"><span class="page-link">⬅ Previous</span></li>`;
+    }
+
+    const delta = 2;
+    const range = [];
+    for (let i = 1; i <= totalPages; i++) {
+        if (i === 1 || i === totalPages || (i >= currentPage - delta && i <= currentPage + delta)) {
+            range.push(i);
+        }
+    }
+
+    let last = 0;
+    for (let i of range) {
+        if (last && i - last > 1) {
+            html += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
+        }
+        html += `<li class="page-item ${i === currentPage ? 'active' : ''}">
+            <a class="page-link" href="?page=${i}&sortBy=${sortBy || ''}&order=${order}">${i}</a>
+        </li>`;
+        last = i;
+    }
+
+    if (hasNextPage) {
+        html += `<li class="page-item"><a class="page-link" href="?page=${nextPage}&sortBy=${sortBy || ''}&order=${order}" aria-label="Next">Next ➡</a></li>`;
+    } else {
+        html += `<li class="page-item disabled"><span class="page-link">Next ➡</span></li>`;
+    }
+
+    return html;
+}
+
+// Handle sorting headers
+document.querySelectorAll('.sort-header').forEach(header => {
+    header.addEventListener('click', async () => {
+        const sortBy = header.getAttribute('data-sort-by');
+        const order = header.getAttribute('data-order');
+
+        try {
+            const response = await fetch(`/about/personnel-detail/${userId}/publications?page=1&sortBy=${sortBy}&order=${order}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+
+            if (data.error) {
+                throw new Error(data.error);
             }
 
-            // Update global sort state
-            currentSortBy = sortBy;
-            currentOrder = order;
-
-            // Fetch sorted data
-            const url = `/about/personnel-detail/${userId}/publications?page=${currentPage}&sortBy=${sortBy}&order=${order}`;
-            try {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error('Failed to fetch sorted publications');
-                const data = await response.json();
-
-                // Update table body
-                const tbody = document.getElementById('publications-tbody');
-                tbody.innerHTML = '';
+            // Update table
+            const tbody = document.getElementById('publications-tbody');
+            tbody.innerHTML = '';
+            if (data.publications && Array.isArray(data.publications)) {
                 data.publications.forEach(pub => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
@@ -230,58 +321,56 @@
                             <div class="publication-title">
                                 ${pub.link ? `<a href="${pub.link}" target="_blank">${pub.title || 'Untitled'}</a>` : pub.title || 'Untitled'}
                             </div>
-                            ${pub.authors && pub.authors.length > 0 ? `
-                                <div class="publication-authors">
-                                    <strong><%= __('personnel.authors') %>:</strong> ${pub.authors.join(', ')}
-                                </div>
-                            ` : ''}
-                            ${pub.doi ? `
-                                <div class="publication-action">
-                                    <a href="https://doi.org/${pub.doi}" target="_blank" class="btn btn-sm btn-outline-primary">
-                                        <%= __('personnel.view_publication') %>
-                                    </a>
-                                </div>
-                            ` : ''}
+                            ${pub.authors?.length ? `<div class="publication-authors"><strong>Authors:</strong> ${pub.authors.join(', ')}</div>` : ''}
+                            ${pub.doi ? `<div class="publication-action"><a href="https://doi.org/${pub.doi}" target="_blank" class="btn btn-sm btn-outline-primary">View</a></div>` : ''}
                         </td>
                         <td class="year-column">${pub.publicationYear || 'N/A'}</td>
                         <td class="citation-column">${pub.citationCount ?? 0}</td>
                     `;
                     tbody.appendChild(row);
                 });
+            } else {
+                throw new Error('Invalid publications data received');
+            }
 
-                document.querySelectorAll('.sort-header').forEach(h => {
+            // Update pagination
+            const pagination = data.pagination;
+            currentSortBy = data.sortBy || currentSortBy;
+            currentOrder = data.order || currentOrder;
+            const paginationHtml = renderPagination(pagination, sortBy, order);
+            document.querySelector('.pagination').innerHTML = paginationHtml;
+
+            // Update sort icons
+            document.querySelectorAll('.sort-header').forEach(h => {
                 const hSortBy = h.getAttribute('data-sort-by');
                 const icon = h.querySelector('.sort-icon');
-                
+                icon.classList.remove('active', 'secondary');
+
                 if (hSortBy === sortBy) {
+                    const newOrder = order === 'asc' ? 'desc' : 'asc';
+                    h.setAttribute('data-order', newOrder);
                     icon.classList.add('active');
                     icon.textContent = order === 'asc' ? '▲' : '▼';
-                    h.setAttribute('data-order', order === 'asc' ? 'desc' : 'asc');
                 } else {
-                    icon.classList.remove('active', 'secondary'); // Xóa tất cả class cũ
-                    icon.textContent = '▼';
-
-                    if (hSortBy === 'year' && sortBy === null) {
-                        icon.classList.add('active');
-                    } else if (hSortBy === 'citation' && sortBy === null) {
-                        icon.classList.add('secondary');
-                    }
-
                     h.setAttribute('data-order', 'asc');
+                    if (hSortBy === 'citation' && (!sortBy || sortBy === 'none')) {
+                        icon.classList.add('secondary');
+                        icon.textContent = '▼';
+                    } else {
+                        icon.textContent = '▲';
+                    }
                 }
             });
 
-                // Update URL without reloading
-                const newUrl = `/about/personnel-detail/${userId}?page=${currentPage}&sortBy=${sortBy}&order=${order}`;
-                history.pushState({}, '', newUrl);
+            // Update URL
+            history.pushState({}, '', `/about/personnel-detail/${userId}?page=1&sortBy=${sortBy}&order=${order}`);
 
-            } catch (error) {
-                console.error('Error sorting publications:', error);
-                alert('Failed to sort publications. Please try again.');
-            }
-        });
+        } catch (err) {
+            console.error('Sorting AJAX error:', err.message);
+            alert(`Failed to sort publications: ${err.message}`);
+        }
     });
-
+});
 </script>
 <style>
     .personnel-detail-section {

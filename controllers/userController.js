@@ -64,16 +64,23 @@ const getUserDetail = async (req, res) => {
     }
 };
 
-// Adding a new user
 const addUser = async (req, res) => {
     try {
+        // Nếu có file được upload, thêm đường dẫn file vào avatar
+        if (req.file) {
+            req.body.avatar = `/uploads/avatar/${req.file.filename}`;
+        }
+
         const newUser = new User(req.body);
         await newUser.save();
+
         res.status(201).json({
             status: 'success',
+            message: 'User added successfully.',
             data: newUser
         });
     } catch (error) {
+        console.error('Error adding user:', error);
         res.status(500).json({
             status: 'error',
             message: 'Failed to add user.',
@@ -175,7 +182,7 @@ const getPersonnelForPage = async (req, res) => {
             role: { $in: ['personnel', 'colab'] },
             isLocked: false,
         })
-            .select('fullName bio avatar _id role jobTitles degree')
+            .select('fullName bio avatar _id role jobTitles degree roleInLab')
             .lean();
 
         res.render('personnel', {
@@ -263,7 +270,6 @@ const getPersonnelDetail = async (req, res) => {
         res.status(500).render('500', { locale: req.getLocale(), __: res.__, message: 'Failed to fetch personnel details.' });
     }
 };
-
 const getPersonnelPublications = async (req, res) => {
     try {
         const userId = req.params.userId;
@@ -296,14 +302,27 @@ const getPersonnelPublications = async (req, res) => {
             }
         }
 
+        const totalPublications = await Publication.countDocuments({ owner_id: userId });
         const publications = await Publication.find({ owner_id: userId })
             .sort(sortCriteria)
             .skip(skip)
             .limit(limit)
             .lean();
 
+        const totalPages = Math.ceil(totalPublications / limit);
+        const pagination = {
+            currentPage: page,
+            totalPages,
+            hasPrevPage: page > 1,
+            hasNextPage: page < totalPages,
+            prevPage: page - 1,
+            nextPage: page + 1,
+            totalPublications: totalPublications
+        };
+
         res.json({
             publications,
+            pagination,
             sortBy,
             order
         });
@@ -312,6 +331,7 @@ const getPersonnelPublications = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch publications.' });
     }
 };
+
 
 module.exports = {
     getAllPersonnelUsers,

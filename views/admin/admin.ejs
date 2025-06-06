@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giao diện Quản lý Admin</title>
+    <link rel="stylesheet" href="/css/admin-style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Quản lý Admin</h2>
+        <ul>
+            <li><a href="#personnel" class="tab-link" data-tab="personnel">Nhân sự</a></li>
+            <li><a href="#interns" class="tab-link" data-tab="interns">Thực tập sinh</a></li>
+            <li><a href="#news" class="tab-link" data-tab="news">Tin tức</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>Bảng điều khiển Admin</h1>
+            <div class="admin-profile">
+                <img src="https://via.placeholder.com/40" alt="Admin Avatar" class="avatar">
+                <span class="admin-name">Admin</span>
+                <a href="#" class="logout-btn">Đăng xuất</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div id="personnel" class="tab-content active">
+                <h2>Quản lý Nhân sự</h2>
+                <button id="add-personnel-btn" class="add-btn">Thêm nhân sự</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Avatar</th>
+                            <th>Họ tên</th>
+                            <th>Vai trò</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="personnel-table-body">
+                        <!-- Dữ liệu sẽ được render bởi JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="interns" class="tab-content">
+                <h2>Quản lý Thực tập sinh</h2>
+                <button id="add-intern-btn" class="add-btn">Thêm thực tập sinh</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Avatar</th>
+                            <th>Họ tên</th>
+                            <th>Ngành</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="interns-table-body">
+                        <!-- Dữ liệu sẽ được render bởi JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="news" class="tab-content">
+                <h2>Quản lý Tin tức</h2>
+                <button id="add-news-btn" class="add-btn">Thêm tin tức</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tiêu đề</th>
+                            <th>Ngày đăng</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="news-table-body">
+                        <!-- Dữ liệu sẽ được render bởi JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="js/admin-script.js"></script>
+    <%- include('admin-chatbot') %>
+</body>
+</html>
